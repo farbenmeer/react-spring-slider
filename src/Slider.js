@@ -1,35 +1,35 @@
-import React, {useRef} from 'react';
-import PropTypes from 'prop-types';
-import clamp from 'lodash/clamp';
-import {useSprings, animated} from 'react-spring';
-import {useDrag} from 'react-use-gesture';
+import React, { useRef } from "react";
+import PropTypes from "prop-types";
+import clamp from "lodash/clamp";
+import { useSprings, animated } from "react-spring";
+import { useDrag } from "react-use-gesture";
 
-const Slider = ({children, bullets}) => {
+const Slider = ({ children, bullets }) => {
   const index = useRef(0);
 
   const [props, set] = useSprings(children.length, i => ({
     x: i * window.innerWidth,
     sc: 1,
-    display: 'block',
+    display: "block"
   }));
 
   const bind = useDrag(
-    ({down, movement: [xDelta], direction: [xDir], distance, cancel}) => {
+    ({ down, movement: [xDelta], direction: [xDir], distance, cancel }) => {
       if (down && distance > window.innerWidth / 2)
         cancel(
           (index.current = clamp(
             index.current + (xDir > 0 ? -1 : 1),
             0,
-            children.length - 1,
-          )),
+            children.length - 1
+          ))
         );
 
       set(i => {
         const x = (i - index.current) * window.innerWidth + (down ? xDelta : 0);
         const sc = down ? 1 - distance / window.innerWidth / 2 : 1;
-        return {x, sc, display: 'block'};
+        return { x, sc, display: "block" };
       });
-    },
+    }
   );
 
   const jumpTo = i => () => {
@@ -38,7 +38,7 @@ const Slider = ({children, bullets}) => {
     set(i => {
       const x = (i - index.current) * window.innerWidth;
       const sc = 1;
-      return {x, sc, display: 'block'};
+      return { x, sc, display: "block" };
     });
   };
 
@@ -47,8 +47,8 @@ const Slider = ({children, bullets}) => {
       ...child,
       props: {
         ...child.props,
-        style: {...child.props.style, pointerEvents: 'none'},
-      },
+        style: { ...child.props.style, pointerEvents: "none" }
+      }
     };
   });
 
@@ -63,14 +63,15 @@ const Slider = ({children, bullets}) => {
           ))}
         </ul>
       )}
-      {props.map(({x, display, sc}, i) => (
+      {props.map(({ x, display, sc }, i) => (
         <animated.div
           {...bind()}
           key={i}
           style={{
             display,
-            transform: x.interpolate(x => `translate3d(${x}px,0,0)`),
-          }}>
+            transform: x.interpolate(x => `translate3d(${x}px,0,0)`)
+          }}
+        >
           <animated.div>{nonePointerChilds[i]}</animated.div>
         </animated.div>
       ))}
@@ -80,12 +81,12 @@ const Slider = ({children, bullets}) => {
 
 Slider.propTypes = {
   children: PropTypes.node,
-  bullets: PropTypes.bool,
+  bullets: PropTypes.bool
 };
 
 Slider.defaultProps = {
   children: [],
-  bullets: false,
+  bullets: false
 };
 
 export default Slider;
