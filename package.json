@@ -1,27 +1,20 @@
 {
-  "name": "slider",
-  "version": "0.1.0",
-  "private": true,
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
+  "name": "@farbenmeer/react-spring-slider",
+  "version": "0.0.1",
+  "main": "dist/index.js",
   "author": {
     "name": "Max Strübing",
     "email": "max.struebing@farbenmeer.de",
     "url": "https://maex.me"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/farbenmeer/react-spring-slider.git"
+  },
+  "bugs": {
+    "url": "https://github.com/farbenmeer/react-spring-slider/issues"
+  },
+  "homepage": "https://github.com/farbenmeer/react-spring-slider",
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -e",
@@ -37,28 +30,36 @@
     ]
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "eject": "react-scripts eject",
+    "build": "babel src/index.js --out-file dist/index.js",
+    "watch": "babel --watch src --out-file dist/index.js",
     "lint": "prettier-eslint $PWD/src/**/*",
     "lint:editorconfig": "ec",
-    "lint:fix": "prettier-eslint --write $PWD/src/**/*"
+    "lint:fix": "prettier-eslint --write $PWD/src/**/*",
+    "prepublish": "npm run build"
   },
-  "dependencies": {
+  "peerDependencies": {
     "lodash": "4.17.15",
     "prop-types": "15.7.2",
     "react": "16.12.0",
-    "react-dom": "16.12.0",
-    "react-scripts": "3.2.0",
+    "react-dom": "16.12.0"
+  },
+  "dependencies": {
     "react-spring": "8.0.27",
     "react-use-gesture": "6.0.14"
   },
   "devDependencies": {
+    "@babel/cli": "^7.7.4",
+    "@babel/core": "^7.7.4",
+    "@babel/preset-env": "^7.7.4",
+    "@babel/preset-react": "^7.7.4",
     "commitlint": "^8.2.0",
     "editorconfig-checker": "^3.0.3",
     "husky": "^3.1.0",
     "lint-staged": "^9.5.0",
+    "lodash": "4.17.15",
+    "parcel-bundler": "^1.12.4",
     "prettier": "^1.19.1",
-    "prettier-eslint-cli": "^5.0.0"
+    "prettier-eslint-cli": "^5.0.0",
+    "prop-types": "15.7.2"
   }
 }

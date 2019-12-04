@@ -1,44 +1,92 @@
-import { render } from "react-dom";
-import React from "react";
-import Slider from "./Slider";
-import "./index.css";
+import React, { useRef } from "react";
+import PropTypes from "prop-types";
+import clamp from "lodash/clamp";
+import { useSprings, animated } from "react-spring";
+import { useDrag } from "react-use-gesture";
 
-const slides = [
-  <div key={0} style={{ width: "100%", height: "100%" }}>
-    <img
-      alt="slide1"
-      src="https://images.pexels.com/photos/62689/pexels-photo-62689.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-    />
-    <p>HELLO</p>
-  </div>,
-  <img
-    key={1}
-    style={{ width: "100%", height: "100%" }}
-    alt="slide2"
-    src="https://images.pexels.com/photos/296878/pexels-photo-296878.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-  />,
-  <img
-    key={2}
-    style={{ width: "100%", height: "100%" }}
-    alt="slide3"
-    src="https://images.pexels.com/photos/1509428/pexels-photo-1509428.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-  />,
-  <img
-    key={3}
-    style={{ width: "100%", height: "100%" }}
-    alt="slide4"
-    src="https://images.pexels.com/photos/351265/pexels-photo-351265.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-  />,
-  <img
-    key={4}
-    style={{ width: "100%", height: "100%" }}
-    alt="slide4"
-    src="https://images.pexels.com/photos/924675/pexels-photo-924675.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-  />
-];
+const Slider = ({ children, bullets }) => {
+  const index = useRef(0);
 
-const App = () => {
-  return <Slider bullets>{slides}</Slider>;
+  const [props, set] = useSprings(children.length, i => ({
+    x: i * window.innerWidth,
+    sc: 1,
+    display: "block"
+  }));
+
+  const bind = useDrag(
+    ({ down, movement: [xDelta], direction: [xDir], distance, cancel }) => {
+      if (down && distance > window.innerWidth / 2)
+        cancel(
+          (index.current = clamp(
+            index.current + (xDir > 0 ? -1 : 1),
+            0,
+            children.length - 1
+          ))
+        );
+
+      set(i => {
+        const x = (i - index.current) * window.innerWidth + (down ? xDelta : 0);
+        const sc = down ? 1 - distance / window.innerWidth / 2 : 1;
+        return { x, sc, display: "block" };
+      });
+    }
+  );
+
+  const jumpTo = i => () => {
+    index.current = i;
+
+    set(i => {
+      const x = (i - index.current) * window.innerWidth;
+      const sc = 1;
+      return { x, sc, display: "block" };
+    });
+  };
+
+  const nonePointerChilds = children.map((child, index) => {
+    return {
+      ...child,
+      props: {
+        ...child.props,
+        style: { ...child.props.style, pointerEvents: "none" }
+      }
+    };
+  });
+
+  return (
+    <>
+      {bullets && (
+        <ul>
+          {children.map((_, index) => (
+            <li key={index}>
+              <button onClick={jumpTo(index)}>{index}</button>
+            </li>
+          ))}
+        </ul>
+      )}
+      {props.map(({ x, display, sc }, i) => (
+        <animated.div
+          {...bind()}
+          key={i}
+          style={{
+            display,
+            transform: x.interpolate(x => `translate3d(${x}px,0,0)`)
+          }}
+        >
+          <animated.div>{nonePointerChilds[i]}</animated.div>
+        </animated.div>
+      ))}
+    </>
+  );
 };
 
-render(<App />, document.getElementById("root"));
+Slider.propTypes = {
+  children: PropTypes.node,
+  bullets: PropTypes.bool
+};
+
+Slider.defaultProps = {
+  children: [],
+  bullets: false
+};
+
+export default Slider;
