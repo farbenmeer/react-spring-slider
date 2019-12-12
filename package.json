@@ -30,12 +30,14 @@
     ]
   },
   "scripts": {
-    "build": "babel src/index.js --out-file dist/index.js && cp -f src/index.css dist/index.css",
+    "build": "babel src/index.js --out-file dist/index.js && ln -sf src/index.css dist/index.css",
     "watch": "babel --watch src --out-file dist/index.js",
     "lint": "prettier-eslint $PWD/src/**/*",
     "lint:editorconfig": "ec",
     "lint:fix": "prettier-eslint --write $PWD/src/**/*",
-    "prepublish": "npm run build"
+    "prepublish": "npm run build",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "peerDependencies": {
     "lodash": "4.17.15",
@@ -52,6 +54,11 @@
     "@babel/core": "^7.7.4",
     "@babel/preset-env": "^7.7.4",
     "@babel/preset-react": "^7.7.4",
+    "@storybook/addon-actions": "^5.2.8",
+    "@storybook/addon-links": "^5.2.8",
+    "@storybook/addons": "^5.2.8",
+    "@storybook/react": "^5.2.8",
+    "babel-loader": "^8.0.6",
     "commitlint": "^8.2.0",
     "editorconfig-checker": "^3.0.3",
     "husky": "^3.1.0",

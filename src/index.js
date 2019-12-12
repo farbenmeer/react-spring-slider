@@ -8,24 +8,35 @@ import "./index.css";
 
 const Slider = ({ children, bullets }) => {
   const index = useRef(0);
+  const sliderRef = useRef(null);
   const [width, setWidth] = useState(window.innerWidth);
 
   // initialize slides with spring
   const [props, set] = useSprings(children.length, i => ({
-    x: i * window.innerWidth,
+    x: i * width,
     sc: 1,
     display: "block"
   }));
 
+  // set the width correctly on mount
+  useEffect(() => {
+    sliderRef.current &&
+      setWidth(sliderRef.current.parentElement.getBoundingClientRect().width);
+  }, [sliderRef.current]);
+
   // resize handler in case the browser window gets resized
   useEffect(() => {
-    const handleResize = () => setWidth(window.innerWidth);
+    const handleResize = () => {
+      sliderRef.current &&
+        setWidth(sliderRef.current.parentElement.getBoundingClientRect().width);
+    };
+
     window.addEventListener("resize", handleResize);
 
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  });
+  }, [sliderRef.current]);
 
   // run when window got resized to make sure slides are always in place
   useEffect(() => {
@@ -82,7 +93,7 @@ const Slider = ({ children, bullets }) => {
   });
 
   return (
-    <div className="slider__wrapper">
+    <div ref={sliderRef} className="slider__wrapper">
       <div className="slider">
         {bullets && (
           <div className="slider__bullets">
