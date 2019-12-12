@@ -35,7 +35,7 @@
     "lint": "prettier-eslint $PWD/src/**/*",
     "lint:editorconfig": "ec",
     "lint:fix": "prettier-eslint --write $PWD/src/**/*",
-    "prepublish": "rm -r dist/ && mkdir dist && cp src/index.css dist/ && npm run build",
+    "prepublish": "rm -rf dist/ && mkdir dist && cp src/index.css dist/ && npm run build",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
