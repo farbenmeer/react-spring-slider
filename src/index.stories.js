@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {storiesOf} from '@storybook/react';
 
 import Slider from '.';
@@ -47,4 +47,41 @@ storiesOf('Slider', module)
 				))}
 			</Slider>
 		</div>
-	));
+	))
+	.add('With activeIndex (2)', () => (
+		<div style={{width: '100vw', height: '100vh'}}>
+			<Slider hasBullets activeIndex={2}>
+				{images.map(image => (
+					<div key={image}>
+						<img draggable="false" src={image} />
+					</div>
+				))}
+			</Slider>
+		</div>
+	))
+	.add('With activeIndex (interval)', () => {
+		const [activeIndex, setActiveIndex] = useState(2);
+
+		useEffect(() => {
+			const id = setInterval(() => {
+				const index = activeIndex + (1 % images.length);
+				setActiveIndex(index);
+			}, 2000);
+
+			return () => {
+				clearInterval(id);
+			};
+		});
+
+		return (
+			<div style={{width: '100vw', height: '100vh'}}>
+				<Slider hasBullets activeIndex={activeIndex}>
+					{images.map(image => (
+						<div key={image}>
+							<img draggable="false" src={image} />
+						</div>
+					))}
+				</Slider>
+			</div>
+		);
+	});
