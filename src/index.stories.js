@@ -10,10 +10,14 @@ const images = [
   "https://images.pexels.com/photos/924675/pexels-photo-924675.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
 ];
 
+const onSlideChange = index => {
+  console.log(`Slide changed to: ${index}`);
+};
+
 storiesOf("Slider", module)
   .add("default", () => (
     <div style={{ width: "100vw", height: "100vh" }}>
-      <Slider bullets>
+      <Slider onSlideChange={onSlideChange} bullets>
         {images.map(image => (
           <div key={image}>
             <img draggable="false" src={image} />

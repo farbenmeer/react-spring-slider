@@ -3,18 +3,22 @@ import PropTypes from "prop-types";
 import clamp from "lodash/clamp";
 import { useSprings, animated } from "react-spring";
 import { useDrag } from "react-use-gesture";
+import { useDebouncedCallback } from "use-debounce";
 
 import "./index.css";
 
-const Slider = ({ children, bullets }) => {
-  const index = useRef(0);
+const Slider = ({ children, bullets, onSlideChange }) => {
+  const slide = useRef(0);
   const sliderRef = useRef(null);
   const [width, setWidth] = useState(window.innerWidth);
+
+  const [debouncedOnSlideChange] = useDebouncedCallback(index => {
+    onSlideChange(index);
+  }, 300);
 
   // initialize slides with spring
   const [props, set] = useSprings(children.length, i => ({
     x: i * width,
-    sc: 1,
     display: "block"
   }));
 
@@ -41,9 +45,8 @@ const Slider = ({ children, bullets }) => {
   // run when window got resized to make sure slides are always in place
   useEffect(() => {
     set(i => {
-      const x = (i - index.current) * width;
-      const sc = 1;
-      return { x, sc, display: "block" };
+      const x = (i - slide.current) * width;
+      return { x, display: "block" };
     });
   }, [width]);
 
@@ -52,30 +55,33 @@ const Slider = ({ children, bullets }) => {
     ({ down, movement: [xDelta], direction: [xDir], distance, cancel }) => {
       if (down && distance > width / 2)
         cancel(
-          (index.current = clamp(
-            index.current + (xDir > 0 ? -1 : 1),
+          (slide.current = clamp(
+            slide.current + (xDir > 0 ? -1 : 1),
             0,
             children.length - 1
           ))
         );
 
       set(i => {
-        const x = (i - index.current) * width + (down ? xDelta : 0);
-        const sc = down ? 1 - distance / width / 2 : 1;
-        return { x, sc, display: "block" };
+        const x = (i - slide.current) * width + (down ? xDelta : 0);
+        debouncedOnSlideChange(
+          [...Array(children.length).keys()].reverse()[x / width]
+        );
+        return { x, display: "block" };
       });
     }
   );
 
   // jump to via bullets
-  const jumpTo = i => () => {
-    index.current = i;
+  const jumpTo = index => () => {
+    slide.current = index;
 
     set(i => {
-      const x = (i - index.current) * width;
-      const sc = 1;
-      return { x, sc, display: "block" };
+      const x = (i - slide.current) * width;
+      return { x, display: "block" };
     });
+
+    debouncedOnSlideChange(index);
   };
 
   // sets pointer events none to every child and preserves styles
@@ -108,7 +114,7 @@ const Slider = ({ children, bullets }) => {
             </ul>
           </div>
         )}
-        {props.map(({ x, display, sc }, i) => (
+        {props.map(({ x, display }, i) => (
           <animated.div
             {...bind()}
             key={i}
@@ -130,12 +136,14 @@ const Slider = ({ children, bullets }) => {
 
 Slider.propTypes = {
   children: PropTypes.node,
-  bullets: PropTypes.bool
+  bullets: PropTypes.bool,
+  onSlideChange: PropTypes.func
 };
 
 Slider.defaultProps = {
   children: [],
-  bullets: false
+  bullets: false,
+  onSlideChange: () => {}
 };
 
 export default Slider;

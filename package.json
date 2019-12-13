@@ -1,6 +1,6 @@
 {
   "name": "@farbenmeer/react-spring-slider",
-  "version": "0.0.1-alpha.1",
+  "version": "0.0.1-alpha.2",
   "main": "dist/index.js",
   "author": {
     "name": "Max Strübing",
@@ -47,7 +47,8 @@
   },
   "dependencies": {
     "react-spring": "8.0.27",
-    "react-use-gesture": "6.0.14"
+    "react-use-gesture": "6.0.14",
+    "use-debounce": "^3.3.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.4",
