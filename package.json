@@ -21,6 +21,10 @@
       "pre-commit": "lint-staged"
     }
   },
+  "xo": {
+    "extends": "xo-react",
+    "env": "browser"
+  },
   "lint-staged": {
     "./**/*.{js,jsx,css}": [
       "npm run lint:fix",
@@ -32,9 +36,9 @@
   "scripts": {
     "build": "babel src/index.js --out-file dist/index.js",
     "watch": "babel --watch src --out-file dist/index.js",
-    "lint": "prettier-eslint $PWD/src/**/*",
+    "lint": "xo --prettier $PWD/src/**/*",
     "lint:editorconfig": "ec",
-    "lint:fix": "prettier-eslint --write $PWD/src/**/*",
+    "lint:fix": "xo --prettier --fix $PWD/src/**/*",
     "prepublish": "rm -rf dist/ && mkdir dist && cp src/index.css dist/ && npm run build",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
@@ -62,12 +66,15 @@
     "babel-loader": "8.0.6",
     "commitlint": "8.2.0",
     "editorconfig-checker": "3.0.3",
+    "eslint-config-xo-react": "0.20.0",
+    "eslint-plugin-react": "7.17.0",
+    "eslint-plugin-react-hooks": "2.3.0",
     "husky": "3.1.0",
     "lint-staged": "9.5.0",
     "lodash": "4.17.15",
     "parcel-bundler": "1.12.4",
     "prettier": "1.19.1",
-    "prettier-eslint-cli": "5.0.0",
-    "prop-types": "15.7.2"
+    "prop-types": "15.7.2",
+    "xo": "0.25.3"
   }
 }
