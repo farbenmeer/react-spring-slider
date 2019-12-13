@@ -87,6 +87,20 @@ const Slider = ({ children, hasBullets, onSlideChange }) => {
 		debouncedOnSlideChange(index);
 	};
 
+	// effect for autosliding
+	useEffect(() => {
+		let id = undefined;
+
+		if (auto > 0) {
+			id = setInterval(() => {
+				const targetIndex = (slide.current + 1) % children.length;
+				jumpTo(targetIndex)();
+			}, auto);
+		}
+
+		return () => id && clearInterval(id);
+	}, [auto, index.current]);
+
 	// Sets pointer events none to every child and preserves styles
 	const nonePointerChilds = children.map(child => {
 		return {
