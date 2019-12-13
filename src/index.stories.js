@@ -48,6 +48,17 @@ storiesOf('Slider', module)
 			</Slider>
 		</div>
 	))
+	.add('With activeIndex (2)', () => (
+		<div style={{width: '100vw', height: '100vh'}}>
+			<Slider hasBullets activeIndex={2}>
+				{images.map(image => (
+					<div key={image}>
+						<img draggable="false" src={image} />
+					</div>
+				))}
+			</Slider>
+		</div>
+	))
 	.add('With activeIndex (interval)', () => {
 		const [activeIndex, setActiveIndex] = useState(2);
 
@@ -64,7 +75,7 @@ storiesOf('Slider', module)
 
 		return (
 			<div style={{width: '100vw', height: '100vh'}}>
-				<Slider bullets activeIndex={activeIndex}>
+				<Slider hasBullets activeIndex={activeIndex}>
 					{images.map(image => (
 						<div key={image}>
 							<img draggable="false" src={image} />
