@@ -8,7 +8,7 @@ import {useDebouncedCallback} from 'use-debounce';
 // eslint-disable-next-line import/no-unassigned-import
 import './index.css';
 
-const Slider = ({auto, children, hasBullets, onSlideChange}) => {
+const Slider = ({activeIndex, auto, children, hasBullets, onSlideChange}) => {
 	const slide = useRef(0);
 	const sliderRef = useRef(null);
 	const [width, setWidth] = useState(window.innerWidth);
@@ -104,6 +104,11 @@ const Slider = ({auto, children, hasBullets, onSlideChange}) => {
 		return () => id && clearInterval(id);
 	}, [auto, children.length, jumpTo]);
 
+	// Jump to slide index when prop changes
+	useEffect(() => {
+		jumpTo(activeIndex % children.length)();
+	}, [activeIndex, children.length, jumpTo]);
+
 	// Sets pointer events none to every child and preserves styles
 	const nonePointerChilds = children.map(child => {
 		return {
@@ -155,6 +160,7 @@ const Slider = ({auto, children, hasBullets, onSlideChange}) => {
 };
 
 Slider.propTypes = {
+	activeIndex: PropTypes.number,
 	auto: PropTypes.number,
 	children: PropTypes.node,
 	hasBullets: PropTypes.bool,
@@ -162,6 +168,7 @@ Slider.propTypes = {
 };
 
 Slider.defaultProps = {
+	activeIndex: 0,
 	auto: 0,
 	children: [],
 	hasBullets: false,
