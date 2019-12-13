@@ -1,14 +1,14 @@
-import React, { useRef, useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import clamp from "lodash/clamp";
-import { useSprings, animated } from "react-spring";
-import { useDrag } from "react-use-gesture";
-import { useDebouncedCallback } from "use-debounce";
+import React, {useRef, useEffect, useState, useCallback} from 'react';
+import PropTypes from 'prop-types';
+import clamp from 'lodash/clamp';
+import {useSprings, animated} from 'react-spring';
+import {useDrag} from 'react-use-gesture';
+import {useDebouncedCallback} from 'use-debounce';
 
 // eslint-disable-next-line import/no-unassigned-import
-import "./index.css";
+import './index.css';
 
-const Slider = ({ children, hasBullets, onSlideChange }) => {
+const Slider = ({auto, children, hasBullets, onSlideChange}) => {
 	const slide = useRef(0);
 	const sliderRef = useRef(null);
 	const [width, setWidth] = useState(window.innerWidth);
@@ -20,7 +20,7 @@ const Slider = ({ children, hasBullets, onSlideChange }) => {
 	// Initialize slides with spring
 	const [springProps, setSpringProps] = useSprings(children.length, i => ({
 		x: i * width,
-		display: "block"
+		display: 'block'
 	}));
 
 	// Set the width correctly on mount
@@ -38,10 +38,10 @@ const Slider = ({ children, hasBullets, onSlideChange }) => {
 			}
 		};
 
-		window.addEventListener("resize", handleResize);
+		window.addEventListener('resize', handleResize);
 
 		return () => {
-			window.removeEventListener("resize", handleResize);
+			window.removeEventListener('resize', handleResize);
 		};
 	}, []);
 
@@ -49,13 +49,13 @@ const Slider = ({ children, hasBullets, onSlideChange }) => {
 	useEffect(() => {
 		setSpringProps(i => {
 			const x = (i - slide.current) * width;
-			return { x, display: "block" };
+			return {x, display: 'block'};
 		});
 	}, [setSpringProps, width]);
 
 	// Drag binding to set on the element
 	const bind = useDrag(
-		({ down, movement: [xDelta], direction: [xDir], distance, cancel }) => {
+		({down, movement: [xDelta], direction: [xDir], distance, cancel}) => {
 			if (down && distance > width / 2)
 				cancel(
 					(slide.current = clamp(
@@ -70,26 +70,29 @@ const Slider = ({ children, hasBullets, onSlideChange }) => {
 				debouncedOnSlideChange(
 					[...new Array(children.length).keys()].reverse()[x / width]
 				);
-				return { x, display: "block" };
+				return {x, display: 'block'};
 			});
 		}
 	);
 
 	// Jump to via bullets
-	const jumpTo = index => () => {
-		slide.current = index;
+	const jumpTo = useCallback(
+		index => () => {
+			slide.current = index;
 
-		setSpringProps(i => {
-			const x = (i - slide.current) * width;
-			return { x, display: "block" };
-		});
+			setSpringProps(i => {
+				const x = (i - slide.current) * width;
+				return {x, display: 'block'};
+			});
 
-		debouncedOnSlideChange(index);
-	};
+			debouncedOnSlideChange(index);
+		},
+		[debouncedOnSlideChange, setSpringProps, width]
+	);
 
-	// effect for autosliding
+	// Effect for autosliding
 	useEffect(() => {
-		let id = undefined;
+		let id;
 
 		if (auto > 0) {
 			id = setInterval(() => {
@@ -99,7 +102,7 @@ const Slider = ({ children, hasBullets, onSlideChange }) => {
 		}
 
 		return () => id && clearInterval(id);
-	}, [auto, index.current]);
+	}, [auto, children.length, jumpTo]);
 
 	// Sets pointer events none to every child and preserves styles
 	const nonePointerChilds = children.map(child => {
@@ -109,7 +112,7 @@ const Slider = ({ children, hasBullets, onSlideChange }) => {
 				...child.props,
 				style: {
 					...child.props.style,
-					pointerEvents: "none"
+					pointerEvents: 'none'
 				}
 			}
 		};
@@ -131,7 +134,7 @@ const Slider = ({ children, hasBullets, onSlideChange }) => {
 						</ul>
 					</div>
 				)}
-				{springProps.map(({ x, display }, index) => (
+				{springProps.map(({x, display}, index) => (
 					<animated.div
 						{...bind()}
 						key={index} // eslint-disable-line react/no-array-index-key
@@ -141,7 +144,7 @@ const Slider = ({ children, hasBullets, onSlideChange }) => {
 							transform: x.interpolate(x => `translate3d(${x}px,0,0)`)
 						}}
 					>
-						<animated.div style={{ pointerEvents: "none" }}>
+						<animated.div style={{pointerEvents: 'none'}}>
 							{nonePointerChilds[index]}
 						</animated.div>
 					</animated.div>
