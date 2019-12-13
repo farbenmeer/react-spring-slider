@@ -36,4 +36,15 @@ storiesOf('Slider', module)
 				))}
 			</Slider>
 		</div>
+	))
+	.add('with auto sliding', () => (
+		<div style={{width: '100vw', height: '100vh'}}>
+			<Slider bullets auto={2000}>
+				{images.map(image => (
+					<div key={image}>
+						<img draggable="false" src={image} />
+					</div>
+				))}
+			</Slider>
+		</div>
 	));

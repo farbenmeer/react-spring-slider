@@ -1,4 +1,4 @@
-import React, {useRef, useEffect, useState} from 'react';
+import React, {useRef, useEffect, useState, useCallback} from 'react';
 import PropTypes from 'prop-types';
 import clamp from 'lodash/clamp';
 import {useSprings, animated} from 'react-spring';
@@ -8,7 +8,7 @@ import {useDebouncedCallback} from 'use-debounce';
 // eslint-disable-next-line import/no-unassigned-import
 import './index.css';
 
-const Slider = ({children, hasBullets, onSlideChange}) => {
+const Slider = ({auto, children, hasBullets, onSlideChange}) => {
 	const slide = useRef(0);
 	const sliderRef = useRef(null);
 	const [width, setWidth] = useState(window.innerWidth);
@@ -76,16 +76,33 @@ const Slider = ({children, hasBullets, onSlideChange}) => {
 	);
 
 	// Jump to via bullets
-	const jumpTo = index => () => {
-		slide.current = index;
+	const jumpTo = useCallback(
+		index => () => {
+			slide.current = index;
 
-		setSpringProps(i => {
-			const x = (i - slide.current) * width;
-			return {x, display: 'block'};
-		});
+			setSpringProps(i => {
+				const x = (i - slide.current) * width;
+				return {x, display: 'block'};
+			});
 
-		debouncedOnSlideChange(index);
-	};
+			debouncedOnSlideChange(index);
+		},
+		[debouncedOnSlideChange, setSpringProps, width]
+	);
+
+	// Effect for autosliding
+	useEffect(() => {
+		let id;
+
+		if (auto > 0) {
+			id = setInterval(() => {
+				const targetIndex = (slide.current + 1) % children.length;
+				jumpTo(targetIndex)();
+			}, auto);
+		}
+
+		return () => id && clearInterval(id);
+	}, [auto, children.length, jumpTo]);
 
 	// Sets pointer events none to every child and preserves styles
 	const nonePointerChilds = children.map(child => {
@@ -138,12 +155,14 @@ const Slider = ({children, hasBullets, onSlideChange}) => {
 };
 
 Slider.propTypes = {
+	auto: PropTypes.number,
 	children: PropTypes.node,
 	hasBullets: PropTypes.bool,
 	onSlideChange: PropTypes.func
 };
 
 Slider.defaultProps = {
+	auto: 0,
 	children: [],
 	hasBullets: false,
 	onSlideChange: () => {}
