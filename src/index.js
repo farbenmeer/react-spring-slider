@@ -1,113 +1,63 @@
-import React, {useRef, useEffect, useState, useCallback} from 'react';
+import React, {useRef, useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
-import clamp from 'lodash/clamp';
 import {useSprings, animated} from 'react-spring';
 import {useDrag} from 'react-use-gesture';
-import {useDebouncedCallback} from 'use-debounce';
 
 // eslint-disable-next-line import/no-unassigned-import
 import './index.css';
 
-const Slider = ({activeIndex, auto, children, hasBullets, onSlideChange}) => {
-	const slide = useRef(0);
-	const sliderRef = useRef(null);
-	const [width, setWidth] = useState(window.innerWidth);
+const clamp = (number, lower, upper) =>
+	Math.min(Math.max(number, lower), upper);
 
-	const [debouncedOnSlideChange] = useDebouncedCallback(index => {
-		onSlideChange(index);
-	}, 300);
+const Slider = ({activeIndex, auto, children, hasBullets, onSlideChange}) => {
+	const sliderRef = useRef(null);
+	const [slide, setSlide] = useState(0);
 
 	// Initialize slides with spring
-	const [springProps, setSpringProps] = useSprings(children.length, i => ({
-		x: i * width,
-		display: 'block'
+	const [springProps, setSpringProps] = useSprings(children.length, index => ({
+		offset: index
 	}));
-
-	// Set the width correctly on mount
-	useEffect(() => {
-		if (sliderRef.current) {
-			setWidth(sliderRef.current.parentElement.getBoundingClientRect().width);
-		}
-	}, []);
-
-	// Resize handler in case the browser window gets resized
-	useEffect(() => {
-		const handleResize = () => {
-			if (sliderRef.current) {
-				setWidth(sliderRef.current.parentElement.getBoundingClientRect().width);
-			}
-		};
-
-		window.addEventListener('resize', handleResize);
-
-		return () => {
-			window.removeEventListener('resize', handleResize);
-		};
-	}, []);
-
-	// Run when window got resized to make sure slides are always in place
-	useEffect(() => {
-		setSpringProps(i => {
-			const x = (i - slide.current) * width;
-			return {x, display: 'block'};
-		});
-	}, [setSpringProps, width]);
 
 	// Drag binding to set on the element
 	const bind = useDrag(
 		({down, movement: [xDelta], direction: [xDir], distance, cancel}) => {
-			if (down && distance > width / 2)
-				cancel(
-					(slide.current = clamp(
-						slide.current + (xDir > 0 ? -1 : 1),
-						0,
-						children.length - 1
-					))
-				);
+			const {width} = sliderRef.current.parentElement.getBoundingClientRect();
 
-			setSpringProps(i => {
-				const x = (i - slide.current) * width + (down ? xDelta : 0);
-				debouncedOnSlideChange(
-					[...new Array(children.length).keys()].reverse()[x / width]
-				);
-				return {x, display: 'block'};
-			});
+			if (down && distance > width / 2) {
+				cancel();
+				setSlide(clamp(slide + (xDir > 0 ? -1 : 1), 0, children.length - 1));
+			}
+
+			setSpringProps(index => ({
+				offset: (down ? xDelta : 0) / width + (index - slide)
+			}));
 		}
 	);
 
-	// Jump to via bullets
-	const jumpTo = useCallback(
-		index => () => {
-			slide.current = index;
-
-			setSpringProps(i => {
-				const x = (i - slide.current) * width;
-				return {x, display: 'block'};
-			});
-
-			debouncedOnSlideChange(index);
-		},
-		[debouncedOnSlideChange, setSpringProps, width]
-	);
+	// Triggered on slide change
+	useEffect(() => {
+		setSpringProps(index => ({offset: index - slide}));
+		onSlideChange(slide);
+	}, [slide, setSpringProps, onSlideChange]);
 
 	// Effect for autosliding
 	useEffect(() => {
-		let id;
+		let interval;
 
 		if (auto > 0) {
-			id = setInterval(() => {
-				const targetIndex = (slide.current + 1) % children.length;
-				jumpTo(targetIndex)();
+			interval = setInterval(() => {
+				const targetIndex = (slide + 1) % children.length;
+				setSlide(targetIndex);
 			}, auto);
 		}
 
-		return () => id && clearInterval(id);
-	}, [auto, children.length, jumpTo]);
+		return () => interval && clearInterval(interval);
+	}, [auto, children.length, slide]);
 
 	// Jump to slide index when prop changes
 	useEffect(() => {
-		jumpTo(activeIndex % children.length)();
-	}, [activeIndex, children.length, jumpTo]);
+		setSlide(activeIndex % children.length);
+	}, [activeIndex, children.length]);
 
 	// Sets pointer events none to every child and preserves styles
 	const nonePointerChilds = children.map(child => {
@@ -133,25 +83,24 @@ const Slider = ({activeIndex, auto, children, hasBullets, onSlideChange}) => {
 								<li
 									key={index} // eslint-disable-line react/no-array-index-key
 									className="slider__bullets__list__item"
-									onClick={jumpTo(index)}
+									onClick={() => setSlide(index)}
 								/>
 							))}
 						</ul>
 					</div>
 				)}
-				{springProps.map(({x, display}, index) => (
+				{springProps.map(({offset}, index) => (
 					<animated.div
 						{...bind()}
 						key={index} // eslint-disable-line react/no-array-index-key
 						className="slider__slide"
 						style={{
-							display,
-							transform: x.interpolate(x => `translate3d(${x}px,0,0)`)
+							transform: offset.interpolate(
+								offset => `translate3d(${offset * 100}%, 0, 0)`
+							)
 						}}
 					>
-						<animated.div style={{pointerEvents: 'none'}}>
-							{nonePointerChilds[index]}
-						</animated.div>
+						{nonePointerChilds[index]}
 					</animated.div>
 				))}
 			</div>
