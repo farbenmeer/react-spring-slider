@@ -14,13 +14,20 @@ const onSlideChange = index => {
 	console.log(`Slide changed to: ${index}`);
 };
 
+const imageStyle = src => ({
+	backgroundSize: 'cover',
+	backgroundImage: `url(${src})`,
+	height: '100%',
+	width: '100%'
+});
+
 storiesOf('Slider', module)
 	.add('default', () => (
 		<div style={{width: '100vw', height: '100vh'}}>
 			<Slider hasBullets onSlideChange={onSlideChange}>
 				{images.map(image => (
 					<div key={image}>
-						<img draggable="false" src={image} />
+						<div draggable="false" style={imageStyle(image)} />
 					</div>
 				))}
 			</Slider>
@@ -31,7 +38,7 @@ storiesOf('Slider', module)
 			<Slider hasBullets>
 				{images.map(image => (
 					<div key={image}>
-						<img draggable="false" src={image} />
+						<div draggable="false" style={imageStyle(image)} />
 					</div>
 				))}
 			</Slider>
@@ -42,7 +49,7 @@ storiesOf('Slider', module)
 			<Slider bullets auto={2000}>
 				{images.map(image => (
 					<div key={image}>
-						<img draggable="false" src={image} />
+						<div draggable="false" style={imageStyle(image)} />
 					</div>
 				))}
 			</Slider>
@@ -53,7 +60,7 @@ storiesOf('Slider', module)
 			<Slider hasBullets activeIndex={2}>
 				{images.map(image => (
 					<div key={image}>
-						<img draggable="false" src={image} />
+						<div draggable="false" style={imageStyle(image)} />
 					</div>
 				))}
 			</Slider>
@@ -78,7 +85,7 @@ storiesOf('Slider', module)
 				<Slider hasBullets activeIndex={activeIndex}>
 					{images.map(image => (
 						<div key={image}>
-							<img draggable="false" src={image} />
+							<div draggable="false" style={imageStyle(image)} />
 						</div>
 					))}
 				</Slider>
