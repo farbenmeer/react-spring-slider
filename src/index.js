@@ -1,8 +1,9 @@
 import React, {useRef, useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
-import classnames from 'classnames';
 import {useSprings, animated} from 'react-spring';
 import {useDrag} from 'react-use-gesture';
+
+import {Bullet} from './components';
 
 // eslint-disable-next-line import/no-unassigned-import
 import './index.css';
@@ -82,38 +83,6 @@ const Slider = ({
 		};
 	});
 
-	const Bullet = ({index, BulletComponent}) => {
-		if (BulletComponent) {
-			return (
-				<BulletComponent
-					key={index}
-					isActive={index === slide}
-					onClick={() => setSlide(index)}
-				/>
-			);
-		}
-
-		return (
-			<li
-				key={index}
-				className={classnames('slider__bullets__list__item', {
-					'slider__bullets__list__item--active': index === slide
-				})}
-				style={bulletStyle}
-				onClick={() => setSlide(index)}
-			/>
-		);
-	};
-
-	Bullet.propTypes = {
-		index: PropTypes.number.isRequired,
-		BulletComponent: PropTypes.func
-	};
-
-	Bullet.defaultProps = {
-		BulletComponent: null
-	};
-
 	return (
 		<div ref={sliderRef} className="slider__wrapper">
 			<div className="slider">
@@ -125,6 +94,9 @@ const Slider = ({
 									key={index} // eslint-disable-line react/no-array-index-key
 									index={index}
 									BulletComponent={BulletComponent}
+									setSlide={setSlide}
+									activeIndex={slide}
+									bulletStyle={bulletStyle}
 								/>
 							))}
 						</ul>
