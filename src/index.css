@@ -51,3 +51,7 @@
 	display: inline-block;
 	margin: 0 2px;
 }
+
+.slider__bullets__list__item--active {
+	opacity: 0.5;
+}

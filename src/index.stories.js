@@ -91,4 +91,17 @@ storiesOf('Slider', module)
 				</Slider>
 			</div>
 		);
+	})
+	.add('With different `bulletStyle`', () => {
+		return (
+			<div style={{width: '100vw', height: '100vh'}}>
+				<Slider hasBullets bulletStyle={{backgroundColor: '#fff'}}>
+					{images.map(image => (
+						<div key={image}>
+							<div draggable="false" style={imageStyle(image)} />
+						</div>
+					))}
+				</Slider>
+			</div>
+		);
 	});
