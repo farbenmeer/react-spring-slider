@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import PropTypes from 'prop-types';
 import {storiesOf} from '@storybook/react';
 
 import Slider from '.';
@@ -96,6 +97,37 @@ storiesOf('Slider', module)
 		return (
 			<div style={{width: '100vw', height: '100vh'}}>
 				<Slider hasBullets bulletStyle={{backgroundColor: '#fff'}}>
+					{images.map(image => (
+						<div key={image}>
+							<div draggable="false" style={imageStyle(image)} />
+						</div>
+					))}
+				</Slider>
+			</div>
+		);
+	})
+	.add('With custom `bullets`', () => {
+		const BulletComponent = ({onClick, isActive}) => (
+			<li
+				style={{
+					width: '25px',
+					height: '25px',
+					backgroundColor: 'red',
+					margin: '0 2px',
+					opacity: isActive && '0.5'
+				}}
+				onClick={onClick}
+			/>
+		);
+
+		BulletComponent.propTypes = {
+			onClick: PropTypes.func.isRequired,
+			isActive: PropTypes.bool.isRequired
+		};
+
+		return (
+			<div style={{width: '100vw', height: '100vh'}}>
+				<Slider hasBullets BulletComponent={BulletComponent}>
 					{images.map(image => (
 						<div key={image}>
 							<div draggable="false" style={imageStyle(image)} />

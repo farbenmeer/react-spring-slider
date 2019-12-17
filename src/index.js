@@ -13,10 +13,11 @@ const clamp = (number, lower, upper) =>
 const Slider = ({
 	activeIndex,
 	auto,
+	BulletComponent,
+	bulletStyle,
 	children,
 	hasBullets,
-	onSlideChange,
-	bulletStyle
+	onSlideChange
 }) => {
 	const sliderRef = useRef(null);
 	const [slide, setSlide] = useState(0);
@@ -81,6 +82,38 @@ const Slider = ({
 		};
 	});
 
+	const Bullet = ({index, BulletComponent}) => {
+		if (BulletComponent) {
+			return (
+				<BulletComponent
+					key={index}
+					isActive={index === slide}
+					onClick={() => setSlide(index)}
+				/>
+			);
+		}
+
+		return (
+			<li
+				key={index}
+				className={classnames('slider__bullets__list__item', {
+					'slider__bullets__list__item--active': index === slide
+				})}
+				style={bulletStyle}
+				onClick={() => setSlide(index)}
+			/>
+		);
+	};
+
+	Bullet.propTypes = {
+		index: PropTypes.number.isRequired,
+		BulletComponent: PropTypes.func
+	};
+
+	Bullet.defaultProps = {
+		BulletComponent: null
+	};
+
 	return (
 		<div ref={sliderRef} className="slider__wrapper">
 			<div className="slider">
@@ -88,13 +121,10 @@ const Slider = ({
 					<div className="slider__bullets">
 						<ul className="slider__bullets__list">
 							{children.map((_, index) => (
-								<li
+								<Bullet
 									key={index} // eslint-disable-line react/no-array-index-key
-									className={classnames('slider__bullets__list__item', {
-										'slider__bullets__list__item--active': index === slide
-									})}
-									style={bulletStyle}
-									onClick={() => setSlide(index)}
+									index={index}
+									BulletComponent={BulletComponent}
 								/>
 							))}
 						</ul>
@@ -122,6 +152,7 @@ const Slider = ({
 Slider.propTypes = {
 	activeIndex: PropTypes.number,
 	auto: PropTypes.number,
+	BulletComponent: PropTypes.func,
 	bulletStyle: PropTypes.objectOf(PropTypes.string),
 	children: PropTypes.node,
 	hasBullets: PropTypes.bool,
@@ -131,6 +162,7 @@ Slider.propTypes = {
 Slider.defaultProps = {
 	activeIndex: 0,
 	auto: 0,
+	BulletComponent: null,
 	bulletStyle: {},
 	children: [],
 	hasBullets: false,
