@@ -53,9 +53,9 @@
 		"react-use-gesture": "6.0.14"
 	},
 	"devDependencies": {
-		"@babel/cli": "7.7.5",
-		"@babel/core": "7.7.5",
-		"@babel/preset-env": "7.7.6",
+		"@babel/cli": "7.7.7",
+		"@babel/core": "7.7.7",
+		"@babel/preset-env": "7.7.7",
 		"@babel/preset-react": "7.7.4",
 		"@storybook/addon-actions": "5.2.8",
 		"@storybook/addon-links": "5.2.8",
