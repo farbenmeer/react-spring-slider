@@ -27,22 +27,13 @@
 	},
 	"lint-staged": {
 		"./src/**/*.{js,jsx,css}": [
-			"npm run lint:fix",
-			"npm run lint:editorconfig",
+			"make lint-fix",
+			"make lint",
 			"git add"
 		]
 	},
 	"scripts": {
-		"clean": "rm -rf dist",
-		"build": "babel src -d dist && npm run copy-styles",
-		"copy-styles": "cp src/index.css dist/ && cp src/components/bullet/bullet.css dist/components/bullet/",
-		"watch": "babel --watch src -d dist",
-		"lint": "xo --prettier $PWD/src/**/*",
-		"lint:editorconfig": "ec",
-		"lint:fix": "xo --prettier --fix $PWD/src/**/*",
-		"prepublish": "npm run clean && npm run build",
-		"storybook": "start-storybook -p 6006",
-		"build-storybook": "build-storybook --output-dir docs"
+		"prepublishOnly": "make clean && make build && make storybook"
 	},
 	"peerDependencies": {
 		"prop-types": "15.7.2",
