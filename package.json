@@ -26,7 +26,7 @@
 		"env": "browser"
 	},
 	"lint-staged": {
-		"./**/*.{js,jsx,css}": [
+		"./src/**/*.{js,jsx,css}": [
 			"npm run lint:fix",
 			"npm run lint:editorconfig",
 			"git add"
@@ -42,7 +42,7 @@
 		"lint:fix": "xo --prettier --fix $PWD/src/**/*",
 		"prepublish": "npm run clean && npm run build",
 		"storybook": "start-storybook -p 6006",
-		"build-storybook": "build-storybook"
+		"build-storybook": "build-storybook --output-dir docs"
 	},
 	"peerDependencies": {
 		"prop-types": "15.7.2",
