@@ -1,5 +1,13 @@
 # react-spring-slider
 
+1. [General](#general)  
+2. [Installation](#installation)  
+3. [Usage](#usage)  
+4. [Configuration](#configuration)  
+5. [Contribution](#contribution)  
+
+## General
+
 This is a slider which uses [react-spring](https://www.react-spring.io/) under 
 the hood.
 
@@ -105,6 +113,4 @@ Only a different bulletStyle:
 
 ## Contribution
 
-Contributions are very welcome, we value everything from a bug report, feature 
-request, ideas, pull requests or anything else.
-Please keep in mind to provide as much and detailed informations as possible.
+See [CONTRIBUTING.md](https://github.com/farbenmeer/react-spring-slider/blob/master/CONTRIBUTING.md)
