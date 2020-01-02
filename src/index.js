@@ -17,6 +17,7 @@ const Slider = ({
 	BulletComponent,
 	bulletStyle,
 	children,
+	hasArrows,
 	hasBullets,
 	onSlideChange
 }) => {
@@ -83,9 +84,37 @@ const Slider = ({
 		};
 	});
 
+	const nextSlide = () => {
+		if (slide === children.length - 1) {
+			setSlide(0);
+			return;
+		}
+
+		setSlide(slide + 1);
+	};
+
+	const previousSlide = () => {
+		if (slide === 0) {
+			setSlide(children.length - 1);
+			return;
+		}
+
+		setSlide(slide - 1);
+	};
+
 	return (
 		<div ref={sliderRef} className="slider__wrapper">
 			<div className="slider">
+				{hasArrows && (
+					<div className="slider__arrows">
+						<a title="previous slide" onClick={previousSlide}>
+							<i className="slider__arrows__arrow slider__arrows__arrow--previous" />
+						</a>
+						<a title="next slide" onClick={nextSlide}>
+							<i className="slider__arrows__arrow slider__arrows__arrow--next" />
+						</a>
+					</div>
+				)}
 				{hasBullets && (
 					<div className="slider__bullets">
 						<ul className="slider__bullets__list">
@@ -127,6 +156,7 @@ Slider.propTypes = {
 	BulletComponent: PropTypes.func,
 	bulletStyle: PropTypes.objectOf(PropTypes.string),
 	children: PropTypes.node,
+	hasArrows: PropTypes.bool,
 	hasBullets: PropTypes.bool,
 	onSlideChange: PropTypes.func
 };
@@ -137,6 +167,7 @@ Slider.defaultProps = {
 	BulletComponent: null,
 	bulletStyle: {},
 	children: [],
+	hasArrows: false,
 	hasBullets: false,
 	onSlideChange: () => {}
 };
