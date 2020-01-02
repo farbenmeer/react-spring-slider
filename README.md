@@ -53,6 +53,8 @@ The slider currently provides the following interface:
 
 ```js
 activeIndex: PropTypes.number, // the index to show, can be controlled
+ArrowComponent: PropTypes.func, // a custom component for the arrows
+arrowStyle: PropTypes.objectOf(PropTypes.string), // custom styles for the arrows
 auto: PropTypes.number, // this number indicates the speed when the slider should be slide to next slide (milliseconds)
 BulletComponent: PropTypes.func, // a custom component for the bullets
 bulletStyle: PropTypes.objectOf(PropTypes.string), // custom styles for the bullets
@@ -86,13 +88,35 @@ const App = () => {
 		isActive: PropTypes.bool.isRequired
 	};
 
+	const ArrowComponent = ({onClick, direction}) => {
+		return (
+			<div
+				style={{
+					border: '1px solid black',
+					padding: '1em',
+					backgroundColor: 'white'
+				}}
+				onClick={onClick}
+			>
+				{direction}
+			</div>
+		);
+	};
+
+	ArrowComponent.propTypes = {
+		onClick: PropTypes.func.isRequired,
+		direction: PropTypes.string.isRequired
+	};
+
+
 	return (
 		<Slider 
 			activeIndex={2} 
 			auto 
 			hasBullets 
 			BulletComponent={BulletComponent}
-			onSlideChange={onSlideChange}}
+			ArrowComponent={ArrowComponent}
+			onSlideChange={onSlideChange}
 			>
 				<div>child 1</div>
 				<div>child 2</div>

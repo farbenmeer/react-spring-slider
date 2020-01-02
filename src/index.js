@@ -13,6 +13,8 @@ const clamp = (number, lower, upper) =>
 
 const Slider = ({
 	activeIndex,
+	ArrowComponent,
+	arrowStyle,
 	auto,
 	BulletComponent,
 	bulletStyle,
@@ -107,8 +109,18 @@ const Slider = ({
 			<div className="slider">
 				{hasArrows && (
 					<div className="slider__arrows">
-						<Arrow direction="left" onClick={previousSlide} />
-						<Arrow direction="right" onClick={nextSlide} />
+						<Arrow
+							ArrowComponent={ArrowComponent}
+							arrowStyle={arrowStyle}
+							direction="left"
+							onClick={previousSlide}
+						/>
+						<Arrow
+							ArrowComponent={ArrowComponent}
+							arrowStyle={arrowStyle}
+							direction="right"
+							onClick={nextSlide}
+						/>
 					</div>
 				)}
 				{hasBullets && (
@@ -148,6 +160,8 @@ const Slider = ({
 
 Slider.propTypes = {
 	activeIndex: PropTypes.number,
+	ArrowComponent: PropTypes.func,
+	arrowStyle: PropTypes.objectOf(PropTypes.string),
 	auto: PropTypes.number,
 	BulletComponent: PropTypes.func,
 	bulletStyle: PropTypes.objectOf(PropTypes.string),
@@ -159,6 +173,8 @@ Slider.propTypes = {
 
 Slider.defaultProps = {
 	activeIndex: 0,
+	ArrowComponent: null,
+	arrowStyle: {},
 	auto: 0,
 	BulletComponent: null,
 	bulletStyle: {},
