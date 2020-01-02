@@ -28,18 +28,19 @@
 	"lint-staged": {
 		"./**/*.{js,jsx,css}": [
 			"npm run lint:fix",
-			"npm run lint",
 			"npm run lint:editorconfig",
 			"git add"
 		]
 	},
 	"scripts": {
-		"build": "babel src/index.js --out-file dist/index.js",
-		"watch": "babel --watch src --out-file dist/index.js",
+		"clean": "rm -rf dist",
+		"build": "babel src -d dist && npm run copy-styles",
+		"copy-styles": "cp src/index.css dist/ && cp src/components/bullet/bullet.css dist/components/bullet/",
+		"watch": "babel --watch src -d dist",
 		"lint": "xo --prettier $PWD/src/**/*",
 		"lint:editorconfig": "ec",
 		"lint:fix": "xo --prettier --fix $PWD/src/**/*",
-		"prepublish": "rm -rf dist/ && mkdir dist && cp src/index.css dist/ && npm run build",
+		"prepublish": "npm run clean && npm run build",
 		"storybook": "start-storybook -p 6006",
 		"build-storybook": "build-storybook"
 	},
@@ -49,6 +50,7 @@
 		"react-dom": "16.12.0"
 	},
 	"dependencies": {
+		"classnames": "^2.2.6",
 		"react-spring": "8.0.27",
 		"react-use-gesture": "6.0.14"
 	},
@@ -69,7 +71,6 @@
 		"eslint-plugin-react-hooks": "2.3.0",
 		"husky": "3.1.0",
 		"lint-staged": "9.5.0",
-		"parcel-bundler": "1.12.4",
 		"prettier": "1.19.1",
 		"prop-types": "15.7.2",
 		"xo": "0.25.3"

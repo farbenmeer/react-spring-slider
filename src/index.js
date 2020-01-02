@@ -3,13 +3,23 @@ import PropTypes from 'prop-types';
 import {useSprings, animated} from 'react-spring';
 import {useDrag} from 'react-use-gesture';
 
+import {Bullet} from './components';
+
 // eslint-disable-next-line import/no-unassigned-import
 import './index.css';
 
 const clamp = (number, lower, upper) =>
 	Math.min(Math.max(number, lower), upper);
 
-const Slider = ({activeIndex, auto, children, hasBullets, onSlideChange}) => {
+const Slider = ({
+	activeIndex,
+	auto,
+	BulletComponent,
+	bulletStyle,
+	children,
+	hasBullets,
+	onSlideChange
+}) => {
 	const sliderRef = useRef(null);
 	const [slide, setSlide] = useState(0);
 
@@ -80,10 +90,13 @@ const Slider = ({activeIndex, auto, children, hasBullets, onSlideChange}) => {
 					<div className="slider__bullets">
 						<ul className="slider__bullets__list">
 							{children.map((_, index) => (
-								<li
+								<Bullet
 									key={index} // eslint-disable-line react/no-array-index-key
-									className="slider__bullets__list__item"
-									onClick={() => setSlide(index)}
+									index={index}
+									BulletComponent={BulletComponent}
+									setSlide={setSlide}
+									activeIndex={slide}
+									bulletStyle={bulletStyle}
 								/>
 							))}
 						</ul>
@@ -111,6 +124,8 @@ const Slider = ({activeIndex, auto, children, hasBullets, onSlideChange}) => {
 Slider.propTypes = {
 	activeIndex: PropTypes.number,
 	auto: PropTypes.number,
+	BulletComponent: PropTypes.func,
+	bulletStyle: PropTypes.objectOf(PropTypes.string),
 	children: PropTypes.node,
 	hasBullets: PropTypes.bool,
 	onSlideChange: PropTypes.func
@@ -119,6 +134,8 @@ Slider.propTypes = {
 Slider.defaultProps = {
 	activeIndex: 0,
 	auto: 0,
+	BulletComponent: null,
+	bulletStyle: {},
 	children: [],
 	hasBullets: false,
 	onSlideChange: () => {}

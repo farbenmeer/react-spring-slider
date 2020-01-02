@@ -1,0 +1,26 @@
+.slider__bullets {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	z-index: 1;
+}
+
+.slider__bullets__list {
+	display: flex;
+	justify-content: center;
+	list-style-type: none;
+}
+
+.slider__bullets__list__item {
+	cursor: pointer;
+	height: 15px;
+	width: 15px;
+	background-color: #333;
+	border-radius: 50%;
+	display: inline-block;
+	margin: 0 2px;
+}
+
+.slider__bullets__list__item--active {
+	opacity: 0.5;
+}
