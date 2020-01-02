@@ -136,4 +136,78 @@ storiesOf('Slider', module)
 				</Slider>
 			</div>
 		);
+	})
+	.add('With arrows', () => {
+		return (
+			<div style={{width: '100vw', height: '100vh'}}>
+				<Slider hasArrows>
+					{images.map(image => (
+						<div key={image}>
+							<div draggable="false" style={imageStyle(image)} />
+						</div>
+					))}
+				</Slider>
+			</div>
+		);
+	})
+	.add('With custom arrow style', () => {
+		const arrowStyle = {border: 'solid red', borderWidth: '0 5px 5px 0'};
+
+		return (
+			<div style={{width: '100vw', height: '100vh'}}>
+				<Slider hasArrows arrowStyle={arrowStyle}>
+					{images.map(image => (
+						<div key={image}>
+							<div draggable="false" style={imageStyle(image)} />
+						</div>
+					))}
+				</Slider>
+			</div>
+		);
+	})
+	.add('With custom arrow component', () => {
+		const ArrowComponent = ({onClick, direction}) => {
+			return (
+				<div
+					style={{
+						border: '1px solid black',
+						padding: '1em',
+						backgroundColor: 'white'
+					}}
+					onClick={onClick}
+				>
+					{direction}
+				</div>
+			);
+		};
+
+		ArrowComponent.propTypes = {
+			onClick: PropTypes.func.isRequired,
+			direction: PropTypes.string.isRequired
+		};
+
+		return (
+			<div style={{width: '100vw', height: '100vh'}}>
+				<Slider hasArrows ArrowComponent={ArrowComponent}>
+					{images.map(image => (
+						<div key={image}>
+							<div draggable="false" style={imageStyle(image)} />
+						</div>
+					))}
+				</Slider>
+			</div>
+		);
+	})
+	.add('With arrows and bullets', () => {
+		return (
+			<div style={{width: '100vw', height: '100vh'}}>
+				<Slider hasArrows hasBullets>
+					{images.map(image => (
+						<div key={image}>
+							<div draggable="false" style={imageStyle(image)} />
+						</div>
+					))}
+				</Slider>
+			</div>
+		);
 	});

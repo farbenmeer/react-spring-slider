@@ -1,3 +1,4 @@
+import Arrow from './arrow';
 import Bullet from './bullet';
 
-export {Bullet};
+export {Arrow, Bullet};

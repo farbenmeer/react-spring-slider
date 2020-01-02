@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {useSprings, animated} from 'react-spring';
 import {useDrag} from 'react-use-gesture';
 
-import {Bullet} from './components';
+import {Arrow, Bullet} from './components';
 
 // eslint-disable-next-line import/no-unassigned-import
 import './index.css';
@@ -13,10 +13,13 @@ const clamp = (number, lower, upper) =>
 
 const Slider = ({
 	activeIndex,
+	ArrowComponent,
+	arrowStyle,
 	auto,
 	BulletComponent,
 	bulletStyle,
 	children,
+	hasArrows,
 	hasBullets,
 	onSlideChange
 }) => {
@@ -83,9 +86,43 @@ const Slider = ({
 		};
 	});
 
+	const nextSlide = () => {
+		if (slide === children.length - 1) {
+			setSlide(0);
+			return;
+		}
+
+		setSlide(slide + 1);
+	};
+
+	const previousSlide = () => {
+		if (slide === 0) {
+			setSlide(children.length - 1);
+			return;
+		}
+
+		setSlide(slide - 1);
+	};
+
 	return (
 		<div ref={sliderRef} className="slider__wrapper">
 			<div className="slider">
+				{hasArrows && (
+					<div className="slider__arrows">
+						<Arrow
+							ArrowComponent={ArrowComponent}
+							arrowStyle={arrowStyle}
+							direction="left"
+							onClick={previousSlide}
+						/>
+						<Arrow
+							ArrowComponent={ArrowComponent}
+							arrowStyle={arrowStyle}
+							direction="right"
+							onClick={nextSlide}
+						/>
+					</div>
+				)}
 				{hasBullets && (
 					<div className="slider__bullets">
 						<ul className="slider__bullets__list">
@@ -123,20 +160,26 @@ const Slider = ({
 
 Slider.propTypes = {
 	activeIndex: PropTypes.number,
+	ArrowComponent: PropTypes.func,
+	arrowStyle: PropTypes.objectOf(PropTypes.string),
 	auto: PropTypes.number,
 	BulletComponent: PropTypes.func,
 	bulletStyle: PropTypes.objectOf(PropTypes.string),
 	children: PropTypes.node,
+	hasArrows: PropTypes.bool,
 	hasBullets: PropTypes.bool,
 	onSlideChange: PropTypes.func
 };
 
 Slider.defaultProps = {
 	activeIndex: 0,
+	ArrowComponent: null,
+	arrowStyle: {},
 	auto: 0,
 	BulletComponent: null,
 	bulletStyle: {},
 	children: [],
+	hasArrows: false,
 	hasBullets: false,
 	onSlideChange: () => {}
 };
