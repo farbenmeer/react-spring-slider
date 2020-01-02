@@ -28,34 +28,3 @@
 		0 37.5px 75px -37.5px rgba(0, 0, 0, 0.6);
 	user-select: none;
 }
-
-.slider__arrows {
-	top: 50%;
-	position: relative;
-	z-index: 1;
-	display: flex;
-	justify-content: space-between;
-	padding: 0 2em;
-}
-
-.slider__arrows__arrow {
-	border: solid #000;
-	border-width: 0 3px 3px 0;
-	display: inline-block;
-	padding: 3px;
-	height: 20px;
-	width: 20px;
-	cursor: pointer;
-}
-
-.slider__arrows__arrow:hover {
-	opacity: 0.4;
-}
-
-.slider__arrows__arrow--previous {
-	transform: rotate(135deg);
-}
-
-.slider__arrows__arrow--next {
-	transform: rotate(-45deg);
-}

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {useSprings, animated} from 'react-spring';
 import {useDrag} from 'react-use-gesture';
 
-import {Bullet} from './components';
+import {Arrow, Bullet} from './components';
 
 // eslint-disable-next-line import/no-unassigned-import
 import './index.css';
@@ -107,12 +107,8 @@ const Slider = ({
 			<div className="slider">
 				{hasArrows && (
 					<div className="slider__arrows">
-						<a title="previous slide" onClick={previousSlide}>
-							<i className="slider__arrows__arrow slider__arrows__arrow--previous" />
-						</a>
-						<a title="next slide" onClick={nextSlide}>
-							<i className="slider__arrows__arrow slider__arrows__arrow--next" />
-						</a>
+						<Arrow direction="left" onClick={previousSlide} />
+						<Arrow direction="right" onClick={nextSlide} />
 					</div>
 				)}
 				{hasBullets && (

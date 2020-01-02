@@ -149,4 +149,17 @@ storiesOf('Slider', module)
 				</Slider>
 			</div>
 		);
+	})
+	.add('With arrows and bullets', () => {
+		return (
+			<div style={{width: '100vw', height: '100vh'}}>
+				<Slider hasArrows hasBullets>
+					{images.map(image => (
+						<div key={image}>
+							<div draggable="false" style={imageStyle(image)} />
+						</div>
+					))}
+				</Slider>
+			</div>
+		);
 	});
