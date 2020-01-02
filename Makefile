@@ -61,6 +61,9 @@ node_modules:
 	npm install
 	touch node_modules
 
+ci:
+	npm ci
+
 dist: $(JS_SOURCES) $(CSS_SOURCES)
 dist:
 	$(babel) src -d dist
