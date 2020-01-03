@@ -1,5 +1,7 @@
 # react-spring-slider
 
+[![CircleCI](https://circleci.com/gh/farbenmeer/react-spring-slider.svg?style=svg)](https://circleci.com/gh/farbenmeer/react-spring-slider)
+
 1. [General](#general)  
 2. [Installation](#installation)  
 3. [Usage](#usage)  
