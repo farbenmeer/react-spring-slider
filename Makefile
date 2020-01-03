@@ -74,7 +74,9 @@ node_modules:
 dist: $(JS_SOURCES) $(CSS_SOURCES)
 dist:
 	$(babel) src -d dist
-	cp src/index.css dist/ && cp src/components/bullet/bullet.css dist/components/bullet/
+	cp src/index.css dist/
+	cp src/components/bullet/bullet.css dist/components/bullet/
+	cp src/components/arrow/arrow.css dist/components/arrow/
 	touch dist
 
 docs: $(JS_SOURCES) $(CSS_SOURCES)

@@ -13,7 +13,7 @@ trim_trailing_whitespace = false
 [.github/**/*]
 indent_style = space
 
-[*.yml]
+[*{.yml,.json}]
 indent_style = space
 
 [.ecrc]
