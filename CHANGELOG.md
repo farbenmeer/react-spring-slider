@@ -93,13 +93,3 @@ All notable changes to this project will be documented in this file. See [standa
 * Fuckup after rebase? ([0727e10](https://github.com/farbenmeer/react-spring-slider/commit/0727e1071c09f09a9dd5cba1dce5486a75517aa4))
 * Use correct symlink ([58cc84a](https://github.com/farbenmeer/react-spring-slider/commit/58cc84a37a2cda823cb4ceaf24bf526dbbbea4ea))
 * Use slide instead of index after rebase :) ([bc648c7](https://github.com/farbenmeer/react-spring-slider/commit/bc648c7c4daae3bb59022d091226e9f8ddd2675e))
-
-# Changelog
-All notable changes to this project will be documented in this file.
-
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
-
-## [Unreleased]
-### Added
-	- initial release
