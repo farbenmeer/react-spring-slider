@@ -10,6 +10,7 @@ xo = ./node_modules/.bin/xo
 babel = ./node_modules/.bin/babel
 build-storybook = ./node_modules/.bin/build-storybook
 start-storybook = ./node_modules/.bin/start-storybook
+standard-version = ./node_modules/.bin/standard-version
 
 .DEFAULT_GOAL := help
 
@@ -103,16 +104,14 @@ _current_version:
 	@echo the current version is: $(CURRENT_VERSION)
 
 _do_release:
-	@read -p "Enter version to release: " version && \
-	sed -i "s/\"version\":.*\",/\"version\": \"$${version}\",/" ./package.json && \
 	make clean && \
 	make install && \
+	$(standard-version) && \
 	make lint && \
 	make build && \
 	make storybook && \
 	git add . && \
-	git commit -m "chore(release): $${version}" --no-verify && \
-	git tag "$${version}" && \
+	git commit -m "chore(release): storybook" --no-verify && \
 	npm publish && \
 	git push origin master && \
 	git push origin master --tags

@@ -1,6 +1,6 @@
 {
 	"name": "@farbenmeer/react-spring-slider",
-	"version": "0.0.1-alpha.3",
+	"version": "0.0.1",
 	"main": "dist/index.js",
 	"author": {
 		"name": "Max Strübing",
@@ -47,12 +47,12 @@
 		"@babel/core": "7.7.7",
 		"@babel/preset-env": "7.7.7",
 		"@babel/preset-react": "7.7.4",
+		"@commitlint/cli": "^8.3.3",
 		"@storybook/addon-actions": "5.2.8",
 		"@storybook/addon-links": "5.2.8",
 		"@storybook/addons": "5.2.8",
 		"@storybook/react": "5.2.8",
 		"babel-loader": "8.0.6",
-		"commitlint": "8.3.3",
 		"editorconfig-checker": "3.0.3",
 		"eslint-config-xo-react": "0.20.0",
 		"eslint-plugin-react": "7.17.0",
@@ -61,6 +61,7 @@
 		"lint-staged": "9.5.0",
 		"prettier": "1.19.1",
 		"prop-types": "15.7.2",
+		"standard-version": "^7.0.1",
 		"xo": "0.25.3"
 	}
 }
