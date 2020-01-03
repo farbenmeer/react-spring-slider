@@ -106,14 +106,16 @@ _current_version:
 	@echo the current version is: $(CURRENT_VERSION)
 
 _do_release:
+	@read -p "Enter version to release: " version && \
+	sed -i "s/\"version\":.*\",/\"version\": \"$${version}\",/" ./package.json && \
 	make clean && \
 	make install && \
-	$(standard-version) && \
 	make lint && \
 	make build && \
 	make storybook && \
 	git add . && \
-	git commit -m "chore(release): storybook" --no-verify && \
+	git commit -m "chore(release): release $${version}" --no-verify && \
+	git tag "$${version}" && \
 	npm publish && \
 	git push origin master && \
 	git push origin master --tags
