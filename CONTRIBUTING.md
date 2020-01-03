@@ -50,3 +50,11 @@ The targets meant to be used are:
 You can see all targets which meant to be used from the developer by simply 
 typing `make help` or, a bit easier `make` into your terminal.
 If you encounter any problem try to run `make clean` at first.
+
+## Releasing
+
+In order to release make sure to be on the `master` branch and have the latest 
+changes. Make also sure to be logged in into your npm-account.
+
+`make release` should do everything needed in order to build a complete release 
+including publishing it to npm and creating a Github tag.
