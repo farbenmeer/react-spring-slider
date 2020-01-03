@@ -32,9 +32,6 @@
 			"git add"
 		]
 	},
-	"scripts": {
-		"prepublishOnly": "make clean && make build && make storybook"
-	},
 	"peerDependencies": {
 		"prop-types": "15.7.2",
 		"react": "16.12.0",
