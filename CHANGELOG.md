@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.4](https://github.com/farbenmeer/react-spring-slider/compare/v0.0.3...v0.0.4) (2020-01-03)
+
+
+### Features
+
+* Do stuff; ([23700e8](https://github.com/farbenmeer/react-spring-slider/commit/23700e853c968c53e7d672605cb5ad8b8622593c))
+
 ### [0.0.3](https://github.com/farbenmeer/react-spring-slider/compare/v0.0.2...v0.0.3) (2020-01-03)
 
 
