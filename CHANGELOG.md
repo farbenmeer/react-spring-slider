@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [0.0.3](https://github.com/farbenmeer/react-spring-slider/compare/v0.0.2...v0.0.3) (2020-01-03)
 
+
 ### [0.0.2](https://github.com/farbenmeer/react-spring-slider/compare/v0.0.1-alpha.0...v0.0.2) (2020-01-03)
 
 
