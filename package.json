@@ -61,7 +61,7 @@
     "lint-staged": "9.5.0",
     "prettier": "1.19.1",
     "prop-types": "15.7.2",
-    "semantic-release": "^15.14.0",
+    "semantic-release": "15.14.0",
     "xo": "0.25.3"
   },
   "scripts": {
