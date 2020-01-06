@@ -1,5 +1,4 @@
 import React, {useRef, useState, useEffect} from 'react';
-import PropTypes from 'prop-types';
 import {useSprings, animated} from 'react-spring';
 import {useDrag} from 'react-use-gesture';
 
@@ -7,23 +6,38 @@ import {Arrow, Bullet} from './components';
 
 // eslint-disable-next-line import/no-unassigned-import
 import './index.css';
+import { ArrowComponentType, ArrowStyle } from './components/arrow/arrow';
+import { BulletComponentType, BulletStyle } from './components/bullet/bullet';
 
-const clamp = (number, lower, upper) =>
+interface SliderProps {
+	activeIndex?: number,
+	ArrowComponent?: ArrowComponentType,
+	arrowStyle?: ArrowStyle,
+	auto?: number,
+	BulletComponent?: BulletComponentType,
+	bulletStyle?: BulletStyle,
+	children?: React.ReactNode[],
+	hasArrows?: boolean,
+	hasBullets?: boolean,
+	onSlideChange?: (slide: number) => void,
+}
+
+const clamp = (number: number, lower: number, upper: number) =>
 	Math.min(Math.max(number, lower), upper);
 
-const Slider = ({
-	activeIndex,
+const Slider: React.FunctionComponent<SliderProps> = ({
+	activeIndex = 0,
 	ArrowComponent,
-	arrowStyle,
-	auto,
+	arrowStyle = {},
+	auto = 0,
 	BulletComponent,
-	bulletStyle,
-	children,
-	hasArrows,
-	hasBullets,
-	onSlideChange
+	bulletStyle = {},
+	children = [],
+	hasArrows = false,
+	hasBullets = false,
+	onSlideChange = () => {},
 }) => {
-	const sliderRef = useRef(null);
+	const sliderRef = useRef<HTMLDivElement>(null);
 	const [slide, setSlide] = useState(0);
 
 	// Initialize slides with spring
@@ -34,28 +48,31 @@ const Slider = ({
 	// Drag binding to set on the element
 	const bind = useDrag(
 		({down, movement: [xDelta], direction: [xDir], distance, cancel}) => {
-			const {width} = sliderRef.current.parentElement.getBoundingClientRect();
+			if (sliderRef && sliderRef.current && sliderRef.current.parentElement) {
+				const {width} = sliderRef.current.parentElement.getBoundingClientRect();
 
-			if (down && distance > width / 2) {
-				cancel();
-				setSlide(clamp(slide + (xDir > 0 ? -1 : 1), 0, children.length - 1));
+				if (down && distance > width / 2) {
+					cancel && cancel();
+					setSlide(clamp(slide + (xDir > 0 ? -1 : 1), 0, children.length - 1));
+				}
+				//@ts-ignore
+				setSpringProps(index => ({
+					offset: (down ? xDelta : 0) / width + (index - slide)
+				}));
 			}
-
-			setSpringProps(index => ({
-				offset: (down ? xDelta : 0) / width + (index - slide)
-			}));
 		}
 	);
 
 	// Triggered on slide change
 	useEffect(() => {
+		//@ts-ignore
 		setSpringProps(index => ({offset: index - slide}));
 		onSlideChange(slide);
 	}, [slide, setSpringProps, onSlideChange]);
 
 	// Effect for autosliding
 	useEffect(() => {
-		let interval;
+		let interval: NodeJS.Timeout;
 
 		if (auto > 0) {
 			interval = setInterval(() => {
@@ -75,6 +92,7 @@ const Slider = ({
 	// Sets pointer events none to every child and preserves styles
 	const nonePointerChilds = children.map(child => {
 		return {
+			//@ts-ignore
 			...child,
 			props: {
 				...child.props,
@@ -156,32 +174,6 @@ const Slider = ({
 			</div>
 		</div>
 	);
-};
-
-Slider.propTypes = {
-	activeIndex: PropTypes.number,
-	ArrowComponent: PropTypes.func,
-	arrowStyle: PropTypes.objectOf(PropTypes.string),
-	auto: PropTypes.number,
-	BulletComponent: PropTypes.func,
-	bulletStyle: PropTypes.objectOf(PropTypes.string),
-	children: PropTypes.node,
-	hasArrows: PropTypes.bool,
-	hasBullets: PropTypes.bool,
-	onSlideChange: PropTypes.func
-};
-
-Slider.defaultProps = {
-	activeIndex: 0,
-	ArrowComponent: null,
-	arrowStyle: {},
-	auto: 0,
-	BulletComponent: null,
-	bulletStyle: {},
-	children: [],
-	hasArrows: false,
-	hasBullets: false,
-	onSlideChange: () => {}
 };
 
 export default Slider;

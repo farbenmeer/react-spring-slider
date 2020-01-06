@@ -1,4 +1,4 @@
-JS_SOURCES=$(wildcard src/*.js src/**/*.js src/**/**/*.js)
+TS_SOURCES=$(wildcard src/*.tsx src/*.ts src/**/*.tsx src/**/*.ts src/**/**/*.tsx src/**/**/*.ts)
 CSS_SOURCES=$(wildcard src/*.css src/**/*.css src/**/**/*.css)
 
 GIT_BRANCH = $(shell git rev-parse --abbrev-ref HEAD)
@@ -11,6 +11,7 @@ babel = ./node_modules/.bin/babel
 build-storybook = ./node_modules/.bin/build-storybook
 start-storybook = ./node_modules/.bin/start-storybook
 standard-version = ./node_modules/.bin/standard-version
+tsc = ./node_modules/.bin/tsc
 
 .DEFAULT_GOAL := help
 
@@ -71,15 +72,15 @@ node_modules:
 	npm install
 	touch node_modules
 
-dist: $(JS_SOURCES) $(CSS_SOURCES)
+dist: $(TS_SOURCES) $(CSS_SOURCES)
 dist:
-	$(babel) src -d dist
+	$(tsc) --declaration
 	cp src/index.css dist/
 	cp src/components/bullet/bullet.css dist/components/bullet/
 	cp src/components/arrow/arrow.css dist/components/arrow/
 	touch dist
 
-docs: $(JS_SOURCES) $(CSS_SOURCES)
+docs: $(TS_SOURCES) $(CSS_SOURCES)
 docs:
 	$(build-storybook) --output-dir docs
 	touch docs

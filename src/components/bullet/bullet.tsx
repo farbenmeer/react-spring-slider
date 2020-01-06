@@ -1,11 +1,29 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 // eslint-disable-next-line import/no-unassigned-import
 import './bullet.css';
 
-const Bullet = ({
+interface BulletProps {
+	BulletComponent?: BulletComponentType,
+	bulletStyle?: BulletStyle,
+	index: number,
+	setSlide: (index: number) => void,
+	activeIndex: number,
+}
+
+export type BulletComponentType = (props: BulletComponentProps) => React.ReactElement
+
+export interface BulletStyle {
+	[key: string]: string
+}
+
+interface BulletComponentProps {
+	isActive: boolean,
+	onClick: () => void,
+}
+
+const Bullet: React.FunctionComponent<BulletProps> = ({
 	index,
 	BulletComponent,
 	setSlide,
@@ -34,16 +52,8 @@ const Bullet = ({
 	);
 };
 
-Bullet.propTypes = {
-	activeIndex: PropTypes.number.isRequired,
-	BulletComponent: PropTypes.func,
-	bulletStyle: PropTypes.objectOf(PropTypes.string),
-	index: PropTypes.number.isRequired,
-	setSlide: PropTypes.func.isRequired
-};
-
 Bullet.defaultProps = {
-	BulletComponent: null,
+	BulletComponent: undefined,
 	bulletStyle: {}
 };
 
