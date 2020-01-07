@@ -43,14 +43,9 @@ const StyledSlider = styled.div`
 `
 
 const StyledSlide = styled.div`
-	background-size: cover;
-	background-repeat: no-repeat;
-	background-position: center center;
 	width: 100%;
 	height: 100%;
 	will-change: transform;
-	box-shadow: 0 62.5px 125px -25px rgba(50, 50, 73, 0.5),
-		0 37.5px 75px -37.5px rgba(0, 0, 0, 0.6);
 	user-select: none;
 	pointer-events: none;
 `
