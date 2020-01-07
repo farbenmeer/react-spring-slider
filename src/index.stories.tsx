@@ -1,8 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {storiesOf} from '@storybook/react';
+import { BulletComponentType } from '../src/components/bullet/bullet'
 
 import Slider from '.';
+import { ArrowComponentType } from './components/arrow/arrow';
 
 const images = [
 	'https://images.pexels.com/photos/296878/pexels-photo-296878.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
@@ -11,11 +13,11 @@ const images = [
 	'https://images.pexels.com/photos/924675/pexels-photo-924675.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
 ];
 
-const onSlideChange = index => {
+const onSlideChange = (index: number) => {
 	console.log(`Slide changed to: ${index}`);
 };
 
-const imageStyle = src => ({
+const imageStyle = (src: string) => ({
 	backgroundSize: 'cover',
 	backgroundImage: `url(${src})`,
 	height: '100%',
@@ -47,7 +49,7 @@ storiesOf('Slider', module)
 	))
 	.add('with auto sliding', () => (
 		<div style={{width: '100vw', height: '100vh'}}>
-			<Slider bullets auto={2000}>
+			<Slider hasBullets auto={2000}>
 				{images.map(image => (
 					<div key={image}>
 						<div draggable="false" style={imageStyle(image)} />
@@ -107,23 +109,18 @@ storiesOf('Slider', module)
 		);
 	})
 	.add('With custom `bullets`', () => {
-		const BulletComponent = ({onClick, isActive}) => (
+		const BulletComponent: BulletComponentType = ({onClick, isActive}) => (
 			<li
 				style={{
 					width: '25px',
 					height: '25px',
 					backgroundColor: 'red',
 					margin: '0 2px',
-					opacity: isActive && '0.5'
+					opacity: isActive ? '0.5' : undefined
 				}}
 				onClick={onClick}
 			/>
 		);
-
-		BulletComponent.propTypes = {
-			onClick: PropTypes.func.isRequired,
-			isActive: PropTypes.bool.isRequired
-		};
 
 		return (
 			<div style={{width: '100vw', height: '100vh'}}>
@@ -166,7 +163,7 @@ storiesOf('Slider', module)
 		);
 	})
 	.add('With custom arrow component', () => {
-		const ArrowComponent = ({onClick, direction}) => {
+		const ArrowComponent: ArrowComponentType = ({onClick, direction}) => {
 			return (
 				<div
 					style={{
@@ -179,11 +176,6 @@ storiesOf('Slider', module)
 					{direction}
 				</div>
 			);
-		};
-
-		ArrowComponent.propTypes = {
-			onClick: PropTypes.func.isRequired,
-			direction: PropTypes.string.isRequired
 		};
 
 		return (
