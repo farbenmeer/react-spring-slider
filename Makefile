@@ -82,6 +82,7 @@ dist:
 
 docs: $(TS_SOURCES) $(CSS_SOURCES)
 docs:
+	rm -rf docs
 	$(build-storybook) --output-dir docs
 	touch docs
 
