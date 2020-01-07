@@ -110,7 +110,7 @@ _do_release:
 	make build && \
 	make storybook && \
 	git add . && \
-	git commit -m "chore(release): release $${version}" --no-verify && \
+	git commit -m "chore(release): release $${version}" --no-verify;
 	git tag "$${version}" && \
 	npm publish && \
 	git push origin master && \
