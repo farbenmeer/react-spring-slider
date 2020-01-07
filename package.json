@@ -51,9 +51,9 @@
     "@storybook/addon-links": "5.2.8",
     "@storybook/addons": "5.2.8",
     "@storybook/react": "5.2.8",
-    "@types/node": "^12.12.24",
+    "@types/node": "12.12.24",
     "@types/styled-components": "4.4.2",
-    "babel-loader": "^8.0.6",
+    "babel-loader": "8.0.6",
     "editorconfig-checker": "3.0.3",
     "eslint-config-xo-react": "0.20.0",
     "eslint-plugin-react": "7.17.0",
@@ -62,8 +62,8 @@
     "lint-staged": "9.5.0",
     "prettier": "1.19.1",
     "prop-types": "15.7.2",
-    "ts-loader": "^6.2.1",
-    "typescript": "^3.7.4",
+    "ts-loader": "6.2.1",
+    "typescript": "3.7.4",
     "xo": "0.25.3"
   }
 }
