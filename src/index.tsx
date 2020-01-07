@@ -1,25 +1,71 @@
-import React, {useRef, useState, useEffect} from 'react';
-import {useSprings, animated} from 'react-spring';
-import {useDrag} from 'react-use-gesture';
+import React, { useRef, useState, useEffect } from "react";
+import styled from 'styled-components';
+import { useSprings, animated } from "react-spring";
+import { useDrag } from "react-use-gesture";
 
-import {Arrow, Bullet} from './components';
+import { Arrow, Bullet } from "./components";
 
-// eslint-disable-next-line import/no-unassigned-import
-import './index.css';
-import { ArrowComponentType, ArrowStyle } from './components/arrow/arrow';
-import { BulletComponentType, BulletStyle } from './components/bullet/bullet';
+import { ArrowComponentType, ArrowStyle } from "./components/arrow/arrow";
+import { BulletComponentType, BulletStyle } from "./components/bullet/bullet";
+
+const StyledSliderArrows = styled.div`
+	top: 50%;
+	position: absolute;
+	width: 100%;
+	z-index: 1;
+	display: flex;
+	justify-content: space-between;
+`;
+
+const StyledBulletList = styled.ul`
+	display: flex;
+	justify-content: center;
+	list-style-type: none;
+`;
+
+const StyledBullets = styled.div`
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	z-index: 1;
+`;
+
+const StyledWrapper = styled.div`
+	width: 100%;
+	height: 100%;
+`
+
+const StyledSlider = styled.div`
+	position: relative;
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
+`
+
+const StyledSlide = styled.div`
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+	width: 100%;
+	height: 100%;
+	will-change: transform;
+	box-shadow: 0 62.5px 125px -25px rgba(50, 50, 73, 0.5),
+		0 37.5px 75px -37.5px rgba(0, 0, 0, 0.6);
+	user-select: none;
+	pointer-events: none;
+`
 
 interface SliderProps {
-	activeIndex?: number,
-	ArrowComponent?: ArrowComponentType,
-	arrowStyle?: ArrowStyle,
-	auto?: number,
-	BulletComponent?: BulletComponentType,
-	bulletStyle?: BulletStyle,
-	children?: React.ReactNode[],
-	hasArrows?: boolean,
-	hasBullets?: boolean,
-	onSlideChange?: (slide: number) => void,
+	activeIndex?: number;
+	ArrowComponent?: ArrowComponentType;
+	arrowStyle?: ArrowStyle;
+	auto?: number;
+	BulletComponent?: BulletComponentType;
+	bulletStyle?: BulletStyle;
+	children?: React.ReactNode[];
+	hasArrows?: boolean;
+	hasBullets?: boolean;
+	onSlideChange?: (slide: number) => void;
 }
 
 const clamp = (number: number, lower: number, upper: number) =>
@@ -35,7 +81,7 @@ const Slider: React.FunctionComponent<SliderProps> = ({
 	children = [],
 	hasArrows = false,
 	hasBullets = false,
-	onSlideChange = () => {},
+	onSlideChange = () => {}
 }) => {
 	const sliderRef = useRef<HTMLDivElement>(null);
 	const [slide, setSlide] = useState(0);
@@ -47,9 +93,11 @@ const Slider: React.FunctionComponent<SliderProps> = ({
 
 	// Drag binding to set on the element
 	const bind = useDrag(
-		({down, movement: [xDelta], direction: [xDir], distance, cancel}) => {
+		({ down, movement: [xDelta], direction: [xDir], distance, cancel }) => {
 			if (sliderRef && sliderRef.current && sliderRef.current.parentElement) {
-				const {width} = sliderRef.current.parentElement.getBoundingClientRect();
+				const {
+					width
+				} = sliderRef.current.parentElement.getBoundingClientRect();
 
 				if (down && distance > width / 2) {
 					cancel && cancel();
@@ -66,7 +114,7 @@ const Slider: React.FunctionComponent<SliderProps> = ({
 	// Triggered on slide change
 	useEffect(() => {
 		//@ts-ignore
-		setSpringProps(index => ({offset: index - slide}));
+		setSpringProps(index => ({ offset: index - slide }));
 		onSlideChange(slide);
 	}, [slide, setSpringProps, onSlideChange]);
 
@@ -81,7 +129,9 @@ const Slider: React.FunctionComponent<SliderProps> = ({
 			}, auto);
 		}
 
-		return () => interval && clearInterval(interval);
+		return () => {
+			interval && clearInterval(interval);
+		};
 	}, [auto, children.length, slide]);
 
 	// Jump to slide index when prop changes
@@ -90,19 +140,7 @@ const Slider: React.FunctionComponent<SliderProps> = ({
 	}, [activeIndex, children.length]);
 
 	// Sets pointer events none to every child and preserves styles
-	const nonePointerChilds = children.map(child => {
-		return {
-			//@ts-ignore
-			...child,
-			props: {
-				...child.props,
-				style: {
-					...child.props.style,
-					pointerEvents: 'none'
-				}
-			}
-		};
-	});
+	const childs = children.map(child => <StyledSlide>{child}</StyledSlide>);
 
 	const nextSlide = () => {
 		if (slide === children.length - 1) {
@@ -123,10 +161,10 @@ const Slider: React.FunctionComponent<SliderProps> = ({
 	};
 
 	return (
-		<div ref={sliderRef} className="slider__wrapper">
-			<div className="slider">
+		<StyledWrapper ref={sliderRef}>
+			<StyledSlider>
 				{hasArrows && (
-					<div className="slider__arrows">
+					<StyledSliderArrows>
 						<Arrow
 							ArrowComponent={ArrowComponent}
 							arrowStyle={arrowStyle}
@@ -139,11 +177,11 @@ const Slider: React.FunctionComponent<SliderProps> = ({
 							direction="right"
 							onClick={nextSlide}
 						/>
-					</div>
+					</StyledSliderArrows>
 				)}
 				{hasBullets && (
-					<div className="slider__bullets">
-						<ul className="slider__bullets__list">
+					<StyledBullets>
+						<StyledBulletList>
 							{children.map((_, index) => (
 								<Bullet
 									key={index} // eslint-disable-line react/no-array-index-key
@@ -154,10 +192,10 @@ const Slider: React.FunctionComponent<SliderProps> = ({
 									bulletStyle={bulletStyle}
 								/>
 							))}
-						</ul>
-					</div>
+						</StyledBulletList>
+					</StyledBullets>
 				)}
-				{springProps.map(({offset}, index) => (
+				{springProps.map(({ offset }, index) => (
 					<animated.div
 						{...bind()}
 						key={index} // eslint-disable-line react/no-array-index-key
@@ -165,14 +203,18 @@ const Slider: React.FunctionComponent<SliderProps> = ({
 						style={{
 							transform: offset.interpolate(
 								offset => `translate3d(${offset * 100}%, 0, 0)`
-							)
+							),
+							position: 'absolute',
+							width: '100%',
+							height: '100%',
+							willChange: 'transform'
 						}}
 					>
-						{nonePointerChilds[index]}
+						{childs[index]}
 					</animated.div>
 				))}
-			</div>
-		</div>
+			</StyledSlider>
+		</StyledWrapper>
 	);
 };
 

@@ -1,8 +1,5 @@
 import React from 'react';
-import classnames from 'classnames';
-
-// eslint-disable-next-line import/no-unassigned-import
-import './bullet.css';
+import styled from 'styled-components';
 
 interface BulletProps {
 	BulletComponent?: BulletComponentType,
@@ -17,6 +14,18 @@ export type BulletComponentType = (props: BulletComponentProps) => React.ReactEl
 export interface BulletStyle {
 	[key: string]: string
 }
+
+const StyledBullet = styled.li<{ active: boolean }>`
+	cursor: pointer;
+	height: 15px;
+	width: 15px;
+	background-color: #333;
+	border-radius: 50%;
+	display: inline-block;
+	margin: 0 2px;
+
+	${({active}) => active ? 'opacity: 0.5' : ''};
+`;
 
 interface BulletComponentProps {
 	isActive: boolean,
@@ -41,11 +50,8 @@ const Bullet: React.FunctionComponent<BulletProps> = ({
 	}
 
 	return (
-		<li
+		<StyledBullet active={index === activeIndex}
 			key={index}
-			className={classnames('slider__bullets__list__item', {
-				'slider__bullets__list__item--active': index === activeIndex
-			})}
 			style={bulletStyle}
 			onClick={() => setSlide(index)}
 		/>

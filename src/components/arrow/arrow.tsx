@@ -1,29 +1,56 @@
-import React from 'react';
-
-// eslint-disable-next-line import/no-unassigned-import
-import './arrow.css';
+import React from "react";
+import styled from "styled-components";
 
 interface ArrowProps {
-	ArrowComponent?: ArrowComponentType,
-	arrowStyle?: ArrowStyle,
-	direction: Direction,
-	onClick: () => void,
+	ArrowComponent?: ArrowComponentType;
+	arrowStyle?: ArrowStyle;
+	direction: Direction;
+	onClick: () => void;
 }
 
-export type ArrowComponentType = (props: ArrowComponentProps) => React.ReactElement
+export type ArrowComponentType = (
+	props: ArrowComponentProps
+) => React.ReactElement;
 
-type Direction = "left" | "right"
+type Direction = "left" | "right";
 
 interface ArrowComponentProps {
-	direction: Direction,
-	onClick: () => void,
+	direction: Direction;
+	onClick: () => void;
 }
 
 export interface ArrowStyle {
-	[key: string]: string
+	[key: string]: string;
 }
 
-const Arrow: React.FunctionComponent<ArrowProps> = ({ArrowComponent, arrowStyle, onClick, direction}) => {
+const StyledI = styled.i<{ direction: string }>`
+	border: solid #333;
+	border-width: 0 5px 5px 0;
+	display: inline-block;
+	padding: 3px;
+	height: 20px;
+	width: 20px;
+	cursor: pointer;
+
+	&:hover {
+		opacity: 0.4;
+	}
+
+	${({ direction }) =>
+		direction === "left"
+			? "transform: rotate(135deg); \
+				margin-left: 1em;"
+			: "transform: rotate(-45deg); \
+				margin-right: 1em;"
+	}
+`;
+
+const Arrow: React.FunctionComponent<ArrowProps> = ({
+	ArrowComponent,
+	arrowStyle,
+	onClick,
+	direction
+}) => {
 	if (ArrowComponent) {
 		return <ArrowComponent direction={direction} onClick={onClick} />;
 	}
@@ -31,10 +58,7 @@ const Arrow: React.FunctionComponent<ArrowProps> = ({ArrowComponent, arrowStyle,
 	return (
 		<>
 			<a onClick={onClick}>
-				<i
-					className={`slider__arrows__arrow slider__arrows__arrow--${direction}`}
-					style={arrowStyle}
-				/>
+				<StyledI style={arrowStyle} direction={direction} />
 			</a>
 		</>
 	);
