@@ -1,16 +1,16 @@
-import React, {useState, useEffect} from 'react';
-import PropTypes from 'prop-types';
-import {storiesOf} from '@storybook/react';
-import { BulletComponentType } from '../src/components/bullet/bullet'
+import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import { storiesOf } from "@storybook/react";
+import { BulletComponentType } from "../src/components/bullet/bullet";
 
-import Slider from '.';
-import { ArrowComponentType } from './components/arrow/arrow';
+import Slider from ".";
+import { ArrowComponentType } from "./components/arrow/arrow";
 
 const images = [
-	'https://images.pexels.com/photos/296878/pexels-photo-296878.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-	'https://images.pexels.com/photos/1509428/pexels-photo-1509428.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-	'https://images.pexels.com/photos/351265/pexels-photo-351265.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-	'https://images.pexels.com/photos/924675/pexels-photo-924675.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
+	"https://images.pexels.com/photos/296878/pexels-photo-296878.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+	"https://images.pexels.com/photos/1509428/pexels-photo-1509428.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+	"https://images.pexels.com/photos/351265/pexels-photo-351265.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+	"https://images.pexels.com/photos/924675/pexels-photo-924675.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
 ];
 
 const onSlideChange = (index: number) => {
@@ -18,58 +18,50 @@ const onSlideChange = (index: number) => {
 };
 
 const imageStyle = (src: string) => ({
-	backgroundSize: 'cover',
+	backgroundSize: "cover",
 	backgroundImage: `url(${src})`,
-	height: '100%',
-	width: '100%'
+	height: "100%",
+	width: "100%"
 });
 
-storiesOf('Slider', module)
-	.add('default', () => (
-		<div style={{width: '100vw', height: '100vh'}}>
+storiesOf("Slider", module)
+	.add("default", () => (
+		<div style={{ width: "100vw", height: "100vh" }}>
 			<Slider hasBullets onSlideChange={onSlideChange}>
 				{images.map(image => (
-					<div key={image}>
-						<div draggable="false" style={imageStyle(image)} />
-					</div>
+					<div key={image} draggable="false" style={imageStyle(image)} />
 				))}
 			</Slider>
 		</div>
 	))
-	.add('smaller than 100%', () => (
-		<div style={{width: '500px', height: '500px'}}>
+	.add("smaller than 100%", () => (
+		<div style={{ width: "500px", height: "500px" }}>
 			<Slider hasBullets>
 				{images.map(image => (
-					<div key={image}>
-						<div draggable="false" style={imageStyle(image)} />
-					</div>
+					<div key={image} draggable="false" style={imageStyle(image)} />
 				))}
 			</Slider>
 		</div>
 	))
-	.add('with auto sliding', () => (
-		<div style={{width: '100vw', height: '100vh'}}>
+	.add("with auto sliding", () => (
+		<div style={{ width: "100vw", height: "100vh" }}>
 			<Slider hasBullets auto={2000}>
 				{images.map(image => (
-					<div key={image}>
-						<div draggable="false" style={imageStyle(image)} />
-					</div>
+					<div key={image} draggable="false" style={imageStyle(image)} />
 				))}
 			</Slider>
 		</div>
 	))
-	.add('With activeIndex (2)', () => (
-		<div style={{width: '100vw', height: '100vh'}}>
+	.add("With activeIndex (2)", () => (
+		<div style={{ width: "100vw", height: "100vh" }}>
 			<Slider hasBullets activeIndex={2}>
 				{images.map(image => (
-					<div key={image}>
-						<div draggable="false" style={imageStyle(image)} />
-					</div>
+					<div key={image} draggable="false" style={imageStyle(image)} />
 				))}
 			</Slider>
 		</div>
 	))
-	.add('With activeIndex (interval)', () => {
+	.add("With activeIndex (interval)", () => {
 		const [activeIndex, setActiveIndex] = useState(2);
 
 		useEffect(() => {
@@ -84,92 +76,82 @@ storiesOf('Slider', module)
 		});
 
 		return (
-			<div style={{width: '100vw', height: '100vh'}}>
+			<div style={{ width: "100vw", height: "100vh" }}>
 				<Slider hasBullets activeIndex={activeIndex}>
 					{images.map(image => (
-						<div key={image}>
-							<div draggable="false" style={imageStyle(image)} />
-						</div>
+						<div key={image} draggable="false" style={imageStyle(image)} />
 					))}
 				</Slider>
 			</div>
 		);
 	})
-	.add('With different `bulletStyle`', () => {
+	.add("With different `bulletStyle`", () => {
 		return (
-			<div style={{width: '100vw', height: '100vh'}}>
-				<Slider hasBullets bulletStyle={{backgroundColor: '#fff'}}>
+			<div style={{ width: "100vw", height: "100vh" }}>
+				<Slider hasBullets bulletStyle={{ backgroundColor: "#fff" }}>
 					{images.map(image => (
-						<div key={image}>
-							<div draggable="false" style={imageStyle(image)} />
-						</div>
+						<div key={image} draggable="false" style={imageStyle(image)} />
 					))}
 				</Slider>
 			</div>
 		);
 	})
-	.add('With custom `bullets`', () => {
-		const BulletComponent: BulletComponentType = ({onClick, isActive}) => (
+	.add("With custom `bullets`", () => {
+		const BulletComponent: BulletComponentType = ({ onClick, isActive }) => (
 			<li
 				style={{
-					width: '25px',
-					height: '25px',
-					backgroundColor: 'red',
-					margin: '0 2px',
-					opacity: isActive ? '0.5' : undefined
+					width: "25px",
+					height: "25px",
+					backgroundColor: "red",
+					margin: "0 2px",
+					opacity: isActive ? "0.5" : undefined
 				}}
 				onClick={onClick}
 			/>
 		);
 
 		return (
-			<div style={{width: '100vw', height: '100vh'}}>
+			<div style={{ width: "100vw", height: "100vh" }}>
 				<Slider hasBullets BulletComponent={BulletComponent}>
 					{images.map(image => (
-						<div key={image}>
-							<div draggable="false" style={imageStyle(image)} />
-						</div>
+						<div key={image} draggable="false" style={imageStyle(image)} />
 					))}
 				</Slider>
 			</div>
 		);
 	})
-	.add('With arrows', () => {
+	.add("With arrows", () => {
 		return (
-			<div style={{width: '100vw', height: '100vh'}}>
+			<div style={{ width: "100vw", height: "100vh" }}>
 				<Slider hasArrows>
 					{images.map(image => (
-						<div key={image}>
-							<div draggable="false" style={imageStyle(image)} />
-						</div>
+						<div key={image} draggable="false" style={imageStyle(image)} />
 					))}
 				</Slider>
 			</div>
 		);
 	})
-	.add('With custom arrow style', () => {
-		const arrowStyle = {border: 'solid red', borderWidth: '0 5px 5px 0'};
+	.add("With custom arrow style", () => {
+		const arrowStyle = { border: "solid red", borderWidth: "0 5px 5px 0" };
 
 		return (
-			<div style={{width: '100vw', height: '100vh'}}>
+			<div style={{ width: "100vw", height: "100vh" }}>
 				<Slider hasArrows arrowStyle={arrowStyle}>
 					{images.map(image => (
-						<div key={image}>
-							<div draggable="false" style={imageStyle(image)} />
-						</div>
+						<div key={image} draggable="false" style={imageStyle(image)} />
 					))}
 				</Slider>
 			</div>
 		);
 	})
-	.add('With custom arrow component', () => {
-		const ArrowComponent: ArrowComponentType = ({onClick, direction}) => {
+	.add("With custom arrow component", () => {
+		const ArrowComponent: ArrowComponentType = ({ onClick, direction }) => {
 			return (
 				<div
 					style={{
-						border: '1px solid black',
-						padding: '1em',
-						backgroundColor: 'white'
+						border: "1px solid black",
+						padding: "1em",
+						backgroundColor: "white"
 					}}
 					onClick={onClick}
 				>
@@ -179,25 +161,21 @@ storiesOf('Slider', module)
 		};
 
 		return (
-			<div style={{width: '100vw', height: '100vh'}}>
+			<div style={{ width: "100vw", height: "100vh" }}>
 				<Slider hasArrows ArrowComponent={ArrowComponent}>
 					{images.map(image => (
-						<div key={image}>
-							<div draggable="false" style={imageStyle(image)} />
-						</div>
+						<div key={image} draggable="false" style={imageStyle(image)} />
 					))}
 				</Slider>
 			</div>
 		);
 	})
-	.add('With arrows and bullets', () => {
+	.add("With arrows and bullets", () => {
 		return (
-			<div style={{width: '100vw', height: '100vh'}}>
+			<div style={{ width: "100vw", height: "100vh" }}>
 				<Slider hasArrows hasBullets>
 					{images.map(image => (
-						<div key={image}>
-							<div draggable="false" style={imageStyle(image)} />
-						</div>
+						<div key={image} draggable="false" style={imageStyle(image)} />
 					))}
 				</Slider>
 			</div>

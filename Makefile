@@ -1,5 +1,4 @@
 TS_SOURCES=$(wildcard src/*.tsx src/*.ts src/**/*.tsx src/**/*.ts src/**/**/*.tsx src/**/**/*.ts)
-CSS_SOURCES=$(wildcard src/*.css src/**/*.css src/**/**/*.css)
 
 GIT_BRANCH = $(shell git rev-parse --abbrev-ref HEAD)
 GIT_BRANCH_UP_TO_DATE = $(shell git remote show origin | tail -n1 | sed 's/.*(\(.*\))/\1/')
@@ -7,10 +6,8 @@ CURRENT_VERSION = $(shell grep 'version' package.json | sed 's/.*".*": "\(.*\)",
 
 ec = ./node_modules/.bin/ec
 xo = ./node_modules/.bin/xo
-babel = ./node_modules/.bin/babel
 build-storybook = ./node_modules/.bin/build-storybook
 start-storybook = ./node_modules/.bin/start-storybook
-standard-version = ./node_modules/.bin/standard-version
 tsc = ./node_modules/.bin/tsc
 
 .DEFAULT_GOAL := help
@@ -72,15 +69,12 @@ node_modules:
 	npm install
 	touch node_modules
 
-dist: $(TS_SOURCES) $(CSS_SOURCES)
+dist: $(TS_SOURCES) tsconfig.json package.json
 dist:
-	$(tsc) --declaration
-	cp src/index.css dist/
-	cp src/components/bullet/bullet.css dist/components/bullet/
-	cp src/components/arrow/arrow.css dist/components/arrow/
+	$(tsc) --build tsconfig.json
 	touch dist
 
-docs: $(TS_SOURCES) $(CSS_SOURCES)
+docs: $(TS_SOURCES)
 docs:
 	rm -rf docs
 	$(build-storybook) --output-dir docs

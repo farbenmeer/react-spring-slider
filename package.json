@@ -15,6 +15,9 @@
     "url": "https://github.com/farbenmeer/react-spring-slider/issues"
   },
   "homepage": "https://github.com/farbenmeer/react-spring-slider",
+  "engines": {
+    "node": ">= 12.0.0 < 13.0"
+  },
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -e",
@@ -26,7 +29,7 @@
     "env": "browser"
   },
   "lint-staged": {
-    "./src/**/*.{js,jsx,css}": [
+    "./src/**/*.{ts,tsx}": [
       "make lint-fix",
       "make lint",
       "git add"
@@ -38,9 +41,9 @@
     "react-dom": "16.12.0"
   },
   "dependencies": {
-    "classnames": "^2.2.6",
     "react-spring": "8.0.27",
-    "react-use-gesture": "6.0.14"
+    "react-use-gesture": "6.0.14",
+    "styled-components": "^4.4.1"
   },
   "devDependencies": {
     "@commitlint/cli": "8.3.4",
@@ -48,7 +51,8 @@
     "@storybook/addon-links": "5.2.8",
     "@storybook/addons": "5.2.8",
     "@storybook/react": "5.2.8",
-    "@types/classnames": "^2.2.9",
+    "@types/node": "^12.12.24",
+    "@types/styled-components": "4.4.2",
     "babel-loader": "^8.0.6",
     "editorconfig-checker": "3.0.3",
     "eslint-config-xo-react": "0.20.0",
