@@ -49,6 +49,8 @@ const App = () => {
 The slider can gain any children as long as there are a react node, so you can 
 show images, text or some more complex components.
 
+You can also use Typescript as the package contains type definitions.
+
 ## Configuration
 
 The slider currently provides the following interface:
