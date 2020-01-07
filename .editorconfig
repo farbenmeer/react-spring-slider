@@ -16,5 +16,8 @@ indent_style = space
 [*{.yml,.json}]
 indent_style = space
 
+[tsconfig.json]
+indent_style = tab
+
 [.ecrc]
 indent_style = space

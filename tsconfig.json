@@ -3,7 +3,7 @@
 			"outDir": "./dist/",
 			"strictNullChecks": true,
 			"moduleResolution": "node",
-			"module": "es6",
+			"module": "commonjs",
 			"jsx": "react",
 			"target": "es5",
 			"allowJs": true,
