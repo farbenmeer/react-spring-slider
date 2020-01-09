@@ -58,7 +58,7 @@
     "eslint-config-xo-react": "0.22.0",
     "eslint-plugin-react": "7.17.0",
     "eslint-plugin-react-hooks": "2.3.0",
-    "husky": "4.0.1",
+    "husky": "4.0.3",
     "lint-staged": "9.5.0",
     "prettier": "1.19.1",
     "prop-types": "15.7.2",
