@@ -9,10 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 ### Deprecated
 ### Removed
-* Remove node engine in `package.json` [#63](https://github.com/farbenmeer/react-spring-slider/pull/63) ([@mstruebing](https://github.com/mstruebing))
 ### Fixed
 ### Security
 ### Misc
+
+## [1.0.2] - 2020-01-14
+### Removed
+	- Remove node engine in `package.json` [#63](https://github.com/farbenmeer/react-spring-slider/pull/63) ([@mstruebing](https://github.com/mstruebing))
+### Misc
+	- Update a bunch of dependencies
 
 ## [1.0.1] - 2020-01-07
 ### Added
