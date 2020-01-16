@@ -60,7 +60,7 @@
     "prettier": "1.19.1",
     "prop-types": "15.7.2",
     "ts-loader": "6.2.1",
-    "typescript": "3.7.4",
+    "typescript": "3.7.5",
     "xo": "0.25.3"
   }
 }
