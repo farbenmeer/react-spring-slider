@@ -38,29 +38,29 @@
     "react-dom": "^16.12"
   },
   "dependencies": {
-    "react-spring": "8.0.27",
-    "react-use-gesture": "6.0.14",
-    "styled-components": "5.0.0"
+    "react-spring": "^8.0",
+    "react-use-gesture": "^6.0",
+    "styled-components": "^5.0.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "8.3.4",
-    "@storybook/addon-actions": "5.3.3",
-    "@storybook/addon-links": "5.3.3",
-    "@storybook/addons": "5.3.3",
-    "@storybook/react": "5.3.3",
-    "@types/node": "12.12.24",
-    "@types/styled-components": "4.4.2",
-    "babel-loader": "8.0.6",
-    "editorconfig-checker": "3.0.3",
-    "eslint-config-xo-react": "0.22.0",
-    "eslint-plugin-react": "7.17.0",
-    "eslint-plugin-react-hooks": "2.3.0",
-    "husky": "4.0.9",
-    "lint-staged": "9.5.0",
-    "prettier": "1.19.1",
-    "prop-types": "15.7.2",
-    "ts-loader": "6.2.1",
-    "typescript": "3.7.4",
-    "xo": "0.25.3"
+    "@commitlint/cli": "^8.3",
+    "@storybook/addon-actions": "^5.3",
+    "@storybook/addon-links": "^5.3",
+    "@storybook/addons": "^5.3",
+    "@storybook/react": "^5.3",
+    "@types/node": "^12.12",
+    "@types/styled-components": "^4.4",
+    "babel-loader": "^8.0",
+    "editorconfig-checker": "^3.0",
+    "eslint-config-xo-react": "^0.22",
+    "eslint-plugin-react": "^7.17",
+    "eslint-plugin-react-hooks": "^2.3",
+    "husky": "^4.0",
+    "lint-staged": "^9.5",
+    "prettier": "^1.19",
+    "prop-types": "^15.7",
+    "ts-loader": "^6.2",
+    "typescript": "^3.7",
+    "xo": "^0.25"
   }
 }
