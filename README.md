@@ -6,7 +6,8 @@
 2. [Installation](#installation)  
 3. [Usage](#usage)  
 4. [Configuration](#configuration)  
-5. [Contribution](#contribution)  
+5. [More Examples](#more-examples)  
+6. [Contribution](#contribution)  
 
 ## General
 
@@ -55,19 +56,33 @@ You can also use Typescript as the package contains type definitions.
 
 The slider currently provides the following interface:
 
+| Name                 | Type          | Default |Description                                            |
+| -------------------- | ------------- | -----   | -----------------------------------------------------:| 
+| activeIndex          | number        | 0       | Controlles the shown index |
+| ArrowComponent       | function      | -       | A custom component for the arrows |
+| auto                 | number        | 0       | 0 = disabled auto sliding. Indicates the pausing time in milliseconds per slide before next slide is shown.  |
+| BulletComponent      | function      | -       | A custom component for the bullets |
+| bulletStyle          | object        | { }     | custom styles for the bullets |
+| children             | node          | [ ]     | The children of the slider, every child is a single slide |
+| hasArrows            | boolean       | false   | Whether the slider should have arrows or not |
+| hasBullets           | boolean       | false   | Whether the slider should have bullets or not |
+| onSlideChange        | function      | -       | Callback which is triggered when the slides changed either manually or automatically |
+
+
+
+## More examples
+
+### Custom bulletStyle
 ```js
-activeIndex: PropTypes.number, // the index to show, can be controlled
-ArrowComponent: PropTypes.func, // a custom component for the arrows
-arrowStyle: PropTypes.objectOf(PropTypes.string), // custom styles for the arrows
-auto: PropTypes.number, // this number indicates the speed when the slider should be slide to next slide (milliseconds)
-BulletComponent: PropTypes.func, // a custom component for the bullets
-bulletStyle: PropTypes.objectOf(PropTypes.string), // custom styles for the bullets
-children: PropTypes.node, // the children of the slider, every child is a single slide
-hasBullets: PropTypes.bool, // whether the slider should have bullets or not
-onSlideChange: PropTypes.func // a callback which is triggered when the slides changed either manually or automatically
+<Slider hasBullets bulletStyle={{backgroundColor: '#fff'}}>
+	<MySlide />
+	<MySlide />
+	<MySlide />
+</Slider>
 ```
 
-Some option examples:
+### Fully customized
+
 ```js
 import Slider from '@farbenmeer/react-spring-slider';
 
@@ -130,14 +145,7 @@ const App = () => {
 }
 ```
 
-Only a different bulletStyle:
-```js
-<Slider hasBullets bulletStyle={{backgroundColor: '#fff'}}>
-	<MySlide />
-	<MySlide />
-	<MySlide />
-</Slider>
-```
+For more examples have a look at [storybook](https://farbenmeer.github.io/react-spring-slider/).
 
 ## Contribution
 
