@@ -31,8 +31,7 @@
   "lint-staged": {
     "./src/**/*.{ts,tsx}": [
       "make lint-fix",
-      "make lint",
-      "git add"
+      "make lint"
     ]
   },
   "peerDependencies": {
