@@ -1,6 +1,11 @@
 # react-spring-slider
 
 [![CircleCI](https://circleci.com/gh/farbenmeer/react-spring-slider.svg?style=svg)](https://circleci.com/gh/farbenmeer/react-spring-slider)
+[![Hits-of-Code](https://hitsofcode.com/github/farbenmeer/react-spring-slider)](https://hitsofcode.com/view/github/farbenmeer/react-spring-slider)
+![Version](https://img.shields.io/npm/v/@farbenmeer/react-spring-slider?style=flat-square)
+[![Minified Size](https://img.shields.io/bundlephobia/min/@farbenmeer/react-spring-slider?style=flat-square)](https://img.shields.io/bundlephobia/min/@farbenmeer/react-spring-slider?style=flat-square)
+[![Minified Zipped Size](https://img.shields.io/bundlephobia/minzip/@farbenmeer/react-spring-slider?style=flat-square)](https://img.shields.io/bundlephobia/minzip/@farbenmeer/react-spring-slider?style=flat-square)
+![License](https://img.shields.io/github/license/farbenmeer/react-spring-slider?style=flat-square)
 
 1. [General](#general)  
 2. [Installation](#installation)  
