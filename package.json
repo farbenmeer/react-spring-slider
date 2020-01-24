@@ -61,6 +61,10 @@
     "lint-staged": "^10.0.0",
     "prettier": "^1.19",
     "ts-loader": "^6.2",
+    "tslint": "^6.0.0",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-react": "^4.2.0",
+    "tslint-react-hooks": "^2.2.1",
     "typescript": "^3.7",
     "xo": "^0.25"
   }

@@ -9,6 +9,7 @@ xo = ./node_modules/.bin/xo
 build-storybook = ./node_modules/.bin/build-storybook
 start-storybook = ./node_modules/.bin/start-storybook
 tsc = ./node_modules/.bin/tsc
+tslint = ./node_modules/.bin/tslint
 
 .DEFAULT_GOAL := help
 
@@ -33,7 +34,7 @@ start:
 
 # help make lint run xo and editorconfig-checker
 .PHONY: lint
-lint: lint-xo lint-editorconfig
+lint: lint-xo lint-editorconfig lint-ts
 
 # help make lint-editorconfig: runs the editorconfig-checker
 lint-editorconfig:
@@ -42,6 +43,9 @@ lint-editorconfig:
 # help make lint-xo: runs the xo linter
 lint-xo:
 	$(xo) --prettier $$PWD/src/**/*
+
+lint-ts:
+	$(tslint) -c tslint.json src/**/*.{ts,tsx}
 
 # help make lint-fix: runs the automatic fixer of xo
 lint-fix:
