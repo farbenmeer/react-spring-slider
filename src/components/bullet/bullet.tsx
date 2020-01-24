@@ -39,12 +39,17 @@ const Bullet: React.FunctionComponent<BulletProps> = ({
 	activeIndex,
 	bulletStyle
 }) => {
+
+	const updateSlide = () => {
+		setSlide(index);
+	}
+
 	if (BulletComponent) {
 		return (
 			<BulletComponent
 				key={index}
 				isActive={index === activeIndex}
-				onClick={() => setSlide(index)}
+				onClick={updateSlide}
 			/>
 		);
 	}
@@ -53,7 +58,7 @@ const Bullet: React.FunctionComponent<BulletProps> = ({
 		<StyledBullet active={index === activeIndex}
 			key={index}
 			style={bulletStyle}
-			onClick={() => setSlide(index)}
+			onClick={updateSlide}
 		/>
 	);
 };

@@ -13,6 +13,7 @@ const images = [
 ];
 
 const onSlideChange = (index: number) => {
+	// tslint:disable-next-line:no-console
 	console.log(`Slide changed to: ${index}`);
 };
 
@@ -23,6 +24,7 @@ const imageStyle = (src: string) => ({
 	width: "100%"
 });
 
+// tslint:disable:react-hooks-nesting
 storiesOf("Slider", module)
 	.add("Default", () => (
 		<div style={{ width: "100vw", height: "100vh" }}>

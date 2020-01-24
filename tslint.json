@@ -6,6 +6,7 @@
     "tslint-config-prettier"
   ],
   "rules": {
-    "react-hooks-nesting": "error"
+    "react-hooks-nesting": "error",
+    "jsx-boolean-value": false
   }
 }
