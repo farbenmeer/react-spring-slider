@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 ### Security
 ### Misc
+* Readme: Improve props overview and examples
 
 ## [1.0.2] - 2020-01-14
 ### Removed
