@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 ### Security
 ### Misc
+* Only distribute dist folder to reduce installation size [#76](https://github.com/farbenmeer/react-spring-slider/pull/76) ([@mstruebing](https://github.com/mstruebing))
 * Readme: Improve props overview and examples
 
 ## [1.0.2] - 2020-01-14

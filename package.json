@@ -21,6 +21,9 @@
       "pre-commit": "lint-staged"
     }
   },
+  "files": [
+    "/dist"
+  ],
   "xo": {
     "extends": "xo-react",
     "env": "browser"
