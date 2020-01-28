@@ -21,6 +21,9 @@
       "pre-commit": "lint-staged"
     }
   },
+  "files": [
+    "/dist"
+  ],
   "xo": {
     "extends": "xo-react",
     "env": "browser"
@@ -33,7 +36,6 @@
     ]
   },
   "peerDependencies": {
-    "prop-types": "^15.7",
     "react": "^16.12",
     "react-dom": "^16.12"
   },
@@ -58,7 +60,6 @@
     "husky": "^4.0",
     "lint-staged": "^10.0.0",
     "prettier": "^1.19",
-    "prop-types": "^15.7",
     "ts-loader": "^6.2",
     "typescript": "^3.7",
     "xo": "^0.25"

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
 import { storiesOf } from "@storybook/react";
 import { BulletComponentType } from "../src/components/bullet/bullet";
 
