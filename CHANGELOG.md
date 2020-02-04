@@ -13,7 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 ### Misc
 * Only distribute dist folder to reduce installation size [#76](https://github.com/farbenmeer/react-spring-slider/pull/76) ([@mstruebing](https://github.com/mstruebing))
-* Readme: Improve props overview and examples
+* Readme: Improve props overview and examples  [#73](https://github.com/farbenmeer/react-spring-slider/pull/73) ([@Tobi-mmt](https://github.com/Tobi-mmt))
+* Update react-use-gesture to v7 [#77](https://github.com/farbenmeer/react-spring-slider/pull/77)
 
 ## [1.0.2] - 2020-01-14
 ### Removed
