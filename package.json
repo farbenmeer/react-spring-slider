@@ -25,8 +25,14 @@
     "/dist"
   ],
   "xo": {
-    "extends": "xo-react",
-    "env": "browser"
+    "extends": [
+      "xo-react",
+      "xo-typescript"
+    ],
+    "env": "browser",
+    "extensions": [
+      "ts"
+    ]
   },
   "lint-staged": {
     "./src/**/*.{ts,tsx}": [
@@ -51,19 +57,18 @@
     "@storybook/react": "^5.3",
     "@types/node": "^12.12",
     "@types/styled-components": "^4.4",
+    "@typescript-eslint/eslint-plugin": "^2.19.0",
+    "@typescript-eslint/parser": "^2.19.0",
     "babel-loader": "^8.0",
     "editorconfig-checker": "^3.0",
     "eslint-config-xo-react": "^0.22",
+    "eslint-config-xo-typescript": "^0.26.0",
     "eslint-plugin-react": "^7.17",
     "eslint-plugin-react-hooks": "^2.3",
     "husky": "^4.0",
     "lint-staged": "^10.0.0",
     "prettier": "^1.19",
     "ts-loader": "^6.2",
-    "tslint": "^6.0.0",
-    "tslint-config-prettier": "^1.18.0",
-    "tslint-react": "^4.2.0",
-    "tslint-react-hooks": "^2.2.1",
     "typescript": "^3.7",
     "xo": "^0.25"
   }
