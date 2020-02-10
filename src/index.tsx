@@ -67,8 +67,8 @@ interface SliderProps {
 	onSlideChange?: (slide: number) => void;
 }
 
-const clamp = (number: number, lower: number, upper: number) =>
-	Math.min(Math.max(number, lower), upper);
+const clamp = (input: number, lower: number, upper: number) =>
+	Math.min(Math.max(input, lower), upper);
 
 const Slider: React.FunctionComponent<SliderProps> = ({
 	activeIndex = 0,
@@ -80,7 +80,7 @@ const Slider: React.FunctionComponent<SliderProps> = ({
 	children = [],
 	hasArrows = false,
 	hasBullets = false,
-	onSlideChange = () => {}
+	onSlideChange = () => undefined
 }) => {
 	const sliderRef = useRef<HTMLDivElement>(null);
 	const [slide, setSlide] = useState(0);
@@ -110,10 +110,11 @@ const Slider: React.FunctionComponent<SliderProps> = ({
 				} = sliderRef.current.parentElement.getBoundingClientRect();
 
 				if (down && distance > width / 2) {
-					cancel && cancel();
+					if (cancel) cancel();
 					setSlide(clamp(slide + (xDir > 0 ? -1 : 1), 0, children.length - 1));
 				}
-				//@ts-ignore
+				// see:  https://github.com/react-spring/react-spring/issues/861
+				// @ts-ignore
 				setSpringProps(index => ({
 					offset: (down ? xDelta : 0) / width + (index - slide)
 				}));
@@ -135,7 +136,8 @@ const Slider: React.FunctionComponent<SliderProps> = ({
 
 	// Triggered on slide change
 	useEffect(() => {
-		//@ts-ignore
+		// see:  https://github.com/react-spring/react-spring/issues/861
+		// @ts-ignore
 		setSpringProps(index => ({ offset: index - slide }));
 		onSlideChange(slide);
 	}, [slide, setSpringProps, onSlideChange]);
@@ -152,7 +154,7 @@ const Slider: React.FunctionComponent<SliderProps> = ({
 		}
 
 		return () => {
-			interval && clearInterval(interval);
+			if (interval) clearInterval(interval);
 		};
 	}, [auto, children.length, slide]);
 
@@ -162,7 +164,9 @@ const Slider: React.FunctionComponent<SliderProps> = ({
 	}, [activeIndex, children.length]);
 
 	// Sets pointer events none to every child and preserves styles
-	const childs = children.map(child => <StyledSlide>{child}</StyledSlide>);
+	const childs = children.map((child, index) => (
+		<StyledSlide key={index}>{child}</StyledSlide> // eslint-disable-line react/no-array-index-key
+	));
 
 	// Calls onClick on the current slide
 	const clickOnSlide = (slideIndex: number) => {
@@ -229,7 +233,7 @@ const Slider: React.FunctionComponent<SliderProps> = ({
 						className="slider__slide"
 						style={{
 							transform: offset.interpolate(
-								offset => `translate3d(${offset * 100}%, 0, 0)`
+								offsetX => `translate3d(${offsetX * 100}%, 0, 0)`
 							),
 							position: "absolute",
 							width: "100%",
