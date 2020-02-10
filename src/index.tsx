@@ -1,12 +1,16 @@
 import React, { useRef, useState, useEffect } from "react";
-import styled from 'styled-components';
+import styled from "styled-components";
 import { useSprings, animated } from "react-spring";
-import { useDrag } from "react-use-gesture";
+import { useGesture } from "react-use-gesture";
 
-import { Arrow, Bullet } from "./components";
-
-import { ArrowComponentType, ArrowStyle } from "./components/arrow/arrow";
-import { BulletComponentType, BulletStyle } from "./components/bullet/bullet";
+import Arrow, {
+	ArrowComponentType,
+	ArrowStyle
+} from "./components/arrow/arrow";
+import Bullet, {
+	BulletComponentType,
+	BulletStyle
+} from "./components/bullet/bullet";
 
 const StyledSliderArrows = styled.div`
 	top: 50%;
@@ -33,14 +37,14 @@ const StyledBullets = styled.div`
 const StyledWrapper = styled.div`
 	width: 100%;
 	height: 100%;
-`
+`;
 
 const StyledSlider = styled.div`
 	position: relative;
 	overflow: hidden;
 	width: 100%;
 	height: 100%;
-`
+`;
 
 const StyledSlide = styled.div`
 	width: 100%;
@@ -48,7 +52,7 @@ const StyledSlide = styled.div`
 	will-change: transform;
 	user-select: none;
 	pointer-events: none;
-`
+`;
 
 interface SliderProps {
 	activeIndex?: number;
@@ -80,15 +84,26 @@ const Slider: React.FunctionComponent<SliderProps> = ({
 }) => {
 	const sliderRef = useRef<HTMLDivElement>(null);
 	const [slide, setSlide] = useState(0);
+	const [isDragging, setDragging] = useState(false);
 
 	// Initialize slides with spring
 	const [springProps, setSpringProps] = useSprings(children.length, index => ({
 		offset: index
 	}));
 
-	// Drag binding to set on the element
-	const bind = useDrag(
-		({ down, movement: [xDelta], direction: [xDir], distance, cancel }) => {
+	// Bindings to set on the element
+	const gestureBinds = useGesture({
+		onDrag: ({
+			down,
+			movement: [xDelta],
+			direction: [xDir],
+			distance,
+			cancel,
+			first
+			}) => {
+			if (first) {
+				setDragging(true);
+			}
 			if (sliderRef && sliderRef.current && sliderRef.current.parentElement) {
 				const {
 					width
@@ -103,8 +118,20 @@ const Slider: React.FunctionComponent<SliderProps> = ({
 					offset: (down ? xDelta : 0) / width + (index - slide)
 				}));
 			}
+		},
+		onClick: () => {
+			if (isDragging) {
+				setDragging(false);
+				return;
+			}
+			clickOnSlide(slide);
 		}
-	);
+	},
+	{
+		drag: {
+			delay: 200
+		}
+	});
 
 	// Triggered on slide change
 	useEffect(() => {
@@ -136,6 +163,11 @@ const Slider: React.FunctionComponent<SliderProps> = ({
 
 	// Sets pointer events none to every child and preserves styles
 	const childs = children.map(child => <StyledSlide>{child}</StyledSlide>);
+
+	// Calls onClick on the current slide
+	const clickOnSlide = (slideIndex: number) => {
+		childs[slideIndex].props.children.props.onClick && childs[slideIndex].props.children.props.onClick();
+	};
 
 	const nextSlide = () => {
 		if (slide === children.length - 1) {
@@ -192,17 +224,17 @@ const Slider: React.FunctionComponent<SliderProps> = ({
 				)}
 				{springProps.map(({ offset }, index) => (
 					<animated.div
-						{...bind()}
+						{...gestureBinds()}
 						key={index} // eslint-disable-line react/no-array-index-key
 						className="slider__slide"
 						style={{
 							transform: offset.interpolate(
 								offset => `translate3d(${offset * 100}%, 0, 0)`
 							),
-							position: 'absolute',
-							width: '100%',
-							height: '100%',
-							willChange: 'transform'
+							position: "absolute",
+							width: "100%",
+							height: "100%",
+							willChange: "transform"
 						}}
 					>
 						{childs[index]}
