@@ -6,12 +6,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Added
-* Add ability to pass an onClick with the slides [#83](https://github.com/farbenmeer/react-spring-slider/pull/83) ([@Flaxxas](https://github.com/Flaxxas))
 ### Changed
 ### Deprecated
 ### Removed
 ### Fixed
 ### Security
+### Misc
+
+
+## [1.1.0] - 2020-02-10
+### Added
+* Add ability to pass an onClick with the slides [#83](https://github.com/farbenmeer/react-spring-slider/pull/83) ([@Flaxxas](https://github.com/Flaxxas))
 ### Misc
 * Only distribute dist folder to reduce installation size [#76](https://github.com/farbenmeer/react-spring-slider/pull/76) ([@mstruebing](https://github.com/mstruebing))
 * Readme: Improve props overview and examples  [#73](https://github.com/farbenmeer/react-spring-slider/pull/73) ([@Tobi-mmt](https://github.com/Tobi-mmt))
