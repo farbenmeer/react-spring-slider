@@ -24,7 +24,7 @@ const imageStyle = (src: string) => ({
 });
 
 storiesOf("Slider", module)
-	.add("default", () => (
+	.add("Default", () => (
 		<div style={{ width: "100vw", height: "100vh" }}>
 			<Slider hasBullets onSlideChange={onSlideChange}>
 				{images.map(image => (
@@ -33,7 +33,7 @@ storiesOf("Slider", module)
 			</Slider>
 		</div>
 	))
-	.add("smaller than 100%", () => (
+	.add("Smaller than 100%", () => (
 		<div style={{ width: "500px", height: "500px" }}>
 			<Slider hasBullets>
 				{images.map(image => (
@@ -42,7 +42,7 @@ storiesOf("Slider", module)
 			</Slider>
 		</div>
 	))
-	.add("with auto sliding", () => (
+	.add("With auto sliding", () => (
 		<div style={{ width: "100vw", height: "100vh" }}>
 			<Slider hasBullets auto={2000}>
 				{images.map(image => (
@@ -179,4 +179,13 @@ storiesOf("Slider", module)
 				</Slider>
 			</div>
 		);
-	});
+	})
+	.add("With onClick", () => (
+		<div style={{ width: "100vw", height: "100vh" }}>
+			<Slider hasBullets onSlideChange={onSlideChange}>
+				{images.map(image => (
+					<div key={image} draggable="false" style={imageStyle(image)} onClick={() => console.log("click")}/>
+				))}
+			</Slider>
+		</div>
+	));

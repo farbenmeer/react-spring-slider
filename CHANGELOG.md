@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Added
+* Add ability to pass an onClick with the slides [#83](https://github.com/farbenmeer/react-spring-slider/pull/83) ([@Flaxxas](https://github.com/Flaxxas))
 ### Changed
 ### Deprecated
 ### Removed
