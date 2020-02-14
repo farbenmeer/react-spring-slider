@@ -61,7 +61,7 @@
     "@typescript-eslint/parser": "^2.19.0",
     "babel-loader": "^8.0",
     "editorconfig-checker": "^3.0",
-    "eslint-config-xo-react": "^0.22",
+    "eslint-config-xo-react": "^0.23.0",
     "eslint-config-xo-typescript": "^0.26.0",
     "eslint-plugin-react": "^7.17",
     "eslint-plugin-react-hooks": "^2.3",
