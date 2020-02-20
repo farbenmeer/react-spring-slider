@@ -36,11 +36,11 @@ start:
 lint: lint-xo lint-editorconfig
 
 # help make lint-editorconfig: runs the editorconfig-checker
-lint-editorconfig:
+lint-editorconfig: install
 	$(ec)
 
 # help make lint-xo: runs the xo linter
-lint-xo:
+lint-xo: install
 	$(xo) --prettier $$PWD/src/**/*
 
 # help make lint-fix: runs the automatic fixer of xo
