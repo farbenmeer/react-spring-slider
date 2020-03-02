@@ -26,6 +26,7 @@ const StyledBulletList = styled.ul`
 	justify-content: center;
 	list-style-type: none;
 	padding: 0;
+	margin: 15px 0;
 `;
 
 const StyledBullets = styled.div`

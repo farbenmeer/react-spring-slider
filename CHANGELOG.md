@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 ### Changed
 * Reset padding to prevent browser default styles [#86](https://github.com/farbenmeer/react-spring-slider/pull/86) ([@mstruebing](https://github.com/mstruebing))
+* Set margin to prevent browser default styles [#94](https://github.com/farbenmeer/react-spring-slider/pull/94) ([@Tobi-mmt](https://github.com/Tobi-mmt))
 ### Deprecated
 ### Removed
 ### Fixed
