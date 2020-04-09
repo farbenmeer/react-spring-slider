@@ -35,13 +35,15 @@ interface BulletComponentProps {
 }
 
 const Bullet: React.FunctionComponent<BulletProps> = ({
+	/* eslint-disable react/prop-types */
 	index,
 	BulletComponent,
 	setSlide,
 	activeIndex,
 	bulletStyle
+	/* eslint-enable react/prop-types */
 }) => {
-	const updateSlide = () => {
+	const updateSlide = (): void => {
 		setSlide(index);
 	};
 
