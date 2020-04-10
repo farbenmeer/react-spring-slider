@@ -84,6 +84,20 @@ storiesOf("Slider", module)
 			</div>
 		);
 	})
+	.add("with activeIndex change at onSlideChange", () => {
+		const [activeIndex, setActiveIndex] = useState(0);
+		const manipulateActiveIndex = (index: number) => setActiveIndex(1);
+
+		return (
+		<div style={{ width: "100vw", height: "100vh" }}>
+			<Slider hasBullets activeIndex={activeIndex} onSlideChange={manipulateActiveIndex}>
+				{images.map(image => (
+					<div key={image} draggable="false" style={imageStyle(image)} />
+				))}
+			</Slider>
+		</div>
+		)
+	})
 	.add("With different `bulletStyle`", () => {
 		return (
 			<div style={{ width: "100vw", height: "100vh" }}>
