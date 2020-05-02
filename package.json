@@ -64,7 +64,7 @@
     "eslint-config-xo-react": "^0.23.0",
     "eslint-config-xo-typescript": "^0.26.0",
     "eslint-plugin-react": "^7.18.3",
-    "eslint-plugin-react-hooks": "^3.0.0",
+    "eslint-plugin-react-hooks": "^4.0.0",
     "husky": "^4.0",
     "lint-staged": "^10.0.0",
     "prettier": "^2.0.0",
