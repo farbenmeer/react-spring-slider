@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Added
+* Add `setSlideCustom` property [#101](https://github.com/farbenmeer/react-spring-slider/pull/101) ([@mstruebing](https://github.com/mstruebing))
 ### Changed
 ### Deprecated
 ### Removed
