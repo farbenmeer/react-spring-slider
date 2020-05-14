@@ -94,7 +94,7 @@ import Slider from '@farbenmeer/react-spring-slider';
 
 const App = () => {
 	const onSlideChange = index => console.log(`changed to slide ${index}`);
-	const setSlideCustom = _ => 1 ;
+	const setSlideCustom = () => 1 ;
 
 	const BulletComponent = ({onClick, isActive}) => (
 		<li
