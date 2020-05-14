@@ -67,6 +67,7 @@ interface SliderProps {
 	hasArrows?: boolean;
 	hasBullets?: boolean;
 	onSlideChange?: (slide: number) => void;
+	setSlideCustom?: (slide: number) => number;
 }
 
 const clamp = (input: number, lower: number, upper: number) =>
@@ -82,59 +83,78 @@ const Slider: React.FunctionComponent<SliderProps> = ({
 	children = [],
 	hasArrows = false,
 	hasBullets = false,
-	onSlideChange = () => undefined
+	onSlideChange = () => undefined,
+	setSlideCustom = undefined
 }) => {
 	const sliderRef = useRef<HTMLDivElement>(null);
-	const [slide, setSlide] = useState(0);
+	const [slide, setSlideOriginal] = useState(0);
+	const setSlide = setSlideCustom
+		? (index: number) => setSlideOriginal(setSlideCustom(index))
+		: setSlideOriginal;
 	const [isDragging, setDragging] = useState(false);
 
 	// Initialize slides with spring
-	const [springProps, setSpringProps] = useSprings(children.length, index => ({
-		offset: index
-	}));
+	const [springProps, setSpringProps] = useSprings(
+		children.length,
+		index => ({
+			offset: index
+		})
+	);
 
 	// Bindings to set on the element
-	const gestureBinds = useGesture({
-		onDrag: ({
-			down,
-			movement: [xDelta],
-			direction: [xDir],
-			distance,
-			cancel,
-			first
+	const gestureBinds = useGesture(
+		{
+			onDrag: ({
+				down,
+				movement: [xDelta],
+				direction: [xDir],
+				distance,
+				cancel,
+				first
 			}) => {
-			if (first) {
-				setDragging(true);
-			}
-			if (sliderRef && sliderRef.current && sliderRef.current.parentElement) {
-				const {
-					width
-				} = sliderRef.current.parentElement.getBoundingClientRect();
-
-				if (down && distance > width / 2) {
-					if (cancel) cancel();
-					setSlide(clamp(slide + (xDir > 0 ? -1 : 1), 0, children.length - 1));
+				if (first) {
+					setDragging(true);
 				}
-				// see:  https://github.com/react-spring/react-spring/issues/861
-				// @ts-ignore
-				setSpringProps(index => ({
-					offset: (down ? xDelta : 0) / width + (index - slide)
-				}));
+				if (
+					sliderRef &&
+					sliderRef.current &&
+					sliderRef.current.parentElement
+				) {
+					const {
+						width
+					} = sliderRef.current.parentElement.getBoundingClientRect();
+
+					if (down && distance > width / 2) {
+						if (cancel) cancel();
+						setSlide(
+							clamp(
+								slide + (xDir > 0 ? -1 : 1),
+								0,
+								children.length - 1
+							)
+						);
+					}
+					// see:  https://github.com/react-spring/react-spring/issues/861
+					// @ts-ignore
+					setSpringProps(index => ({
+						offset: (down ? xDelta : 0) / width + (index - slide)
+					}));
+				}
+			},
+			onClick: () => {
+				if (isDragging) {
+					setDragging(false);
+					return;
+				}
+				clickOnSlide(slide);
 			}
 		},
-		onClick: () => {
-			if (isDragging) {
-				setDragging(false);
-				return;
+		{
+			drag: {
+				delay: 200
 			}
-			clickOnSlide(slide);
 		}
-	},
-	{
-		drag: {
-			delay: 200
-		}
-	});
+	);
 
 	// Triggered on slide change
 	useEffect(() => {
@@ -172,7 +192,8 @@ const Slider: React.FunctionComponent<SliderProps> = ({
 
 	// Calls onClick on the current slide
 	const clickOnSlide = (slideIndex: number) => {
-		childs[slideIndex].props.children.props.onClick && childs[slideIndex].props.children.props.onClick();
+		childs[slideIndex].props.children.props.onClick &&
+			childs[slideIndex].props.children.props.onClick();
 	};
 
 	const nextSlide = () => {
@@ -235,7 +256,8 @@ const Slider: React.FunctionComponent<SliderProps> = ({
 						className="slider__slide"
 						style={{
 							transform: offset.interpolate(
-								offsetX => `translate3d(${offsetX * 100}%, 0, 0)`
+								offsetX =>
+									`translate3d(${offsetX * 100}%, 0, 0)`
 							),
 							position: "absolute",
 							width: "100%",

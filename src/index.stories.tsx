@@ -28,7 +28,11 @@ storiesOf("Slider", module)
 		<div style={{ width: "100vw", height: "100vh" }}>
 			<Slider hasBullets onSlideChange={onSlideChange}>
 				{images.map(image => (
-					<div key={image} draggable="false" style={imageStyle(image)} />
+					<div
+						key={image}
+						draggable="false"
+						style={imageStyle(image)}
+					/>
 				))}
 			</Slider>
 		</div>
@@ -37,7 +41,11 @@ storiesOf("Slider", module)
 		<div style={{ width: "500px", height: "500px" }}>
 			<Slider hasBullets>
 				{images.map(image => (
-					<div key={image} draggable="false" style={imageStyle(image)} />
+					<div
+						key={image}
+						draggable="false"
+						style={imageStyle(image)}
+					/>
 				))}
 			</Slider>
 		</div>
@@ -46,7 +54,11 @@ storiesOf("Slider", module)
 		<div style={{ width: "100vw", height: "100vh" }}>
 			<Slider hasBullets auto={2000}>
 				{images.map(image => (
-					<div key={image} draggable="false" style={imageStyle(image)} />
+					<div
+						key={image}
+						draggable="false"
+						style={imageStyle(image)}
+					/>
 				))}
 			</Slider>
 		</div>
@@ -55,7 +67,11 @@ storiesOf("Slider", module)
 		<div style={{ width: "100vw", height: "100vh" }}>
 			<Slider hasBullets activeIndex={2}>
 				{images.map(image => (
-					<div key={image} draggable="false" style={imageStyle(image)} />
+					<div
+						key={image}
+						draggable="false"
+						style={imageStyle(image)}
+					/>
 				))}
 			</Slider>
 		</div>
@@ -78,7 +94,34 @@ storiesOf("Slider", module)
 			<div style={{ width: "100vw", height: "100vh" }}>
 				<Slider hasBullets activeIndex={activeIndex}>
 					{images.map(image => (
-						<div key={image} draggable="false" style={imageStyle(image)} />
+						<div
+							key={image}
+							draggable="false"
+							style={imageStyle(image)}
+						/>
+					))}
+				</Slider>
+			</div>
+		);
+	})
+	.add("With custom setSlide function", () => {
+		const [activeIndex, setActiveIndex] = useState(0);
+
+		const setSlideCustom = (slide: number) => 1
+
+		return (
+			<div style={{ width: "100vw", height: "100vh" }}>
+				<Slider
+					hasBullets
+					activeIndex={activeIndex}
+					setSlideCustom={setSlideCustom}
+				>
+					{images.map(image => (
+						<div
+							key={image}
+							draggable="false"
+							style={imageStyle(image)}
+						/>
 					))}
 				</Slider>
 			</div>
@@ -89,14 +132,21 @@ storiesOf("Slider", module)
 			<div style={{ width: "100vw", height: "100vh" }}>
 				<Slider hasBullets bulletStyle={{ backgroundColor: "#fff" }}>
 					{images.map(image => (
-						<div key={image} draggable="false" style={imageStyle(image)} />
+						<div
+							key={image}
+							draggable="false"
+							style={imageStyle(image)}
+						/>
 					))}
 				</Slider>
 			</div>
 		);
 	})
 	.add("With custom `bullets`", () => {
-		const BulletComponent: BulletComponentType = ({ onClick, isActive }) => (
+		const BulletComponent: BulletComponentType = ({
+			onClick,
+			isActive
+		}) => (
 			<li
 				style={{
 					width: "25px",
@@ -113,7 +163,11 @@ storiesOf("Slider", module)
 			<div style={{ width: "100vw", height: "100vh" }}>
 				<Slider hasBullets BulletComponent={BulletComponent}>
 					{images.map(image => (
-						<div key={image} draggable="false" style={imageStyle(image)} />
+						<div
+							key={image}
+							draggable="false"
+							style={imageStyle(image)}
+						/>
 					))}
 				</Slider>
 			</div>
@@ -124,7 +178,11 @@ storiesOf("Slider", module)
 			<div style={{ width: "100vw", height: "100vh" }}>
 				<Slider hasArrows>
 					{images.map(image => (
-						<div key={image} draggable="false" style={imageStyle(image)} />
+						<div
+							key={image}
+							draggable="false"
+							style={imageStyle(image)}
+						/>
 					))}
 				</Slider>
 			</div>
@@ -137,7 +195,11 @@ storiesOf("Slider", module)
 			<div style={{ width: "100vw", height: "100vh" }}>
 				<Slider hasArrows arrowStyle={arrowStyle}>
 					{images.map(image => (
-						<div key={image} draggable="false" style={imageStyle(image)} />
+						<div
+							key={image}
+							draggable="false"
+							style={imageStyle(image)}
+						/>
 					))}
 				</Slider>
 			</div>
@@ -163,7 +225,11 @@ storiesOf("Slider", module)
 			<div style={{ width: "100vw", height: "100vh" }}>
 				<Slider hasArrows ArrowComponent={ArrowComponent}>
 					{images.map(image => (
-						<div key={image} draggable="false" style={imageStyle(image)} />
+						<div
+							key={image}
+							draggable="false"
+							style={imageStyle(image)}
+						/>
 					))}
 				</Slider>
 			</div>
@@ -174,7 +240,11 @@ storiesOf("Slider", module)
 			<div style={{ width: "100vw", height: "100vh" }}>
 				<Slider hasArrows hasBullets>
 					{images.map(image => (
-						<div key={image} draggable="false" style={imageStyle(image)} />
+						<div
+							key={image}
+							draggable="false"
+							style={imageStyle(image)}
+						/>
 					))}
 				</Slider>
 			</div>
@@ -184,7 +254,12 @@ storiesOf("Slider", module)
 		<div style={{ width: "100vw", height: "100vh" }}>
 			<Slider hasBullets onSlideChange={onSlideChange}>
 				{images.map(image => (
-					<div key={image} draggable="false" style={imageStyle(image)} onClick={() => console.log("click")}/>
+					<div
+						key={image}
+						draggable="false"
+						style={imageStyle(image)}
+						onClick={() => console.log("click")}
+					/>
 				))}
 			</Slider>
 		</div>

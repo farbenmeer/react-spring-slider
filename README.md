@@ -72,6 +72,7 @@ The slider currently provides the following interface:
 | hasArrows            | boolean       | false   | Whether the slider should have arrows or not |
 | hasBullets           | boolean       | false   | Whether the slider should have bullets or not |
 | onSlideChange        | function      | -       | Callback which is triggered when the slides changed either manually or automatically |
+| setSlideCustom       | function      | -       | A function to overwrite the default `setSlide` behavior. |
 
 
 
@@ -93,6 +94,7 @@ import Slider from '@farbenmeer/react-spring-slider';
 
 const App = () => {
 	const onSlideChange = index => console.log(`changed to slide ${index}`);
+	const setSlideCustom = () => 1 ;
 
 	const BulletComponent = ({onClick, isActive}) => (
 		<li
@@ -141,6 +143,7 @@ const App = () => {
 			BulletComponent={BulletComponent}
 			ArrowComponent={ArrowComponent}
 			onSlideChange={onSlideChange}
+			setSlideCustom={setSlideCustom}
 			>
 				<div>child 1</div>
 				<div>child 2</div>
