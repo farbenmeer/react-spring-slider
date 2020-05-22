@@ -2,20 +2,22 @@ import React from 'react';
 import styled from 'styled-components';
 
 interface BulletProps {
-	BulletComponent?: BulletComponentType,
-	bulletStyle?: BulletStyle,
-	index: number,
-	setSlide: (index: number) => void,
-	activeIndex: number,
+	BulletComponent?: BulletComponentType;
+	bulletStyle?: BulletStyle;
+	index: number;
+	setSlide: (index: number) => void;
+	activeIndex: number;
 }
 
-export type BulletComponentType = (props: BulletComponentProps) => React.ReactElement
+export type BulletComponentType = (
+	props: BulletComponentProps
+) => React.ReactElement;
 
 export interface BulletStyle {
-	[key: string]: string
+	[key: string]: string;
 }
 
-const StyledBullet = styled.li<{ active: boolean }>`
+const StyledBullet = styled.li<{active: boolean}>`
 	cursor: pointer;
 	height: 15px;
 	width: 15px;
@@ -24,25 +26,26 @@ const StyledBullet = styled.li<{ active: boolean }>`
 	display: inline-block;
 	margin: 0 2px;
 
-	${({active}) => active ? 'opacity: 0.5' : ''};
+	${({active}) => (active ? 'opacity: 0.5' : '')};
 `;
 
 interface BulletComponentProps {
-	isActive: boolean,
-	onClick: () => void,
+	isActive: boolean;
+	onClick: () => void;
 }
 
 const Bullet: React.FunctionComponent<BulletProps> = ({
+	/* eslint-disable react/prop-types */
 	index,
 	BulletComponent,
 	setSlide,
 	activeIndex,
 	bulletStyle
+	/* eslint-enable react/prop-types */
 }) => {
-
-	const updateSlide = () => {
+	const updateSlide = (): void => {
 		setSlide(index);
-	}
+	};
 
 	if (BulletComponent) {
 		return (
@@ -55,8 +58,9 @@ const Bullet: React.FunctionComponent<BulletProps> = ({
 	}
 
 	return (
-		<StyledBullet active={index === activeIndex}
+		<StyledBullet
 			key={index}
+			active={index === activeIndex}
 			style={bulletStyle}
 			onClick={updateSlide}
 		/>
