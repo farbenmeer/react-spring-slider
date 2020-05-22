@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, {css} from 'styled-components';
+import styled from 'styled-components';
 
 interface ArrowProps {
 	ArrowComponent?: ArrowComponentType;
@@ -36,16 +36,11 @@ const StyledI = styled.i<{direction: string}>`
 		opacity: 0.4;
 	}
 
+	transform: ${({direction}) =>
+		direction === 'left' ? 'rotate(135deg)' : 'rotate(-45deg)'};
+
 	${({direction}) =>
-		direction === 'left'
-			? css`
-					transform: rotate(135deg);
-					margin-left: 1em;
-				`
-			: css`
-					transform: rotate(-45deg);
-					margin-right: 1em;
-				`}
+		direction === 'left' ? 'margin-left: 1em;' : 'margin-right: 1em;'}
 `;
 
 const Arrow: React.FunctionComponent<ArrowProps> = ({
