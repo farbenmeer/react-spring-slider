@@ -51,6 +51,8 @@
   },
   "devDependencies": {
     "@commitlint/cli": "^8.3",
+    "@semantic-release/changelog": "^5.0.1",
+    "@semantic-release/git": "^9.0.0",
     "@storybook/addon-actions": "^5.3",
     "@storybook/addon-links": "^5.3",
     "@storybook/addons": "^5.3",
@@ -68,6 +70,7 @@
     "husky": "^4.0",
     "lint-staged": "^10.0.0",
     "prettier": "^2.0.0",
+    "semantic-release": "^17.0.7",
     "ts-loader": "^7.0.0",
     "typescript": "^3.7",
     "xo": "^0.32.0"
