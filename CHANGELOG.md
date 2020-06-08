@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/farbenmeer/react-spring-slider/compare/v1.1.1...v1.2.0) (2020-06-08)
+
+
+### Features
+
+* Add optionally custom `setSlide` function ([#101](https://github.com/farbenmeer/react-spring-slider/issues/101)) ([b3889e4](https://github.com/farbenmeer/react-spring-slider/commit/b3889e453df71ffdf9922a60a53d0b51849a72e9)), closes [#100](https://github.com/farbenmeer/react-spring-slider/issues/100)
+
 # Changelog
 All notable changes to this project will be documented in this file.
 
