@@ -44,6 +44,17 @@ jobs:
 
       - name: Run storybook build
         run: make storybook
+
+      - name: Commit storybook changes
+        uses: EndBug/add-and-commit@v4
+        with:
+          author_name: Max Strübing
+          author_email: max.struebing@farbenmeer.de
+          message: "docs: Update storybook"
+          add: "docs"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   release:
     needs: tests
     name: Release
