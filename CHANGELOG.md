@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/farbenmeer/react-spring-slider/compare/v1.2.0...v1.2.1) (2020-07-13)
+
+
+### Bug Fixes
+
+* Run release after build in same job ([#124](https://github.com/farbenmeer/react-spring-slider/issues/124)) ([32c1247](https://github.com/farbenmeer/react-spring-slider/commit/32c1247c06a03d17fdaf29a1597e11068f40bcca)), closes [#123](https://github.com/farbenmeer/react-spring-slider/issues/123)
+
 # [1.2.0](https://github.com/farbenmeer/react-spring-slider/compare/v1.1.1...v1.2.0) (2020-06-08)
 
 
