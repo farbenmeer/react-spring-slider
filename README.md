@@ -21,7 +21,7 @@ the hood.
 This project aims to be flexible through configuration as well as be easy to use 
 by sane and reasonable defaults.
 
-You can have a real life look how this can be used within storybook at: 
+You can have a real life look how this can be used within storybook [(source)](./src/index.stories.tsx) at: 
 [farbenmeer.github.io/react-spring-slider](https://farbenmeer.github.io/react-spring-slider/).
 
 ## Installation
@@ -152,7 +152,7 @@ const App = () => {
 }
 ```
 
-For more examples have a look at [storybook](https://farbenmeer.github.io/react-spring-slider/).
+For more examples have a look at [storybook](https://farbenmeer.github.io/react-spring-slider/) [(storybook source code)](./src/index.stories.tsx).
 
 ## Contribution
 
