@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { storiesOf } from "@storybook/react";
+import { Story, Meta } from '@storybook/react/types-6-0';
 import { BulletComponentType } from "../src/components/bullet/bullet";
 
-import Slider from ".";
+import Slider, {SliderProps} from ".";
 import { ArrowComponentType } from "./components/arrow/arrow";
 
 const images = [
@@ -23,10 +23,84 @@ const imageStyle = (src: string) => ({
 	width: "100%"
 });
 
-storiesOf("Slider", module)
-	.add("Default", () => (
+export default {
+	title: 'Slider',
+	component: Slider,
+} as Meta;
+
+export const DefaultSlider: Story<SliderProps> = () => (
+	<div style={{ width: "100vw", height: "100vh" }}>
+		<Slider hasBullets onSlideChange={onSlideChange}>
+			{images.map(image => (
+				<div
+					key={image}
+					draggable="false"
+					style={imageStyle(image)}
+				/>
+			))}
+		</Slider>
+	</div>
+)
+
+export const SmallerThan100Percent: Story<SliderProps> = () => (
+	<div style={{ width: "500px", height: "500px" }}>
+		<Slider hasBullets>
+			{images.map(image => (
+				<div
+					key={image}
+					draggable="false"
+					style={imageStyle(image)}
+				/>
+			))}
+		</Slider>
+	</div>
+)
+
+export const WithAutoSliding: Story<SliderProps> = () => (
+	<div style={{ width: "100vw", height: "100vh" }}>
+		<Slider hasBullets auto={2000}>
+			{images.map(image => (
+				<div
+					key={image}
+					draggable="false"
+					style={imageStyle(image)}
+				/>
+			))}
+		</Slider>
+	</div>
+)
+
+export const WithActiveIndex2: Story<SliderProps> = () => (
+	<div style={{ width: "100vw", height: "100vh" }}>
+		<Slider hasBullets activeIndex={2}>
+			{images.map(image => (
+				<div
+					key={image}
+					draggable="false"
+					style={imageStyle(image)}
+				/>
+			))}
+		</Slider>
+	</div>
+)
+
+export const WithActiveIndexInterval: Story<SliderProps> = () => {
+	const [activeIndex, setActiveIndex] = useState(2);
+
+	useEffect(() => {
+		const id = setInterval(() => {
+			const index = activeIndex + (1 % images.length);
+			setActiveIndex(index);
+		}, 2000);
+
+		return () => {
+			clearInterval(id);
+		};
+	});
+
+	return (
 		<div style={{ width: "100vw", height: "100vh" }}>
-			<Slider hasBullets onSlideChange={onSlideChange}>
+			<Slider hasBullets activeIndex={activeIndex}>
 				{images.map(image => (
 					<div
 						key={image}
@@ -36,23 +110,20 @@ storiesOf("Slider", module)
 				))}
 			</Slider>
 		</div>
-	))
-	.add("Smaller than 100%", () => (
-		<div style={{ width: "500px", height: "500px" }}>
-			<Slider hasBullets>
-				{images.map(image => (
-					<div
-						key={image}
-						draggable="false"
-						style={imageStyle(image)}
-					/>
-				))}
-			</Slider>
-		</div>
-	))
-	.add("With auto sliding", () => (
+	);
+}
+
+export const WithCustomSetSlideFunction: Story<SliderProps> = () => {
+	const [activeIndex, setActiveIndex] = useState(0);
+	const setSlideCustom = (slide: number) => 1
+
+	return (
 		<div style={{ width: "100vw", height: "100vh" }}>
-			<Slider hasBullets auto={2000}>
+			<Slider
+				hasBullets
+				activeIndex={activeIndex}
+				setSlideCustom={setSlideCustom}
+			>
 				{images.map(image => (
 					<div
 						key={image}
@@ -62,91 +133,28 @@ storiesOf("Slider", module)
 				))}
 			</Slider>
 		</div>
-	))
-	.add("With activeIndex (2)", () => (
-		<div style={{ width: "100vw", height: "100vh" }}>
-			<Slider hasBullets activeIndex={2}>
-				{images.map(image => (
-					<div
-						key={image}
-						draggable="false"
-						style={imageStyle(image)}
-					/>
-				))}
-			</Slider>
-		</div>
-	))
-	.add("With activeIndex (interval)", () => {
-		const [activeIndex, setActiveIndex] = useState(2);
+	);
+}
 
-		useEffect(() => {
-			const id = setInterval(() => {
-				const index = activeIndex + (1 % images.length);
-				setActiveIndex(index);
-			}, 2000);
+export const WithDifferentBulletStyle: Story<SliderProps> = () => (
+	<div style={{ width: "100vw", height: "100vh" }}>
+		<Slider hasBullets bulletStyle={{ backgroundColor: "#fff" }}>
+			{images.map(image => (
+				<div
+					key={image}
+					draggable="false"
+					style={imageStyle(image)}
+				/>
+			))}
+		</Slider>
+	</div>
+)
 
-			return () => {
-				clearInterval(id);
-			};
-		});
-
-		return (
-			<div style={{ width: "100vw", height: "100vh" }}>
-				<Slider hasBullets activeIndex={activeIndex}>
-					{images.map(image => (
-						<div
-							key={image}
-							draggable="false"
-							style={imageStyle(image)}
-						/>
-					))}
-				</Slider>
-			</div>
-		);
-	})
-	.add("With custom setSlide function", () => {
-		const [activeIndex, setActiveIndex] = useState(0);
-
-		const setSlideCustom = (slide: number) => 1
-
-		return (
-			<div style={{ width: "100vw", height: "100vh" }}>
-				<Slider
-					hasBullets
-					activeIndex={activeIndex}
-					setSlideCustom={setSlideCustom}
-				>
-					{images.map(image => (
-						<div
-							key={image}
-							draggable="false"
-							style={imageStyle(image)}
-						/>
-					))}
-				</Slider>
-			</div>
-		);
-	})
-	.add("With different `bulletStyle`", () => {
-		return (
-			<div style={{ width: "100vw", height: "100vh" }}>
-				<Slider hasBullets bulletStyle={{ backgroundColor: "#fff" }}>
-					{images.map(image => (
-						<div
-							key={image}
-							draggable="false"
-							style={imageStyle(image)}
-						/>
-					))}
-				</Slider>
-			</div>
-		);
-	})
-	.add("With custom `bullets`", () => {
-		const BulletComponent: BulletComponentType = ({
-			onClick,
-			isActive
-		}) => (
+export const WithCustomBullets: Story<SliderProps> = () => {
+	const BulletComponent: BulletComponentType = ({
+		onClick,
+		isActive
+	}) => (
 			<li
 				style={{
 					width: "25px",
@@ -159,108 +167,108 @@ storiesOf("Slider", module)
 			/>
 		);
 
-		return (
-			<div style={{ width: "100vw", height: "100vh" }}>
-				<Slider hasBullets BulletComponent={BulletComponent}>
-					{images.map(image => (
-						<div
-							key={image}
-							draggable="false"
-							style={imageStyle(image)}
-						/>
-					))}
-				</Slider>
-			</div>
-		);
-	})
-	.add("With arrows", () => {
-		return (
-			<div style={{ width: "100vw", height: "100vh" }}>
-				<Slider hasArrows>
-					{images.map(image => (
-						<div
-							key={image}
-							draggable="false"
-							style={imageStyle(image)}
-						/>
-					))}
-				</Slider>
-			</div>
-		);
-	})
-	.add("With custom arrow style", () => {
-		const arrowStyle = { border: "solid red", borderWidth: "0 5px 5px 0" };
-
-		return (
-			<div style={{ width: "100vw", height: "100vh" }}>
-				<Slider hasArrows arrowStyle={arrowStyle}>
-					{images.map(image => (
-						<div
-							key={image}
-							draggable="false"
-							style={imageStyle(image)}
-						/>
-					))}
-				</Slider>
-			</div>
-		);
-	})
-	.add("With custom arrow component", () => {
-		const ArrowComponent: ArrowComponentType = ({ onClick, direction }) => {
-			return (
-				<div
-					style={{
-						border: "1px solid black",
-						padding: "1em",
-						backgroundColor: "white"
-					}}
-					onClick={onClick}
-				>
-					{direction}
-				</div>
-			);
-		};
-
-		return (
-			<div style={{ width: "100vw", height: "100vh" }}>
-				<Slider hasArrows ArrowComponent={ArrowComponent}>
-					{images.map(image => (
-						<div
-							key={image}
-							draggable="false"
-							style={imageStyle(image)}
-						/>
-					))}
-				</Slider>
-			</div>
-		);
-	})
-	.add("With arrows and bullets", () => {
-		return (
-			<div style={{ width: "100vw", height: "100vh" }}>
-				<Slider hasArrows hasBullets>
-					{images.map(image => (
-						<div
-							key={image}
-							draggable="false"
-							style={imageStyle(image)}
-						/>
-					))}
-				</Slider>
-			</div>
-		);
-	})
-	.add("With onClick", () => (
+	return (
 		<div style={{ width: "100vw", height: "100vh" }}>
-			<Slider hasBullets onSlideChange={onSlideChange}>
+			<Slider hasBullets BulletComponent={BulletComponent}>
 				{images.map(image => (
 					<div
 						key={image}
 						draggable="false"
 						style={imageStyle(image)}
-						onClick={() => console.log("click")}
 					/>
 				))}
 			</Slider>
 		</div>
-	));
+	);
+}
+
+export const WithArrows: Story<SliderProps> = () => (
+	<div style={{ width: "100vw", height: "100vh" }}>
+		<Slider hasArrows>
+			{images.map(image => (
+				<div
+					key={image}
+					draggable="false"
+					style={imageStyle(image)}
+				/>
+			))}
+		</Slider>
+	</div>
+)
+
+export const WithCustomArrowStyle: Story<SliderProps> = () => {
+	const arrowStyle = { border: "solid red", borderWidth: "0 5px 5px 0" };
+	return (
+		<div style={{ width: "100vw", height: "100vh" }}>
+			<Slider hasArrows arrowStyle={arrowStyle}>
+				{images.map(image => (
+					<div
+						key={image}
+						draggable="false"
+						style={imageStyle(image)}
+					/>
+				))}
+			</Slider>
+		</div>
+	);
+}
+
+export const WithCustomArrowComponent: Story<SliderProps> = () => {
+	const ArrowComponent: ArrowComponentType = ({ onClick, direction }) => {
+		return (
+			<div
+				style={{
+					border: "1px solid black",
+					padding: "1em",
+					backgroundColor: "white"
+				}}
+				onClick={onClick}
+			>
+				{direction}
+			</div>
+		);
+	};
+
+	return (
+		<div style={{ width: "100vw", height: "100vh" }}>
+			<Slider hasArrows ArrowComponent={ArrowComponent}>
+				{images.map(image => (
+					<div
+						key={image}
+						draggable="false"
+						style={imageStyle(image)}
+					/>
+				))}
+			</Slider>
+		</div>
+	);
+}
+
+export const WithArrowsAndBullets: Story<SliderProps> = () => (
+	<div style={{ width: "100vw", height: "100vh" }}>
+		<Slider hasArrows hasBullets>
+			{images.map(image => (
+				<div
+					key={image}
+					draggable="false"
+					style={imageStyle(image)}
+				/>
+			))}
+		</Slider>
+	</div>
+)
+
+export const WithOnClick: Story<SliderProps> = () => (
+	<div style={{ width: "100vw", height: "100vh" }}>
+		<Slider hasBullets onSlideChange={onSlideChange}>
+			{images.map(image => (
+				<div
+					key={image}
+					draggable="false"
+					style={imageStyle(image)}
+					onClick={() => console.log("click")}
+				/>
+			))}
+		</Slider>
+	</div>
+)

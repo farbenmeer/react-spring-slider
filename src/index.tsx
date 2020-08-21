@@ -272,5 +272,5 @@ const Slider: React.FunctionComponent<SliderProps> = ({
 		</StyledWrapper>
 	);
 };
-
+export {SliderProps}
 export default Slider;
