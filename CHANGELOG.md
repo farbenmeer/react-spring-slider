@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/farbenmeer/react-spring-slider/compare/v1.2.1...v1.3.0) (2020-09-01)
+
+
+### Features
+
+* **slidesatonce:** Add `slidesAtOnce` property ([#140](https://github.com/farbenmeer/react-spring-slider/issues/140)) ([6a24ab3](https://github.com/farbenmeer/react-spring-slider/commit/6a24ab3a1380d8e10ab9fac76bcba56dd7901f55)), closes [#79](https://github.com/farbenmeer/react-spring-slider/issues/79)
+
 ## [1.2.1](https://github.com/farbenmeer/react-spring-slider/compare/v1.2.0...v1.2.1) (2020-07-13)
 
 
