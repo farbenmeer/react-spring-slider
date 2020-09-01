@@ -5,11 +5,11 @@ import { useGesture } from "react-use-gesture";
 
 import Arrow, {
 	ArrowComponentType,
-	ArrowStyle
+	ArrowStyle,
 } from "./components/arrow/arrow";
 import Bullet, {
 	BulletComponentType,
-	BulletStyle
+	BulletStyle,
 } from "./components/bullet/bullet";
 
 const StyledSliderArrows = styled.div`
@@ -68,6 +68,7 @@ interface SliderProps {
 	hasBullets?: boolean;
 	onSlideChange?: (slide: number) => void;
 	setSlideCustom?: (slide: number) => number;
+	slidesAtOnce?: number;
 }
 
 const clamp = (input: number, lower: number, upper: number) =>
@@ -84,7 +85,8 @@ const Slider: React.FunctionComponent<SliderProps> = ({
 	hasArrows = false,
 	hasBullets = false,
 	onSlideChange = () => undefined,
-	setSlideCustom = undefined
+	setSlideCustom = undefined,
+	slidesAtOnce = 1,
 }) => {
 	const sliderRef = useRef<HTMLDivElement>(null);
 	const [slide, setSlideOriginal] = useState(0);
@@ -96,8 +98,8 @@ const Slider: React.FunctionComponent<SliderProps> = ({
 	// Initialize slides with spring
 	const [springProps, setSpringProps] = useSprings(
 		children.length,
-		index => ({
-			offset: index
+		(index) => ({
+			offset: index,
 		})
 	);
 
@@ -110,18 +112,14 @@ const Slider: React.FunctionComponent<SliderProps> = ({
 				direction: [xDir],
 				distance,
 				cancel,
-				first
+				first,
 			}) => {
 				if (first) {
 					setDragging(true);
 				}
-				if (
-					sliderRef &&
-					sliderRef.current &&
-					sliderRef.current.parentElement
-				) {
+				if (sliderRef && sliderRef.current && sliderRef.current.parentElement) {
 					const {
-						width
+						width,
 					} = sliderRef.current.parentElement.getBoundingClientRect();
 
 					if (down && distance > width / 2) {
@@ -130,14 +128,14 @@ const Slider: React.FunctionComponent<SliderProps> = ({
 							clamp(
 								slide + (xDir > 0 ? -1 : 1),
 								0,
-								children.length - 1
+								children.length - slidesAtOnce
 							)
 						);
 					}
 					// see:  https://github.com/react-spring/react-spring/issues/861
 					// @ts-ignore
-					setSpringProps(index => ({
-						offset: (down ? xDelta : 0) / width + (index - slide)
+					setSpringProps((index) => ({
+						offset: (down ? xDelta : 0) / width + (index - slide),
 					}));
 				}
 			},
@@ -147,12 +145,12 @@ const Slider: React.FunctionComponent<SliderProps> = ({
 					return;
 				}
 				clickOnSlide(slide);
-			}
+			},
 		},
 		{
 			drag: {
-				delay: 200
-			}
+				delay: 200,
+			},
 		}
 	);
 
@@ -160,7 +158,7 @@ const Slider: React.FunctionComponent<SliderProps> = ({
 	useEffect(() => {
 		// see:  https://github.com/react-spring/react-spring/issues/861
 		// @ts-ignore
-		setSpringProps(index => ({ offset: index - slide }));
+		setSpringProps((index) => ({ offset: index - slide }));
 		onSlideChange(slide);
 	}, [slide, setSpringProps, onSlideChange]);
 
@@ -197,7 +195,7 @@ const Slider: React.FunctionComponent<SliderProps> = ({
 	};
 
 	const nextSlide = () => {
-		if (slide === children.length - 1) {
+		if (slide === children.length - slidesAtOnce) {
 			setSlide(0);
 			return;
 		}
@@ -207,11 +205,29 @@ const Slider: React.FunctionComponent<SliderProps> = ({
 
 	const previousSlide = () => {
 		if (slide === 0) {
-			setSlide(children.length - 1);
+			setSlide(children.length - slidesAtOnce);
 			return;
 		}
 
 		setSlide(slide - 1);
+	};
+
+	const bullets = () => {
+		const arr = [];
+		for (let index = 0; index <= children.length - slidesAtOnce; index++) {
+			arr.push(
+				<Bullet
+					key={index} // eslint-disable-line react/no-array-index-key
+					index={index}
+					BulletComponent={BulletComponent}
+					setSlide={setSlide}
+					activeIndex={slide}
+					bulletStyle={bulletStyle}
+				/>
+			);
+		}
+
+		return arr;
 	};
 
 	return (
@@ -235,18 +251,7 @@ const Slider: React.FunctionComponent<SliderProps> = ({
 				)}
 				{hasBullets && (
 					<StyledBullets>
-						<StyledBulletList>
-							{children.map((_, index) => (
-								<Bullet
-									key={index} // eslint-disable-line react/no-array-index-key
-									index={index}
-									BulletComponent={BulletComponent}
-									setSlide={setSlide}
-									activeIndex={slide}
-									bulletStyle={bulletStyle}
-								/>
-							))}
-						</StyledBulletList>
+						<StyledBulletList>{bullets()}</StyledBulletList>
 					</StyledBullets>
 				)}
 				{springProps.map(({ offset }, index) => (
@@ -256,13 +261,12 @@ const Slider: React.FunctionComponent<SliderProps> = ({
 						className="slider__slide"
 						style={{
 							transform: offset.interpolate(
-								offsetX =>
-									`translate3d(${offsetX * 100}%, 0, 0)`
+								(offsetX) => `translate3d(${offsetX * 100}%, 0, 0)`
 							),
 							position: "absolute",
-							width: "100%",
+							width: `${100 / slidesAtOnce}%`,
 							height: "100%",
-							willChange: "transform"
+							willChange: "transform",
 						}}
 					>
 						{childs[index]}
