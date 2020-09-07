@@ -6,7 +6,7 @@ email, or any other method with the owners of this repository before making a ch
 ## Pull Request Process
 
 1. Make sure your idea is put into an issue first.
-2. Make sure to start your work from the latest master or rebase if needed.
+2. Make sure to start your work from the latest main or rebase if needed.
 3. Make sure to have the latest dependencies installed via `npm install`.
 4. Do your changes and write clear commit messages following our conventions (see previous commits or `commitlint.config.js`).
 5. Test your changes and make sure `npm run lint` passes with no errors. ;)
@@ -53,7 +53,7 @@ If you encounter any problem try to run `make clean` at first.
 
 ## Releasing
 
-In order to release make sure to be on the `master` branch and have the latest 
+In order to release make sure to be on the `main` branch and have the latest 
 changes. Make also sure to be logged in into your npm-account.
 
 `make release` should do everything needed in order to build a complete release 

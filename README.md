@@ -156,4 +156,4 @@ For more examples have a look at [storybook](https://farbenmeer.github.io/react-
 
 ## Contribution
 
-See [CONTRIBUTING.md](https://github.com/farbenmeer/react-spring-slider/blob/master/CONTRIBUTING.md)
+See [CONTRIBUTING.md](https://github.com/farbenmeer/react-spring-slider/blob/main/CONTRIBUTING.md)
