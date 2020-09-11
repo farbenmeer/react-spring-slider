@@ -55,7 +55,7 @@ const StyledSlide = styled.div`
 	user-select: none;
 `;
 
-interface SliderProps {
+export interface SliderProps {
 	activeIndex?: number;
 	ArrowComponent?: ArrowComponentType;
 	arrowStyle?: ArrowStyle;
