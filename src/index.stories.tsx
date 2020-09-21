@@ -213,6 +213,27 @@ storiesOf("Slider", module)
 			</Slider>
 		</div>
 	))
+	.add("With link in slides", () => (
+		<div style={{ width: "100vw", height: "100vh" }}>
+			<Slider hasBullets onSlideChange={onSlideChange}>
+				<div>
+					<h1>
+						<a href="https://google.com">LINK</a>
+					</h1>
+				</div>
+				<div>
+					<h1>
+						<a href="https://google.com">LINK</a>
+					</h1>
+				</div>
+				<div>
+					<h1>
+						<a href="https://google.com">LINK</a>
+					</h1>
+				</div>
+			</Slider>
+		</div>
+	))
 	.add("With slidesAtOnce 2", () => (
 		<div style={{ width: "100vw", height: "100vh" }}>
 			<Slider
