@@ -1,3 +1,11 @@
+## [1.3.1](https://github.com/farbenmeer/react-spring-slider/compare/v1.3.0...v1.3.1) (2020-09-21)
+
+
+### Bug Fixes
+
+* **release:** Run release on `main`-branch ([#146](https://github.com/farbenmeer/react-spring-slider/issues/146)) ([3c1efde](https://github.com/farbenmeer/react-spring-slider/commit/3c1efde2ae2b5f06a0afccceec9b468263d01c9c))
+* **story:** Correct `slidesAtOnce` ([#145](https://github.com/farbenmeer/react-spring-slider/issues/145)) ([742c04d](https://github.com/farbenmeer/react-spring-slider/commit/742c04d5e1c826a010c59fa6f73ce7fd380a2027))
+
 # [1.3.0](https://github.com/farbenmeer/react-spring-slider/compare/v1.2.1...v1.3.0) (2020-09-01)
 
 
