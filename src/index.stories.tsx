@@ -216,7 +216,7 @@ storiesOf("Slider", module)
 	.add("With slidesAtOnce 2", () => (
 		<div style={{ width: "100vw", height: "100vh" }}>
 			<Slider
-				slidesAtOnce={3}
+				slidesAtOnce={2}
 				hasArrows
 				hasBullets
 				onSlideChange={onSlideChange}
