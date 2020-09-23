@@ -1,3 +1,10 @@
+## [1.3.2](https://github.com/farbenmeer/react-spring-slider/compare/v1.3.1...v1.3.2) (2020-09-23)
+
+
+### Bug Fixes
+
+* **slide:** Make links in slides clickable ([#144](https://github.com/farbenmeer/react-spring-slider/issues/144)) ([fba71de](https://github.com/farbenmeer/react-spring-slider/commit/fba71deb3f795b0f9a6264d7725bcf42fda6f770)), closes [#133](https://github.com/farbenmeer/react-spring-slider/issues/133)
+
 ## [1.3.1](https://github.com/farbenmeer/react-spring-slider/compare/v1.3.0...v1.3.1) (2020-09-21)
 
 
