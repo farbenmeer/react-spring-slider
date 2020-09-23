@@ -53,7 +53,6 @@ const StyledSlide = styled.div`
 	height: 100%;
 	will-change: transform;
 	user-select: none;
-	pointer-events: none;
 `;
 
 interface SliderProps {
