@@ -13,9 +13,7 @@ export type BulletComponentType = (
 	props: BulletComponentProps
 ) => React.ReactElement;
 
-export interface BulletStyle {
-	[key: string]: string;
-}
+export type BulletStyle = Record<string, string>;
 
 const StyledBullet = styled.li<{active: boolean}>`
 	cursor: pointer;
