@@ -19,9 +19,7 @@ interface ArrowComponentProps {
 	onClick: () => void;
 }
 
-export interface ArrowStyle {
-	[key: string]: string;
-}
+export type ArrowStyle = Record<string, string>;
 
 const StyledI = styled.i<{direction: string}>`
 	border: solid #333;
