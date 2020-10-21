@@ -41,8 +41,8 @@
     ]
   },
   "peerDependencies": {
-    "react": "^16.12",
-    "react-dom": "^16.12"
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0"
   },
   "dependencies": {
     "react-spring": "^8.0",
