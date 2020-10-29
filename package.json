@@ -46,7 +46,7 @@
   },
   "dependencies": {
     "react-spring": "^8.0",
-    "react-use-gesture": "^7.0.16",
+    "react-use-gesture": "^8.0.0",
     "styled-components": "^5.2.0"
   },
   "devDependencies": {
