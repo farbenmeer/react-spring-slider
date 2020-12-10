@@ -163,7 +163,7 @@ const Slider: React.FunctionComponent<SliderProps> = ({
 
 	// Effect for autosliding
 	useEffect(() => {
-		let interval: NodeJS.Timeout;
+		let interval: number;
 
 		if (auto > 0) {
 			interval = setInterval(() => {
