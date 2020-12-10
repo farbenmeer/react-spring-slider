@@ -55,7 +55,7 @@ const StyledSlide = styled.div`
 	user-select: none;
 `;
 
-interface SliderProps {
+export interface SliderProps {
 	activeIndex?: number;
 	ArrowComponent?: ArrowComponentType;
 	arrowStyle?: ArrowStyle;
@@ -163,7 +163,7 @@ const Slider: React.FunctionComponent<SliderProps> = ({
 
 	// Effect for autosliding
 	useEffect(() => {
-		let interval: NodeJS.Timeout;
+		let interval: number;
 
 		if (auto > 0) {
 			interval = setInterval(() => {

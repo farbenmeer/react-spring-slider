@@ -1,20 +1,18 @@
 {
 	"compilerOptions": {
-			"outDir": "./dist/",
-			"strictNullChecks": true,
-			"moduleResolution": "node",
-			"module": "commonjs",
-			"jsx": "react",
-			"target": "es5",
-			"allowJs": true,
-			"declaration": true,
-			"allowSyntheticDefaultImports": true,
-			"esModuleInterop": true,
-			"noImplicitAny": true,
-			"types": ["react"]
+		"outDir": "./dist/",
+		"strictNullChecks": true,
+		"moduleResolution": "node",
+		"module": "commonjs",
+		"jsx": "react",
+		"target": "ES6",
+		"allowJs": true,
+		"declaration": true,
+		"allowSyntheticDefaultImports": true,
+		"esModuleInterop": true,
+		"noImplicitAny": true,
+		"types": ["react"]
 	},
-	"include": [
-		"src/**/*"
-	],
+	"include": ["src/**/*"],
 	"exclude": ["dist", "node_modules"]
 }
