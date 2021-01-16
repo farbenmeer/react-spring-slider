@@ -46,7 +46,7 @@ jobs:
         run: make storybook
 
       - name: Commit storybook changes
-        uses: EndBug/add-and-commit@v6
+        uses: EndBug/add-and-commit@v7
         with:
           author_name: Max Strübing
           author_email: max.struebing@farbenmeer.de
