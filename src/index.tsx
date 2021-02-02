@@ -112,6 +112,7 @@ const Slider: React.FunctionComponent<SliderProps> = ({
 				distance,
 				cancel,
 				first,
+				active,
 			}) => {
 				if (first) {
 					setDragging(true);
@@ -123,18 +124,21 @@ const Slider: React.FunctionComponent<SliderProps> = ({
 
 					if (down && distance > width / 2) {
 						if (cancel) cancel();
-						setSlide(
-							clamp(
-								slide + (xDir > 0 ? -1 : 1),
-								0,
-								children.length - slidesAtOnce
-							)
-						);
+						if (active) {
+							setSlide(
+								clamp(
+									slide + (xDir > 0 ? -1 : 1),
+									0,
+									children.length - slidesAtOnce
+								)
+							);
+						}
 					}
+
 					// see:  https://github.com/react-spring/react-spring/issues/861
 					// @ts-ignore
 					setSpringProps((index) => ({
-						offset: (down ? xDelta : 0) / width + (index - slide),
+						offset: (active && down ? xDelta : 0) / width + (index - slide),
 					}));
 				}
 			},
