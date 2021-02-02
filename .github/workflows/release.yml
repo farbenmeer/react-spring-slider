@@ -46,14 +46,12 @@ jobs:
         run: make storybook
 
       - name: Commit storybook changes
-        uses: EndBug/add-and-commit@v6
+        uses: EndBug/add-and-commit@v7
         with:
           author_name: Max Strübing
           author_email: max.struebing@farbenmeer.de
           message: "docs: Update storybook"
           add: "docs"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Release
         env:
