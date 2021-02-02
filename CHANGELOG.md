@@ -1,3 +1,10 @@
+## [1.3.4](https://github.com/farbenmeer/react-spring-slider/compare/v1.3.3...v1.3.4) (2021-02-02)
+
+
+### Bug Fixes
+
+* **deps:** update dependency react-use-gesture to v9 ([#170](https://github.com/farbenmeer/react-spring-slider/issues/170)) ([c2a6de3](https://github.com/farbenmeer/react-spring-slider/commit/c2a6de3e80cdbf60f2261ba80c9d6df1281d9832))
+
 ## [1.3.3](https://github.com/farbenmeer/react-spring-slider/compare/v1.3.2...v1.3.3) (2020-10-30)
 
 
