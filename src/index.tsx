@@ -95,7 +95,7 @@ const Slider: React.FunctionComponent<SliderProps> = ({
 	const [isDragging, setDragging] = useState(false);
 
 	// Initialize slides with spring
-	const [springProps, setSpringProps] = useSprings(
+	const [springProps, springPropsRef] = useSprings(
 		children.length,
 		(index) => ({
 			offset: index,
@@ -137,9 +137,9 @@ const Slider: React.FunctionComponent<SliderProps> = ({
 
 					// see:  https://github.com/react-spring/react-spring/issues/861
 					// @ts-ignore
-					setSpringProps((index) => ({
+					springPropsRef.update((index) => ({
 						offset: (active && down ? xDelta : 0) / width + (index - slide),
-					}));
+					})).start();
 				}
 			},
 			onClick: () => {
@@ -161,9 +161,9 @@ const Slider: React.FunctionComponent<SliderProps> = ({
 	useEffect(() => {
 		// see:  https://github.com/react-spring/react-spring/issues/861
 		// @ts-ignore
-		setSpringProps((index) => ({ offset: index - slide }));
+		springPropsRef.update((index) => ({ offset: index - slide })).start();
 		onSlideChange(slide);
-	}, [slide, setSpringProps, onSlideChange]);
+	}, [slide, springPropsRef, onSlideChange]);
 
 	// Effect for autosliding
 	useEffect(() => {
