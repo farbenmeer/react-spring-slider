@@ -62,7 +62,7 @@
     "editorconfig-checker": "^4.0.2",
     "eslint-config-xo": "^0.35.0",
     "eslint-config-xo-react": "^0.25.0",
-    "eslint-config-xo-typescript": "^0.38.0",
+    "eslint-config-xo-typescript": "^0.41.0",
     "eslint-plugin-react": "^7.23.1",
     "eslint-plugin-react-hooks": "^4.2.0",
     "husky": "^6.0.0",
