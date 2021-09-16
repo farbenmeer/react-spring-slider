@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import styled from "styled-components";
 import { useSprings, animated } from "react-spring";
-import { useGesture } from "react-use-gesture";
+import { useGesture } from "@use-gesture/react";
 
 import Arrow, {
 	ArrowComponentType,
@@ -122,7 +122,7 @@ const Slider: React.FunctionComponent<SliderProps> = ({
 						width,
 					} = sliderRef.current.parentElement.getBoundingClientRect();
 
-					if (down && distance > width / 2) {
+					if (down && distance[0] > width / 2) {
 						if (cancel) cancel();
 						if (active) {
 							setSlide(
@@ -137,9 +137,11 @@ const Slider: React.FunctionComponent<SliderProps> = ({
 
 					// see:  https://github.com/react-spring/react-spring/issues/861
 					// @ts-ignore
-					springPropsRef.update((index) => ({
-						offset: (active && down ? xDelta : 0) / width + (index - slide),
-					})).start();
+					springPropsRef
+						.update((index) => ({
+							offset: (active && down ? xDelta : 0) / width + (index - slide),
+						}))
+						.start();
 				}
 			},
 			onClick: () => {
@@ -270,6 +272,7 @@ const Slider: React.FunctionComponent<SliderProps> = ({
 							width: `${100 / slidesAtOnce}%`,
 							height: "100%",
 							willChange: "transform",
+							touchAction: "none",
 						}}
 					>
 						{childs[index]}
