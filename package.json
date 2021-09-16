@@ -69,7 +69,7 @@
     "lint-staged": "^10.5.4",
     "prettier": "^2.2.1",
     "semantic-release": "^17.4.2",
-    "ts-loader": "^8.1.0",
+    "ts-loader": "^9.0.0",
     "typescript": "^4.2.4",
     "xo": "^0.38.2"
   }
