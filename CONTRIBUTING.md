@@ -41,10 +41,8 @@ The targets meant to be used are:
 | `build`      | builds all distribution files |
 | `storybook` | builds the storybook files to the `docs` folder |
 | `start` | starts the storybook development server on port 6006 |
-| `lint` | runs `lint-xo` and `lint-editorconfig` |
-| `lint-xo` | runs the `xo` linter |
-| `lint-editorconfig` | runs the `editorconfig-checker` |
-| `lint-fix` | runs the automatic fixer of `xo` |
+| `lint` | runs `eslint` with plugins |
+| `lint-fix` | runs the automatic fixer of `eslint` |
 | `clean` | cleans all generated files i.e. `node_modules` and `dist` |
 
 You can see all targets which meant to be used from the developer by simply 
