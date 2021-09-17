@@ -33,13 +33,13 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - name: Run install
-        run: make install
+        run: npm ci
 
       - name: Run lint
         run: npm run lint
 
       - name: Run build
-        run: make build
+        run: npm run build
 
       - name: Run storybook build
-        run: make storybook
+        run: npm run build-storybook
