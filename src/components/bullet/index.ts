@@ -1,3 +1,3 @@
-import Bullet from './bullet';
+import Bullet from "./bullet";
 
 export default Bullet;

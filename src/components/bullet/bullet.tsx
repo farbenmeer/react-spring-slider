@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 interface BulletProps {
 	BulletComponent?: BulletComponentType;
@@ -15,7 +15,7 @@ export type BulletComponentType = (
 
 export type BulletStyle = Record<string, string>;
 
-const StyledBullet = styled.li<{active: boolean}>`
+const StyledBullet = styled.li<{ active: boolean }>`
 	cursor: pointer;
 	height: 15px;
 	width: 15px;
@@ -24,7 +24,7 @@ const StyledBullet = styled.li<{active: boolean}>`
 	display: inline-block;
 	margin: 0 2px;
 
-	${({active}) => (active ? 'opacity: 0.5' : '')};
+	${({ active }) => (active ? "opacity: 0.5" : "")};
 `;
 
 interface BulletComponentProps {
@@ -38,7 +38,7 @@ const Bullet: React.FunctionComponent<BulletProps> = ({
 	BulletComponent,
 	setSlide,
 	activeIndex,
-	bulletStyle
+	bulletStyle,
 	/* eslint-enable react/prop-types */
 }) => {
 	const updateSlide = (): void => {
@@ -67,7 +67,7 @@ const Bullet: React.FunctionComponent<BulletProps> = ({
 
 Bullet.defaultProps = {
 	BulletComponent: undefined,
-	bulletStyle: {}
+	bulletStyle: {},
 };
 
 export default Bullet;
