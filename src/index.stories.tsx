@@ -95,9 +95,9 @@ ActiveIndexInterval.args = {
 };
 
 const CustomSetSlideStory = (args: SliderProps) => {
-	const [activeIndex, setActiveIndex] = useState(0);
+	const [activeIndex] = useState(0);
 
-	const setSlideCustom = (_slide: number) => 1;
+	const setSlideCustom = () => 1;
 
 	return (
 		<Story

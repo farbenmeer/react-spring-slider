@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 interface ArrowProps {
 	ArrowComponent?: ArrowComponentType;
@@ -12,7 +12,7 @@ export type ArrowComponentType = (
 	props: ArrowComponentProps
 ) => React.ReactElement;
 
-type Direction = 'left' | 'right';
+type Direction = "left" | "right";
 
 interface ArrowComponentProps {
 	direction: Direction;
@@ -21,7 +21,7 @@ interface ArrowComponentProps {
 
 export type ArrowStyle = Record<string, string>;
 
-const StyledI = styled.i<{direction: string}>`
+const StyledI = styled.i<{ direction: string }>`
 	border: solid #333;
 	border-width: 0 5px 5px 0;
 	display: inline-block;
@@ -34,11 +34,11 @@ const StyledI = styled.i<{direction: string}>`
 		opacity: 0.4;
 	}
 
-	transform: ${({direction}) =>
-		direction === 'left' ? 'rotate(135deg)' : 'rotate(-45deg)'};
+	transform: ${({ direction }) =>
+		direction === "left" ? "rotate(135deg)" : "rotate(-45deg)"};
 
-	${({direction}) =>
-		direction === 'left' ? 'margin-left: 1em;' : 'margin-right: 1em;'}
+	${({ direction }) =>
+		direction === "left" ? "margin-left: 1em;" : "margin-right: 1em;"}
 `;
 
 const Arrow: React.FunctionComponent<ArrowProps> = ({
@@ -46,7 +46,7 @@ const Arrow: React.FunctionComponent<ArrowProps> = ({
 	ArrowComponent,
 	arrowStyle,
 	onClick,
-	direction
+	direction,
 	/* eslint-enable react/prop-types */
 }) => {
 	if (ArrowComponent) {
@@ -62,7 +62,7 @@ const Arrow: React.FunctionComponent<ArrowProps> = ({
 
 Arrow.defaultProps = {
 	ArrowComponent: undefined,
-	arrowStyle: {}
+	arrowStyle: {},
 };
 
 export default Arrow;
