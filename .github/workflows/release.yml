@@ -37,7 +37,7 @@ jobs:
         run: make install
 
       - name: Run lint
-        run: make lint
+        run: npm run lint
 
       - name: Run build
         run: make build

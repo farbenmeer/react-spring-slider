@@ -1,11 +1,29 @@
 {
 	"extends": [
-		"xo",
-		"xo-typescript",
-		"xo-react",
+		"eslint:recommended",
+		"plugin:react/recommended",
+		"plugin:@typescript-eslint/recommended",
+		"plugin:prettier/recommended"
 	],
+	"plugins": [
+		"react",
+		"@typescript-eslint",
+		"prettier"
+	],
+	"env": {
+		"browser": true,
+		"jest": true
+	},
+	"settings": {
+		"react": {
+			"pragma": "React",
+			"version": "detect"
+		}
+	},
+	"parser": "@typescript-eslint/parser",
 	"rules": {
-		"react-hooks-nesting": "error",
-		"jsx-boolean-value": false
+		"@typescript-eslint/ban-ts-comment": "warn",
+		"react/prop-types": "off",
+		"@typescript-eslint/explicit-module-boundary-types": "error"
 	}
 }

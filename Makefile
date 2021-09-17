@@ -5,7 +5,6 @@ GIT_BRANCH_UP_TO_DATE = $(shell git remote show origin | tail -n1 | sed 's/.*(\(
 CURRENT_VERSION = $(shell grep 'version' package.json | sed 's/.*".*": "\(.*\)",/\1/')
 
 ec = ./node_modules/.bin/ec
-xo = ./node_modules/.bin/xo
 build-storybook = ./node_modules/.bin/build-storybook
 start-storybook = ./node_modules/.bin/start-storybook
 tsc = ./node_modules/.bin/tsc
@@ -31,22 +30,6 @@ storybook: install docs
 start: install
 start:
 	$(start-storybook) -p 6006
-
-# help make lint run xo and editorconfig-checker
-.PHONY: lint
-lint: lint-xo lint-editorconfig
-
-# help make lint-editorconfig: runs the editorconfig-checker
-lint-editorconfig: install
-	$(ec)
-
-# help make lint-xo: runs the xo linter
-lint-xo: install
-	$(xo) --prettier $$PWD/src/**/*
-
-# help make lint-fix: runs the automatic fixer of xo
-lint-fix:
-	$(xo) --prettier --fix $$PWD/src/**/*
 
 # help make release: generates the newest version
 release:
