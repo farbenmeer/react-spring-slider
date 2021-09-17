@@ -68,6 +68,7 @@ export interface SliderProps {
 	onSlideChange?: (slide: number) => void;
 	setSlideCustom?: (slide: number) => number;
 	slidesAtOnce?: number;
+	slidesToSlide?: number
 }
 
 const clamp = (input: number, lower: number, upper: number) =>
@@ -86,6 +87,7 @@ const Slider: React.FunctionComponent<SliderProps> = ({
 	onSlideChange = () => undefined,
 	setSlideCustom = undefined,
 	slidesAtOnce = 1,
+	slidesToSlide = 1,
 }) => {
 	const sliderRef = useRef<HTMLDivElement>(null);
 	const [slide, setSlideOriginal] = useState(0);
@@ -199,22 +201,36 @@ const Slider: React.FunctionComponent<SliderProps> = ({
 			childs[slideIndex].props.children.props.onClick();
 	};
 
-	const nextSlide = () => {
-		if (slide === children.length - slidesAtOnce) {
-			setSlide(0);
-			return;
-		}
+	const goToFirstSlide = () => {
+		setSlide(0)
+	}
 
-		setSlide(slide + 1);
+	const goToLastSlide = () => {
+		setSlide(children.length - slidesAtOnce)
+	}
+
+	const nextSlide = () => {
+		const reachedLastSlide = slide === children.length - slidesAtOnce
+		const nextSlideExists = (slide + (slidesAtOnce - 1)) + slidesToSlide < children.length - 1
+		if (reachedLastSlide) {
+			goToFirstSlide()
+		} else if (!nextSlideExists) {
+			goToLastSlide()
+		} else {
+			setSlide(slide + slidesToSlide);
+		}
 	};
 
 	const previousSlide = () => {
 		if (slide === 0) {
-			setSlide(children.length - slidesAtOnce);
+			goToLastSlide();
 			return;
+		} else if (slide - slidesToSlide <= 0) {
+			goToFirstSlide()
+			return
+		} else {
+			setSlide(slide - slidesToSlide);
 		}
-
-		setSlide(slide - 1);
 	};
 
 	const bullets = () => {

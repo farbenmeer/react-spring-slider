@@ -73,6 +73,7 @@ The slider currently provides the following interface:
 | onSlideChange   | function | -       |                        Callback which is triggered when the slides changed either manually or automatically |
 | setSlideCustom  | function | -       |                                                    A function to overwrite the default `setSlide` behavior. |
 | slidesAtOnce    | number   | 1       |                                          A number which represents how many slides should be shown at once. |
+| slidesToSlide   | number   | 1       |                             A number which represents how many slides should be slided with one interaction |
 
 ## More examples
 

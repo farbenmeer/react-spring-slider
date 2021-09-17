@@ -178,3 +178,11 @@ SlidesAtOnceComponent.args = {
 	hasArrows: true,
 	slidesAtOnce: 2,
 };
+
+export const SlidesToSlideComponent = Story.bind({});
+SlidesToSlideComponent.storyName = "With slidesToSlide 2";
+SlidesToSlideComponent.args = {
+	hasArrows: true,
+	slidesAtOnce: 2,
+	slidesToSlide: 2,
+};
