@@ -1,3 +1,10 @@
+## [1.3.5](https://github.com/farbenmeer/react-spring-slider/compare/v1.3.4...v1.3.5) (2021-09-17)
+
+
+### Bug Fixes
+
+* **gestures:** Fix gesture navigation for chrome ([#191](https://github.com/farbenmeer/react-spring-slider/issues/191)) ([87a825d](https://github.com/farbenmeer/react-spring-slider/commit/87a825d98350ab3e3e943f96f8fac1baa52cf251))
+
 ## [1.3.4](https://github.com/farbenmeer/react-spring-slider/compare/v1.3.3...v1.3.4) (2021-02-02)
 
 
