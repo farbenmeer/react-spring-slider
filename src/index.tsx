@@ -137,9 +137,11 @@ const Slider: React.FunctionComponent<SliderProps> = ({
 
 					// see:  https://github.com/react-spring/react-spring/issues/861
 					// @ts-ignore
-					springPropsRef.update((index) => ({
-						offset: (active && down ? xDelta : 0) / width + (index - slide),
-					})).start();
+					springPropsRef
+						.update((index) => ({
+							offset: (active && down ? xDelta : 0) / width + (index - slide),
+						}))
+						.start();
 				}
 			},
 			onClick: () => {
@@ -270,6 +272,7 @@ const Slider: React.FunctionComponent<SliderProps> = ({
 							width: `${100 / slidesAtOnce}%`,
 							height: "100%",
 							willChange: "transform",
+							touchAction: "none",
 						}}
 					>
 						{childs[index]}
