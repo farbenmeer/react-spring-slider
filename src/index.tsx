@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import styled from "styled-components";
 import { useSprings, animated } from "react-spring";
-import { useGesture } from "@use-gesture/react";
+import { useGesture } from "react-use-gesture";
 
 import Arrow, {
 	ArrowComponentType,
@@ -122,7 +122,7 @@ const Slider: React.FunctionComponent<SliderProps> = ({
 						width,
 					} = sliderRef.current.parentElement.getBoundingClientRect();
 
-					if (down && distance[0] > width / 2) {
+					if (down && distance > width / 2) {
 						if (cancel) cancel();
 						if (active) {
 							setSlide(
