@@ -44,7 +44,7 @@
   "devDependencies": {
     "@commitlint/cli": "^13.0.0",
     "@semantic-release/changelog": "^5.0.1",
-    "@semantic-release/git": "^9.0.0",
+    "@semantic-release/git": "^10.0.0",
     "@storybook/addon-essentials": "^6.2.5",
     "@storybook/addons": "^6.2.5",
     "@storybook/react": "^6.2.5",
@@ -62,7 +62,7 @@
     "husky": "^7.0.0",
     "lint-staged": "^11.0.0",
     "prettier": "^2.2.1",
-    "semantic-release": "^17.4.2",
+    "semantic-release": "^18.0.0",
     "ts-loader": "^9.0.0",
     "typescript": "^4.2.4",
     "xo": "^0.40.0"
