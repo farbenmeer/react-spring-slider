@@ -25,34 +25,27 @@ If some parts of the templates doesn't fit to your issue simply delete it.
 
 ## Build process
 
-We have a Makefile which is the source for every build step or anything similar 
+We have npm scripts which are the source for every build step or anything similar 
 like building the distribution file, creating the storybook files, starting the 
 storybook server, linting and so on.
-
-There are some targets which are designed to be user surfacing as well as some 
-targets which are for internal usage - to make the API clear and descriptive to 
-the developer.
 
 The targets meant to be used are:
 
 | Target        | Description   |
 | ------------- |:--------------|
-| `install`      | installs the `node_modules` |
 | `build`      | builds all distribution files |
-| `storybook` | builds the storybook files to the `docs` folder |
-| `start` | starts the storybook development server on port 6006 |
+| `build-storybook` | builds the storybook files to the `docs` folder |
+| `storybook` | starts the storybook development server on port 6006 |
 | `lint` | runs `eslint` with plugins |
 | `lint-fix` | runs the automatic fixer of `eslint` |
 | `clean` | cleans all generated files i.e. `node_modules` and `dist` |
 
-You can see all targets which meant to be used from the developer by simply 
-typing `make help` or, a bit easier `make` into your terminal.
-If you encounter any problem try to run `make clean` at first.
+You can see all targets which meant to be used from the developer in the `package.json` under the `script` section.
+If you encounter any problem try to run `npm run clean` at first.
 
 ## Releasing
 
-In order to release make sure to be on the `main` branch and have the latest 
-changes. Make also sure to be logged in into your npm-account.
+Each push to the `main` branch will build a new version. [semantic-release](https://github.com/semantic-release/semantic-release) creates a changelog, increases the version number, creates a git tag, a github release and deploys it to npm.
 
-`make release` should do everything needed in order to build a complete release 
-including publishing it to npm and creating a Github tag.
+### pre-release
+To create a pre-release just push changes to the `beta` branch. This will deploy a beta version (e.g. `1.2.5-beta1`) and publish it as a pre-release on npm.
