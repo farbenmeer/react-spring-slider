@@ -20,8 +20,12 @@
     "/dist"
   ],
   "scripts": {
+    "build": "tsc --build tsconfig.json",
     "lint": "eslint './**/*.{ts,tsx,js}'",
-    "lint-fix": "eslint './**/*.{ts,tsx,js}' --fix"
+    "lint-fix": "eslint './**/*.{ts,tsx,js}' --fix",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook --output-dir docs ",
+    "clean": "rm -rf dist node_modules"
   },
   "lint-staged": {
     "./src/**/*.{ts,tsx}": [
