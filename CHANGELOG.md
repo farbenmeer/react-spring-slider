@@ -1,3 +1,15 @@
+# [1.4.0](https://github.com/farbenmeer/react-spring-slider/compare/v1.3.5...v1.4.0) (2021-09-22)
+
+
+### Bug Fixes
+
+* linting issues ([0dc9419](https://github.com/farbenmeer/react-spring-slider/commit/0dc94190ce6157ca2c5b8e8bc99177a82888b505))
+
+
+### Features
+
+* Add slidesToSlide prop ([612cb45](https://github.com/farbenmeer/react-spring-slider/commit/612cb45a5f2eca311c999dd6e9f90d396d556223))
+
 ## [1.3.5](https://github.com/farbenmeer/react-spring-slider/compare/v1.3.4...v1.3.5) (2021-09-17)
 
 
