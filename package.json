@@ -25,7 +25,8 @@
     "lint-fix": "eslint './**/*.{ts,tsx,js}' --fix",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook --output-dir docs ",
-    "clean": "rm -rf dist node_modules"
+    "clean": "rm -rf dist node_modules",
+    "release": "semantic-release"
   },
   "lint-staged": {
     "./src/**/*.{ts,tsx}": [
