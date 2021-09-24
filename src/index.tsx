@@ -282,7 +282,7 @@ const Slider: React.FunctionComponent<SliderProps> = ({
 						key={index} // eslint-disable-line react/no-array-index-key
 						className="slider__slide"
 						style={{
-							transform: offset.interpolate(
+							transform: offset.to(
 								(offsetX) => `translate3d(${offsetX * 100}%, 0, 0)`
 							),
 							position: "absolute",
