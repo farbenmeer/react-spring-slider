@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Meta, Story as IStory } from "@storybook/react/types-6-0";
-import { BulletComponentType } from "../src/components/bullet/bullet";
 
 import Slider, { SliderProps } from ".";
 import { ArrowComponentType } from "./components/arrow/arrow";
@@ -112,34 +111,6 @@ CustomSetSlide.storyName = "With custom setSlide function";
 CustomSetSlide.args = {
 	hasBullets: true,
 	hasArrows: false,
-};
-
-export const DifferentBullets = Story.bind({});
-DifferentBullets.storyName = "With different 'bulletStyle'";
-DifferentBullets.args = {
-	hasBullets: true,
-	hasArrows: false,
-	bulletStyle: { backgroundColor: "#fff" },
-};
-
-const BulletComponent: BulletComponentType = ({ onClick, isActive }) => (
-	<li
-		style={{
-			width: "25px",
-			height: "25px",
-			backgroundColor: "red",
-			margin: "0 2px",
-			opacity: isActive ? "0.5" : undefined,
-		}}
-		onClick={onClick}
-	/>
-);
-export const CustomBullets = Story.bind({});
-CustomBullets.storyName = "With custom 'bullets'";
-CustomBullets.args = {
-	hasBullets: true,
-	hasArrows: false,
-	BulletComponent,
 };
 
 export const CustomArrows = Story.bind({});
