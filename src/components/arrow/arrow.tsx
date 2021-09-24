@@ -2,22 +2,14 @@ import React from "react";
 import styled from "styled-components";
 
 interface ArrowProps {
-	ArrowComponent?: ArrowComponentType;
-	arrowStyle?: ArrowStyle;
+	style?: ArrowStyle;
 	direction: Direction;
 	onClick: () => void;
 }
 
-export type ArrowComponentType = (
-	props: ArrowComponentProps
-) => React.ReactElement;
+export type ArrowComponentType = (props: ArrowProps) => React.ReactElement;
 
 type Direction = "left" | "right";
-
-interface ArrowComponentProps {
-	direction: Direction;
-	onClick: () => void;
-}
 
 export type ArrowStyle = Record<string, string>;
 
@@ -42,27 +34,15 @@ const StyledI = styled.i<{ direction: string }>`
 `;
 
 const Arrow: React.FunctionComponent<ArrowProps> = ({
-	/* eslint-disable react/prop-types */
-	ArrowComponent,
-	arrowStyle,
+	style,
 	onClick,
 	direction,
-	/* eslint-enable react/prop-types */
 }) => {
-	if (ArrowComponent) {
-		return <ArrowComponent direction={direction} onClick={onClick} />;
-	}
-
 	return (
 		<a onClick={onClick}>
-			<StyledI style={arrowStyle} direction={direction} />
+			<StyledI style={style} direction={direction} />
 		</a>
 	);
-};
-
-Arrow.defaultProps = {
-	ArrowComponent: undefined,
-	arrowStyle: {},
 };
 
 export default Arrow;
