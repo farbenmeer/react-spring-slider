@@ -76,10 +76,10 @@ const clamp = (input: number, lower: number, upper: number) =>
 
 const Slider: React.FunctionComponent<SliderProps> = ({
 	activeIndex = 0,
-	ArrowComponent,
+	ArrowComponent = Arrow,
 	arrowStyle = {},
 	auto = 0,
-	BulletComponent,
+	BulletComponent = Bullet,
 	bulletStyle = {},
 	children = [],
 	hasArrows = false,
@@ -238,13 +238,11 @@ const Slider: React.FunctionComponent<SliderProps> = ({
 		const arr = [];
 		for (let index = 0; index <= children.length - slidesAtOnce; index++) {
 			arr.push(
-				<Bullet
+				<BulletComponent
 					key={index} // eslint-disable-line react/no-array-index-key
-					index={index}
-					BulletComponent={BulletComponent}
-					setSlide={setSlide}
-					activeIndex={slide}
-					bulletStyle={bulletStyle}
+					isActive={index === slide}
+					onClick={() => setSlide(index)}
+					style={bulletStyle}
 				/>
 			);
 		}
@@ -257,15 +255,13 @@ const Slider: React.FunctionComponent<SliderProps> = ({
 			<StyledSlider>
 				{hasArrows && (
 					<StyledSliderArrows>
-						<Arrow
-							ArrowComponent={ArrowComponent}
-							arrowStyle={arrowStyle}
+						<ArrowComponent
+							style={arrowStyle}
 							direction="left"
 							onClick={previousSlide}
 						/>
-						<Arrow
-							ArrowComponent={ArrowComponent}
-							arrowStyle={arrowStyle}
+						<ArrowComponent
+							style={arrowStyle}
 							direction="right"
 							onClick={nextSlide}
 						/>

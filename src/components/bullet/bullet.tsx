@@ -2,20 +2,16 @@ import React from "react";
 import styled from "styled-components";
 
 interface BulletProps {
-	BulletComponent?: BulletComponentType;
-	bulletStyle?: BulletStyle;
-	index: number;
-	setSlide: (index: number) => void;
-	activeIndex: number;
+	isActive: boolean;
+	onClick: () => void;
+	style: BulletStyle;
 }
 
-export type BulletComponentType = (
-	props: BulletComponentProps
-) => React.ReactElement;
+export type BulletComponentType = (props: BulletProps) => React.ReactElement;
 
 export type BulletStyle = Record<string, string>;
 
-const StyledBullet = styled.li<{ active: boolean }>`
+const StyledBullet = styled.li<{ isActive: boolean }>`
 	cursor: pointer;
 	height: 15px;
 	width: 15px;
@@ -24,50 +20,15 @@ const StyledBullet = styled.li<{ active: boolean }>`
 	display: inline-block;
 	margin: 0 2px;
 
-	${({ active }) => (active ? "opacity: 0.5" : "")};
+	${({ isActive }) => (isActive ? "opacity: 0.5" : "")};
 `;
 
-interface BulletComponentProps {
-	isActive: boolean;
-	onClick: () => void;
-}
-
 const Bullet: React.FunctionComponent<BulletProps> = ({
-	/* eslint-disable react/prop-types */
-	index,
-	BulletComponent,
-	setSlide,
-	activeIndex,
-	bulletStyle,
-	/* eslint-enable react/prop-types */
+	onClick,
+	isActive,
+	style,
 }) => {
-	const updateSlide = (): void => {
-		setSlide(index);
-	};
-
-	if (BulletComponent) {
-		return (
-			<BulletComponent
-				key={index}
-				isActive={index === activeIndex}
-				onClick={updateSlide}
-			/>
-		);
-	}
-
-	return (
-		<StyledBullet
-			key={index}
-			active={index === activeIndex}
-			style={bulletStyle}
-			onClick={updateSlide}
-		/>
-	);
-};
-
-Bullet.defaultProps = {
-	BulletComponent: undefined,
-	bulletStyle: {},
+	return <StyledBullet isActive={isActive} style={style} onClick={onClick} />;
 };
 
 export default Bullet;
