@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Meta, Story as IStory } from "@storybook/react/types-6-0";
 
 import Slider, { SliderProps } from ".";
-import { ArrowComponentType } from "./components/arrow/arrow";
 
 const images = [
 	"https://images.pexels.com/photos/3740695/pexels-photo-3740695.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
@@ -24,7 +23,7 @@ const imageStyle = (src: string) => ({
 
 export default {
 	component: Slider,
-	title: "Slider",
+	title: "Other",
 	decorators: [
 		(Story: IStory<SliderProps>) => (
 			<div style={{ width: "100%", height: "100vh" }}>
@@ -111,36 +110,6 @@ CustomSetSlide.storyName = "With custom setSlide function";
 CustomSetSlide.args = {
 	hasBullets: true,
 	hasArrows: false,
-};
-
-export const CustomArrows = Story.bind({});
-CustomArrows.storyName = "With custom arrow style";
-CustomArrows.args = {
-	hasBullets: false,
-	hasArrows: true,
-	arrowStyle: { border: "solid red", borderWidth: "0 5px 5px 0" },
-};
-
-const ArrowComponent: ArrowComponentType = ({ onClick, direction }) => {
-	return (
-		<div
-			style={{
-				border: "1px solid black",
-				padding: "1em",
-				backgroundColor: "white",
-			}}
-			onClick={onClick}
-		>
-			{direction}
-		</div>
-	);
-};
-export const CustomArrowComponent = Story.bind({});
-CustomArrowComponent.storyName = "With custom arrow component";
-CustomArrowComponent.args = {
-	hasBullets: false,
-	hasArrows: true,
-	ArrowComponent,
 };
 
 export const SlidesAtOnceComponent = Story.bind({});
