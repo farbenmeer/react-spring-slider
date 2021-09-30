@@ -3,14 +3,9 @@ import styled from "styled-components";
 import { useSprings, animated } from "react-spring";
 import { useGesture } from "react-use-gesture";
 
-import Arrow, {
-	ArrowComponentType,
-	ArrowStyle,
-} from "./components/arrow/arrow";
-import Bullet, {
-	BulletComponentType,
-	BulletStyle,
-} from "./components/bullet/bullet";
+import Arrow, { ArrowComponentType, ArrowStyle } from "./components/arrow";
+import Bullet, { BulletComponentType, BulletStyle } from "./components/bullet";
+import Bullets, { BulletsComponentType } from "./components/bullets";
 
 const StyledSliderArrows = styled.div`
 	top: 50%;
@@ -27,13 +22,6 @@ const StyledBulletList = styled.ul`
 	list-style-type: none;
 	padding: 0;
 	margin: 15px 0;
-`;
-
-const StyledBullets = styled.div`
-	position: absolute;
-	bottom: 0;
-	width: 100%;
-	z-index: 1;
 `;
 
 const StyledWrapper = styled.div`
@@ -61,6 +49,7 @@ export interface SliderProps {
 	arrowStyle?: ArrowStyle;
 	auto?: number;
 	BulletComponent?: BulletComponentType;
+	BulletsComponent?: BulletsComponentType;
 	bulletStyle?: BulletStyle;
 	children?: React.ReactNode[];
 	hasArrows?: boolean;
@@ -80,6 +69,7 @@ const Slider: React.FunctionComponent<SliderProps> = ({
 	arrowStyle = {},
 	auto = 0,
 	BulletComponent = Bullet,
+	BulletsComponent = Bullets,
 	bulletStyle = {},
 	children = [],
 	hasArrows = false,
@@ -268,9 +258,9 @@ const Slider: React.FunctionComponent<SliderProps> = ({
 					</StyledSliderArrows>
 				)}
 				{hasBullets && (
-					<StyledBullets>
+					<BulletsComponent>
 						<StyledBulletList>{bullets()}</StyledBulletList>
-					</StyledBullets>
+					</BulletsComponent>
 				)}
 				{springProps.map(({ offset }, index) => (
 					<animated.div
