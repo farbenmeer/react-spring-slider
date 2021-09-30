@@ -1,10 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 
-interface ArrowProps {
+export interface ArrowProps {
 	style?: ArrowStyle;
 	direction: Direction;
 	onClick: () => void;
+	className?: string;
 }
 
 export type ArrowComponentType = (props: ArrowProps) => React.ReactElement;
@@ -37,9 +38,10 @@ const Arrow: React.FunctionComponent<ArrowProps> = ({
 	style,
 	onClick,
 	direction,
+	className = "",
 }) => {
 	return (
-		<a onClick={onClick}>
+		<a onClick={onClick} className={className}>
 			<StyledI style={style} direction={direction} />
 		</a>
 	);
