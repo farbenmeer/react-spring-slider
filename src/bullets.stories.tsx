@@ -1,6 +1,7 @@
 import React from "react";
 import { Meta, Story as IStory } from "@storybook/react/types-6-0";
 import Bullet, { BulletComponentType } from "../src/components/bullet";
+import Bullets from "../src/components/bullets";
 import styled from "styled-components";
 
 import Slider, { SliderProps } from ".";
@@ -75,12 +76,22 @@ CustomBullets.args = {
 	BulletComponent,
 };
 
-export const ModufiedCustomBullets = Story.bind({});
+export const ModufiedCustomBullet = Story.bind({});
 const ModifiedBulletComponent = styled(Bullet)`
+	background-color: green;
+`;
+ModufiedCustomBullet.storyName = "modified 'bullet' component";
+ModufiedCustomBullet.args = {
+	hasBullets: true,
+	BulletComponent: ModifiedBulletComponent,
+};
+
+export const ModufiedCustomBullets = Story.bind({});
+const ModifiedBulletsComponent = styled(Bullets)`
 	background-color: green;
 `;
 ModufiedCustomBullets.storyName = "modified 'bullets' component";
 ModufiedCustomBullets.args = {
 	hasBullets: true,
-	BulletComponent: ModifiedBulletComponent,
+	BulletsComponent: ModifiedBulletsComponent,
 };
