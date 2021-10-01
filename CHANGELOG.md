@@ -1,3 +1,12 @@
+# [1.5.0](https://github.com/farbenmeer/react-spring-slider/compare/v1.4.0...v1.5.0) (2021-10-01)
+
+
+### Features
+
+* **arrows:** export internal arrow component ([f1f8813](https://github.com/farbenmeer/react-spring-slider/commit/f1f881302fa55660de86e0a14f523346f13dc8df))
+* **bullets-wrapper:** export internal arrow component ([ad9697e](https://github.com/farbenmeer/react-spring-slider/commit/ad9697e2a4daaaa2c87f96067dc0fa781486ac68))
+* **bullets:** export internal bullet component ([4966004](https://github.com/farbenmeer/react-spring-slider/commit/49660043d71dedbd281b05060415b5b0d4e05751))
+
 # [1.4.0](https://github.com/farbenmeer/react-spring-slider/compare/v1.3.5...v1.4.0) (2021-09-22)
 
 
