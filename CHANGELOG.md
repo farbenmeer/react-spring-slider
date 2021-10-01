@@ -1,3 +1,10 @@
+## [1.5.2](https://github.com/farbenmeer/react-spring-slider/compare/v1.5.1...v1.5.2) (2021-10-01)
+
+
+### Bug Fixes
+
+* file path in build ([77d6b76](https://github.com/farbenmeer/react-spring-slider/commit/77d6b764b02498f6bed334ad238e164e8ab651bc))
+
 ## [1.5.1](https://github.com/farbenmeer/react-spring-slider/compare/v1.5.0...v1.5.1) (2021-10-01)
 
 
