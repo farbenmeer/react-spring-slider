@@ -1,28 +1,25 @@
-# react-spring-slider
+<h1 align="center">react-spring-slider</h1>
+<div align="center">
+Build a flexibale slider with smooth animations. 
 
-[![Hits-of-Code](https://hitsofcode.com/github/farbenmeer/react-spring-slider)](https://hitsofcode.com/view/github/farbenmeer/react-spring-slider)
+react-spring-slider uses [react-spring](https://www.react-spring.io/) under the hood. This project aims to be flexible through configuration as well as be easy to use by sane and reasonable defaults.
+
+You can have a real life look how this can be used within storybook [(source)](./src/index.stories.tsx) at: [farbenmeer.github.io/react-spring-slider](https://farbenmeer.github.io/react-spring-slider/).
+
+
 ![Version](https://img.shields.io/npm/v/@farbenmeer/react-spring-slider?style=flat-square)
 [![Minified Size](https://img.shields.io/bundlephobia/min/@farbenmeer/react-spring-slider?style=flat-square)](https://img.shields.io/bundlephobia/min/@farbenmeer/react-spring-slider?style=flat-square)
 [![Minified Zipped Size](https://img.shields.io/bundlephobia/minzip/@farbenmeer/react-spring-slider?style=flat-square)](https://img.shields.io/bundlephobia/minzip/@farbenmeer/react-spring-slider?style=flat-square)
 ![License](https://img.shields.io/github/license/farbenmeer/react-spring-slider?style=flat-square)
+[![npm downloads](https://img.shields.io/npm/dm/@farbenmeer/react-spring-slider.svg?style=flat-square)](https://www.npmjs.com/package/@farbenmeer/react-spring-slider?style=flat-square)
+</div>
 
-1. [General](#general)
-2. [Installation](#installation)
-3. [Usage](#usage)
-4. [Configuration](#configuration)
-5. [More Examples](#more-examples)
-6. [Contribution](#contribution)
+1. [Installation](#installation)
+2. [Usage](#usage)
+3. [Configuration](#configuration)
+4. [More Examples](#more-examples)
+5. [Contribution](#contribution)
 
-## General
-
-This is a slider which uses [react-spring](https://www.react-spring.io/) under
-the hood.
-
-This project aims to be flexible through configuration as well as be easy to use
-by sane and reasonable defaults.
-
-You can have a real life look how this can be used within storybook [(source)](./src/index.stories.tsx) at:
-[farbenmeer.github.io/react-spring-slider](https://farbenmeer.github.io/react-spring-slider/).
 
 ## Installation
 
