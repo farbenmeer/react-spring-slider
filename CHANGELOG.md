@@ -1,3 +1,10 @@
+## [1.5.1](https://github.com/farbenmeer/react-spring-slider/compare/v1.5.0...v1.5.1) (2021-10-01)
+
+
+### Performance Improvements
+
+* remove stories from production bundle ([e4838e9](https://github.com/farbenmeer/react-spring-slider/commit/e4838e9ca1c75abd549c58d978e98b6c6f0a7bc4))
+
 # [1.5.0](https://github.com/farbenmeer/react-spring-slider/compare/v1.4.0...v1.5.0) (2021-10-01)
 
 
