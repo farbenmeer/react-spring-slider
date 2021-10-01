@@ -13,6 +13,6 @@
 		"noImplicitAny": true,
 		"types": ["react"]
 	},
-	"include": ["src/**/*"],
+	"include": ["src/**/*", "stories/**/*"],
 	"exclude": ["dist", "node_modules"]
 }

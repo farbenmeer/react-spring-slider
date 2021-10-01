@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Meta, Story as IStory } from "@storybook/react/types-6-0";
 import Arrow, { ArrowComponentType } from "../src/components/arrow";
 import styled from "styled-components";
 
-import Slider, { SliderProps } from ".";
+import Slider, { SliderProps } from "../src";
 
 const images = [
 	"https://images.pexels.com/photos/3740695/pexels-photo-3740695.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
