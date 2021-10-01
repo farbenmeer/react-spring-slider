@@ -65,7 +65,8 @@ The slider currently provides the following interface:
 | activeIndex     | number   | 0       |                                                                                  Controlles the shown index |
 | ArrowComponent  | function | -       |                                                                           A custom component for the arrows |
 | auto            | number   | 0       | 0 = disabled auto sliding. Indicates the pausing time in milliseconds per slide before next slide is shown. |
-| BulletComponent | function | -       |                                                                          A custom component for the bullets |
+| BulletComponent | function | -       |                                                                           A custom component for one bullet |
+| BulletsComponent| function | -       |                                                                  A custom component for the bullets wrapper |
 | bulletStyle     | object   | { }     |                                                                               custom styles for the bullets |
 | children        | node     | [ ]     |                                                   The children of the slider, every child is a single slide |
 | hasArrows       | boolean  | false   |                                                                Whether the slider should have arrows or not |
