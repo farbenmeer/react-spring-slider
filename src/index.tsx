@@ -110,9 +110,8 @@ const Slider: React.FunctionComponent<SliderProps> = ({
 					setDragging(true);
 				}
 				if (sliderRef && sliderRef.current && sliderRef.current.parentElement) {
-					const {
-						width,
-					} = sliderRef.current.parentElement.getBoundingClientRect();
+					const { width } =
+						sliderRef.current.parentElement.getBoundingClientRect();
 
 					if (down && distance > width / 2) {
 						if (cancel) cancel();
