@@ -46,7 +46,7 @@ jobs:
         run: npm run build-storybook
 
       - name: Commit storybook changes
-        uses: EndBug/add-and-commit@v8
+        uses: EndBug/add-and-commit@v9
         with:
           author_name: frred
           author_email: engineering@farbenmeer.de
