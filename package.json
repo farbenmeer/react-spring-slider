@@ -23,16 +23,16 @@
     "build": "tsc --build tsconfig.json",
     "lint": "eslint './**/*.{ts,tsx,js}'",
     "lint-fix": "eslint './**/*.{ts,tsx,js}' --fix",
+    "format": "prettier . --write",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook --output-dir docs ",
     "clean": "rm -rf dist node_modules",
-    "release": "semantic-release"
+    "release": "semantic-release",
+    "prepare": "husky install"
   },
   "lint-staged": {
-    "./src/**/*.{ts,tsx}": [
-      "npm run lint-fix",
-      "npm run lint"
-    ]
+    "./src/**/*.{ts,tsx,JS}": "eslint --cache --fix",
+    "*": "prettier --write --ignore-unknown"
   },
   "dependencies": {
     "react": "^17.0.1",
