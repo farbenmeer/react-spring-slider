@@ -21,9 +21,8 @@
   ],
   "scripts": {
     "build": "tsc --build tsconfig.json",
-    "lint": "eslint './**/*.{ts,tsx,js}'",
-    "lint-fix": "eslint './**/*.{ts,tsx,js}' --fix",
-    "format": "prettier . --write",
+    "lint": "eslint './**/*.{ts,tsx,js}' && prettier --check .",
+    "lint-fix": "eslint './**/*.{ts,tsx,js}' --fix && prettier --write .",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook --output-dir docs ",
     "clean": "rm -rf dist node_modules",
@@ -31,7 +30,7 @@
     "prepare": "husky install"
   },
   "lint-staged": {
-    "./src/**/*.{ts,tsx,JS}": "eslint --cache --fix",
+    "./src/**/*.{ts,tsx,js}": "eslint --cache --fix",
     "*": "prettier --write --ignore-unknown"
   },
   "dependencies": {
@@ -57,7 +56,6 @@
     "editorconfig-checker": "^4.0.2",
     "eslint": "^8.0.0",
     "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.29.3",
     "eslint-plugin-react-hooks": "^4.3.0",
     "husky": "^7.0.4",
