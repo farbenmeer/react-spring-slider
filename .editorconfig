@@ -9,6 +9,7 @@ end_of_line = lf
 
 [*.md]
 trim_trailing_whitespace = false
+indent_style = space
 
 [.github/**/*]
 indent_style = space
