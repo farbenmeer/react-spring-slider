@@ -14,11 +14,13 @@ You can have a real life look how this can be used within storybook [(source)](.
 [![npm downloads](https://img.shields.io/npm/dm/@farbenmeer/react-spring-slider.svg?style=flat-square)](https://www.npmjs.com/package/@farbenmeer/react-spring-slider?style=flat-square)
 </div>
 
-1. [Installation](#installation)
-2. [Usage](#usage)
-3. [Configuration](#configuration)
-4. [More Examples](#more-examples)
-5. [Contribution](#contribution)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Configuration](#configuration)
+- [More examples](#more-examples)
+	- [Custom bulletStyle](#custom-bulletstyle)
+	- [Fully customized](#fully-customized)
+- [Contribution](#contribution)
 
 
 ## Installation
@@ -94,43 +96,6 @@ const App = () => {
 	const onSlideChange = (index) => console.log(`changed to slide ${index}`);
 	const setSlideCustom = () => 1;
 
-	const BulletComponent = ({ onClick, isActive }) => (
-		<li
-			style={{
-				width: "25px",
-				height: "25px",
-				backgroundColor: "red",
-				margin: "0 2px",
-				opacity: isActive && "0.5",
-			}}
-			onClick={onClick}
-		/>
-	);
-
-	BulletComponent.propTypes = {
-		onClick: PropTypes.func.isRequired,
-		isActive: PropTypes.bool.isRequired,
-	};
-
-	const ArrowComponent = ({ onClick, direction }) => {
-		return (
-			<div
-				style={{
-					border: "1px solid black",
-					padding: "1em",
-					backgroundColor: "white",
-				}}
-				onClick={onClick}
-			>
-				{direction}
-			</div>
-		);
-	};
-
-	ArrowComponent.propTypes = {
-		onClick: PropTypes.func.isRequired,
-		direction: PropTypes.string.isRequired,
-	};
 
 	return (
 		<Slider
@@ -148,6 +113,44 @@ const App = () => {
 			<div>child 3</div>
 		</Slider>
 	);
+};
+
+const BulletComponent = ({ onClick, isActive }) => (
+	<li
+		style={{
+			width: "25px",
+			height: "25px",
+			backgroundColor: "red",
+			margin: "0 2px",
+			opacity: isActive && "0.5",
+		}}
+		onClick={onClick}
+	/>
+);
+
+BulletComponent.propTypes = {
+	onClick: PropTypes.func.isRequired,
+	isActive: PropTypes.bool.isRequired,
+};
+
+const ArrowComponent = ({ onClick, direction }) => {
+	return (
+		<div
+			style={{
+				border: "1px solid black",
+				padding: "1em",
+				backgroundColor: "white",
+			}}
+			onClick={onClick}
+		>
+			{direction}
+		</div>
+	);
+};
+
+ArrowComponent.propTypes = {
+	onClick: PropTypes.func.isRequired,
+	direction: PropTypes.string.isRequired,
 };
 ```
 
