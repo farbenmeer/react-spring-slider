@@ -50,7 +50,7 @@ jobs:
         with:
           author_name: frred
           author_email: engineering@farbenmeer.de
-          message: "docs: Update storybook"
+          message: "docs: update storybook"
           add: "docs"
 
       - name: Release
