@@ -91,11 +91,12 @@ The slider currently provides the following interface:
 
 ```js
 import Slider from "@farbenmeer/react-spring-slider";
+import { BulletComponentType } from "@farbenmeer/react-spring-slider/components/bullet";
+import { ArrowComponentType } from "@farbenmeer/react-spring-slider/components/arrow";
 
 const App = () => {
 	const onSlideChange = (index) => console.log(`changed to slide ${index}`);
 	const setSlideCustom = () => 1;
-
 
 	return (
 		<Slider
@@ -115,7 +116,7 @@ const App = () => {
 	);
 };
 
-const BulletComponent = ({ onClick, isActive }) => (
+const BulletComponent: BulletComponentType = ({ onClick, isActive }) => (
 	<li
 		style={{
 			width: "25px",
@@ -128,12 +129,7 @@ const BulletComponent = ({ onClick, isActive }) => (
 	/>
 );
 
-BulletComponent.propTypes = {
-	onClick: PropTypes.func.isRequired,
-	isActive: PropTypes.bool.isRequired,
-};
-
-const ArrowComponent = ({ onClick, direction }) => {
+const ArrowComponent: ArrowComponentType = ({ onClick, direction }) => {
 	return (
 		<div
 			style={{
@@ -146,11 +142,6 @@ const ArrowComponent = ({ onClick, direction }) => {
 			{direction}
 		</div>
 	);
-};
-
-ArrowComponent.propTypes = {
-	onClick: PropTypes.func.isRequired,
-	direction: PropTypes.string.isRequired,
 };
 ```
 
