@@ -1,4 +1,8 @@
 <h1 align="center">react-spring-slider</h1>
+
+> [!WARNING]
+> 🛑 Deprecated: Package no longer supported‼️ 🛑
+
 <div align="center">
 Build a flexibale slider with smooth animations.
 
